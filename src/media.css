@@ -1,0 +1,25 @@
+
+@media(max-width:1200px){
+  .container{width:auto}
+}
+
+@media(max-width:767px){
+  .bg-img{display: none;}
+  .testStartBlock{width: 100% !important;}
+  .userRegister{padding: 20px;}
+}
+
+@media(max-width:990px){
+  .userRegisterRightBlock{
+    text-align: left;
+    margin-top: 20px;
+  }
+  .userRegisterRightBlock .btn-green{margin-top: 20px;}
+  .bodybg2{display: none}
+}
+
+
+@media screen and (min-width:768px) and (max-width:1200px){
+  .bg-img{width: 66%;left: -80px;}
+}
+

@@ -1,3 +1,7 @@
-import MainLayout from './Home';
+import WelComepage from './WelComepage';
+import UserRegister from './UserRegister';
 
-export default MainLayout;
+export {
+  WelComepage,
+  UserRegister,
+};

@@ -1,31 +1,86 @@
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  background-color: #F2F2F1 !important;
+  font-family: 'Lato', sans-serif;
+}
+/***************************** general css start *************************/
+.m-t-15{margin-top: 15px}
+.m-b-15{margin-bottom: 15px}
+.m-t-60{margin-top: 60px}
+.ant-layout{background-color: #F2F2F1 !important}
+.ant-layout-sider-children{display: flex;flex-direction: column; justify-content: space-around;}
+.ant-layout-sider,.ant-layout-sider-trigger{background: #1B2027 !important}
+.container{width:1200px;margin: 0 auto;position: relative;overflow: hidden;}
+.btn-green{background: #5AB38A !important;color: #FFF !important;border-radius: 25px !important;padding: 12px 35px !important;height: auto !important;font-size: 30px !important;font-weight: 700 !important;font-family: 'Lato', sans-serif !important; }
+.btn-green:active, .btn-green.active{border-color: #5AB38A !important;}
+.text-center{text-align: center}
+.text-left{text-align: left}
+.pageHeading{font-size: 30px;line-height: 36px;font-weight: 700;display: block;margin-bottom: 40px;}
+.pageSubHeading{font-size: 30px;line-height: 36px;font-weight: 300;display: block;}
+.formInput{background: #e5e5e5 !important;height: 40px !important;font-size: 16px !important;font-weight: 700;padding: 0 30px !important;border-radius: 25px !important; color: #A0A0A0 !important;margin-bottom: 15px !important;border-color: #e5e5e5 !important;}
+.ant-radio-inner:after{background-color: #1B2027 !important;width: 10px !important;height: 10px !important;left: 5px !important;top: 5px !important;}
+.ant-radio-inner{background: #e5e5e5 !important;border-color: #e5e5e5 !important;padding: 10px !important}
+.ant-radio-wrapper span:last-child{font-weight: 700 !important;color: #A0A0A0 !important;font-size: 18px !important;}
+.ant-radio-wrapper span.terms{font-weight: 300 !important;padding-left: 30px !important}
+
+/*********************************** general css end **************************/
+
+/***************************** sidebar css start *************************/
+
+.sidebarLogo{
+  width: 73px;
+  height: 110px;
+  margin: 15px auto;
+}
+.brainColor{
+  width: 97px;
+  height: 80px;
+  margin: 0 auto 10px;
+}
+.sidebarTop h2{
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+  color: #FFF;
+}
+.sidebarTop h2 span{
+  font-weight: 300;
 }
 
-.logo{
-  width: 325px;
-  height: 50px;
-}
+/***************************** sidebar css start *************************/
 
-.btn-green{
-  background: #5AB38A !important;
-  color: #FFF !important;
-  border-radius: 10px !important;
-  padding: 7px 25px !important;
-  height: auto !important;
-  font-size: 18px !important;
-}
+/***************************** welcome page css start *************************/
 
-.btn-green:active, .btn-green.active{
-  border-color: #5AB38A !important;
+.welcomeScreenLogo{width: 325px;height: 50px;}
+.welcomeScreen{margin-top: 50px;height: 100%;width:100%;}
+.bg-img{background: url('images/body-bg.svg') no-repeat bottom left;background-size:contain; background-position-x: 0%;background-position-y: 0%;position: absolute;left:0;
+  top:200px;height: 510px;width:100%;left: -125px;}
+.testStartBlock{background: url('images/steps.svg') no-repeat top right;float: right !important;margin-top: 80px;}
+.testStartBlock h1{
+  margin-bottom: 70px;
+  font-size: 40px;
+  line-height: 45px;
+  font-weight: 700;
 }
+.testStartBlock h1 span{
+  font-weight: 300;
+}
+/***************************** welcome page css end *************************/
 
-.right-block{
-  background: url('images/steps.svg') no-repeat top right
+/***************************** User Register page css end *************************/
+.userRegister{padding: 20px 50px;}
+.userRegisterRightBlock{
+  text-align: center
 }
-
-.home{
-  margin-top: 50px;
+.btn-green i.anticon{
+  font-size: 22px !important;
 }
+.bodybg2{background: url('images/bodyBg-2.svg') no-repeat bottom right;width: 564px;
+  height: 300px;
+  position: absolute;
+  top: 400px;
+  right: 0px;}
+.userRegisterRightBlock .ant-radio-wrapper span:last-child{color: #1B2027 !important }
+/***************************** User Register page css end *************************/
