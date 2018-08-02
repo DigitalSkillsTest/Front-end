@@ -6,7 +6,7 @@
 @media(max-width:767px){
   .bg-img{display: none;}
   .testStartBlock{width: 100% !important;}
-  .userRegister{padding: 20px;}
+  .userRegister,.howTestWorks{padding: 20px;}
 }
 
 @media(max-width:990px){
@@ -16,6 +16,7 @@
   }
   .userRegisterRightBlock .btn-green{margin-top: 20px;}
   .bodybg2{display: none}
+  .chartImage{width: auto;height: auto;}
 }
 
 

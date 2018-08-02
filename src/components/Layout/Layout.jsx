@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Layout, Row, Col } from 'antd';
 import logoWhite from '../../images/logo-white.svg';
 import brainColor from '../../images/brain-color.svg';
@@ -7,14 +8,14 @@ import 'antd/dist/antd.css';
 
 const { Content, Sider } = Layout;
 
-export default class MainLayout extends React.Component {
+class MainLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   render() {
-    const { sidebar, children } = this.props;
+    const { sidebar, children, currentUser } = this.props;
     return (
       <Layout style={{ minHeight: '100vh' }}>
         {sidebar && (
@@ -30,19 +31,38 @@ export default class MainLayout extends React.Component {
                     Test de
                   </span>
                   <br />
-                    Habilidades
+                  Habilidades
                   {' '}
                   <br />
-                    Digitales
+                  Digitales
                 </h2>
               </Col>
             </Row>
 
-            {/* <Row type="flex" justify="center" align="bottom">
-              <Col span={24} className="text-center">
-                <img src={logoWhite} alt="logo-white" className="sidebarLogo" />
-              </Col>
-            </Row> */}
+            {currentUser !== null
+              && (
+                <Row type="flex" justify="center" align="bottom">
+                  <Col span={24} className="text-center userInfo">
+                    <h2 className="username">
+                      {currentUser.data.name} {' '} {currentUser.data.lastName}
+                      {' '}
+                    </h2>
+                    {/* <p>
+                      info@pepehongo.com
+                    </p>
+                    <p>
+                      SODIMAC
+                    </p> */}
+                    <p>
+                      {currentUser.data.position}
+                    </p>
+                    <p>
+                      {currentUser.data.age} años
+                    </p>
+                  </Col>
+                </Row>
+              )
+            }
 
             <Row type="flex" justify="center" align="bottom">
               <Col span={24} className="text-center">
@@ -61,6 +81,11 @@ export default class MainLayout extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  currentUser: state.currentUser.currentUser,
+});
+export default connect(mapStateToProps)(MainLayout);
 
 MainLayout.propTypes = {
   sidebar: PropTypes.bool,
