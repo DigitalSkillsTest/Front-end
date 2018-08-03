@@ -4,6 +4,7 @@ body {
   padding: 0;
   background-color: #F2F2F1 !important;
   font-family: 'Lato', sans-serif !important;
+  font-weight: 400 !important;
 }
 /***************************** general css start *************************/
 .m-t-15{margin-top: 15px}
@@ -14,12 +15,11 @@ body {
 .btn-green{background: #5AB38A !important;color: #FFF !important;border-radius: 25px !important;padding: 12px 35px !important;height: auto !important;font-size: 30px !important;font-weight: 700 !important;font-family: 'Lato', sans-serif !important; }
 .btn-default{background: #D2D2D2 !important;color: #A0A0A0 !important;border-radius: 25px !important;height: 45px !important; width: 137px !important;font-weight: 700 !important;font-size: 20px !important;line-height: 24px !important;}
 .btn-green:active, .btn-green.active,.btn-green:hover{border-color: #5AB38A !important;}
-.btn-default:active, .btn-default.active,.btn-default:hover{border-color: #D2D2D2 !important;}
+.btn-default:active, .btn-default.active,.btn-default:hover{border-color: #D2D2D2 !important;color:#777 !important}
 .btn-default i.anticon{font-size: 15px;vertical-align: middle}
 .pull-right{float: right;}
 
 .container{width:1200px;margin: 0 auto;position: relative;overflow: hidden;}
-.ant-layout{background-color: #F2F2F1 !important}
 .ant-layout-sider-children{display: flex;flex-direction: column; justify-content: space-around;}
 .ant-layout-sider,.ant-layout-sider-trigger{background: #1B2027 !important}
 .ant-layout-sider-zero-width-trigger{background: #1c2027 !important;}
@@ -56,8 +56,8 @@ body {
 .sidebarTop h2 span{
   font-weight: 300;
 }
-
-.userInfo h2{font-size: 22px;line-height: 26px;font-weight: 700;color: #FFF;margin-bottom: 20px;}
+.userInfo{padding: 0 10px !important;}
+.userInfo h2{font-size: 22px;line-height: 28px;font-weight: 700;color: #FFF;margin-bottom: 15px;}
 .userInfo p{font-size: 12px;line-height: 14px;font-weight: 300;color: #FFF;margin-bottom: 8px;text-transform: capitalize;}
 
 /***************************** sidebar css end *************************/
@@ -113,7 +113,81 @@ h2.testCategoryTitle{font-size: 20px;font-weight: 700;color: #1B2027;line-height
 }
 .chartImage{width: 100%;height: 370px;float: right;}
 .questiontimewrapper{position: relative;display: inline-block;float: none;;width: auto;text-align: left;margin-bottom: 20px}
-.question,.timer{font-size: 24px;line-height: 48px;font-weight: 700;padding-left: 35px;position: relative;margin-bottom: 0}
-.question::before{content: '';width: 29px;height: 29px;position: absolute;top: 10px; left: 0;background: url('images/question.svg') no-repeat}
-.timer::before{content: '';width: 29px;height: 29px;position: absolute;top: 10px; left: 0;background: url('images/timer.svg') no-repeat}
+.questionMarkIcon,.timerIcon{font-size: 24px;line-height: 48px;font-weight: 700;padding-left: 35px;position: relative;margin-bottom: 0}
+.questionMarkIcon::before{content: '';width: 29px;height: 29px;position: absolute;top: 10px; left: 0;background: url('images/question.svg') no-repeat}
+.timerIcon::before{content: '';width: 29px;height: 29px;position: absolute;top: 10px; left: 0;background: url('images/timer.svg') no-repeat}
 /***************************** How Test Works page css end *************************/
+
+/***************************** Test Category page css start *************************/
+.testcategorywrapper{
+  position: relative;
+  display: block;
+  padding: 80px;
+}
+.testcategory h1{font-size: 80px;line-height: 80px;font-weight: 700;color: #FFF;margin-bottom: 30px}
+.testcategory p{font-size: 20px; line-height: 24px; font-weight: 300;color: #FFF;margin-bottom: 40px;}
+.testcategory ul{font-size: 20px; line-height: 24px; font-weight: 700;color: #000;margin: 0;padding:0}
+.testcategory ul li{font-size: 20px; line-height: 30px; font-weight: 300;color: #000;margin: 0;padding:0;list-style-position: inside;padding-left: 35px}
+.testcategory ul li:first-child{margin-top: 15px}
+.btn-default.transparent{background: rgba(0,0,0,0.1) !important;border: none !important;}
+.btn-default.transparent:hover{color: #ddd !important;}
+
+/***************************** Test Category page css end *************************/
+
+/***************************** Test Component page css end *************************/
+.testCategoryTitle{font-size: 12px;line-height: 14px;color: #FFF;display: inline-block;padding: 8px 50px 8px 30px;margin-left: -25px;}
+.mcqWrapper{position: relative;display:block;float: left;width: calc(100% - 70px);}
+.mcqQuestion,.mcqAnswer{position: relative;display:block;margin: 10px 0;float: left;width: 100%;}
+.mcqWrapper .mcqQuestion .questionNos{float: left; color: #FFF;font-size: 30px;line-height: 36px;font-weight: 700;width: 60px;height: 60px;border-radius: 50%;text-align: center;padding-top: 10px;margin-right: 20px}
+.mcqWrapper .mcqQuestion .question{font-size: 24px;line-height: 28px;font-weight: 700;float: left;width: calc(100% - 100px);}
+.mcqWrapper .mcqAnswer{float: left;width: calc(100% - 25px);position: relative;display: block;}
+.mcqWrapper .mcqAnswer .ant-radio-group,.mcqWrapper .mcqAnswer .ant-radio-group .ant-radio-button-wrapper{width: 100% !important;display: block !important;}
+.mcqWrapper .mcqAnswer .ant-radio-group .ant-radio-button-wrapper{
+  border-radius : 6px !important;
+  -moz-border-radius : 6px !important;
+  -webkit-border-radius : 6px !important;
+  box-shadow: 0 2px 0px #ccc;
+  -moz-box-shadow: 0 2px 0px #ccc;
+  -webkit-box-shadow: 0 2px 0px #ccc;
+  margin: 0 0 15px;
+  min-height: 100px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 300;
+  padding: 15px;
+  height: auto;
+  width: 100%;
+  border: none !important;
+}
+.ant-radio-button-wrapper-checked:first-child{
+  box-shadow: 0 2px 0px #ccc !important;
+  -moz-box-shadow: 0 2px 0px #ccc !important;
+  -webkit-box-shadow: 0 2px 0px #ccc !important;
+}
+.mcqWrapper .mcqAnswer .ant-radio-group .ant-radio-button-wrapper::before{display: none !important;}
+.mcqWrapper .stepButtonWrapper{width: calc(100% - 25px);float: left;display: block;position: relative;}
+
+.testSubCategory{display: block;position: relative;float: left; width: 100%;}
+.testSubCategory .card{position: relative;display: block;background: #FFF}
+.testSubCategory .card .card-head{color:#FFF;font-size: 16px;line-height: 20px;font-weight: 300;padding: 8px 30px;}
+.testSubCategory .card .card-body{padding: 30px;min-height: 400px;height: auto;}
+.testSubCategory .card .card-body p.subCategory{line-height: 16px;margin: 0 0 10px 0}
+
+.questionSteps{position: relative;float: none;display: inline-block;width: auto; margin: 30px auto 0}
+.questionSteps .ant-steps-vertical .ant-steps-item{height: 70px;}
+.questionSteps .ant-steps-item-icon{z-index: 99;position: relative;border: none;    width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  border-radius: 36px !important;
+  background-color: #d4d4d4 !important;box-shadow: 0 0px 4px inset #999 !important;}
+.questionSteps .ant-steps-vertical > .ant-steps-item > .ant-steps-item-tail{left: 13px !important;width: 10px !important;background: #E7E6E5;}
+.questionSteps .ant-steps-icon{display: none !important; background : #D2D2D2 !important;}
+.questionSteps .ant-steps-item-tail:after{background: none !important;}
+
+.progressWrapper{width: calc(100% - 125px);margin: 50px 0 20px;float: left;display: block;position: relative;}
+.progressWrapper .ant-progress-inner{padding: 7px !important;background: #E7E6E5 !important;}
+.progressWrapper .ant-progress-outer{padding-right: calc(4em + 8px) !important;margin-right: calc(-4em - 4px) !important;}
+.progressWrapper .ant-progress-text{font-size: 24px;line-height: 28px;font-weight: 700;}
+.step1 .ant-steps-item-icon{background-color: #0085C6 !important;box-shadow: 0 0px 6px inset #555 !important;}
+
+/***************************** Test Component page css end *************************/

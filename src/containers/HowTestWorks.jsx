@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   Row, Col, Button, Icon,
 } from 'antd';
+import * as routes from '../Routes/path';
 import Layout from '../components/Layout/Layout';
 import chartImage from '../images/chart.svg';
 
 class HowTestWorks extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    this.state = {};
+    this.onClickNextBtn = this.onClickNextBtn.bind(this);
+  }
+
+  onClickNextBtn() {
+    const { history } = this.props;
+    history.push(routes.TestCategoty);
   }
 
   render() {
@@ -72,10 +80,10 @@ class HowTestWorks extends Component {
             <Col xs={24} sm={24} md={24} lg={12} className="m-b-15 text-center">
               <img src={chartImage} alt="chart" className="chartImage" />
               <div className="questiontimewrapper">
-                <h5 className="question">
+                <h5 className="questionMarkIcon">
                   30 preguntas
                 </h5>
-                <h5 className="timer">
+                <h5 className="timerIcon">
                   20 minutos
                 </h5>
               </div>
@@ -90,7 +98,7 @@ class HowTestWorks extends Component {
                 {''}
                 Anterior
               </Button>
-              <Button className="btn-default pull-right">
+              <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
                 Siguiente
                 {''}
                 <Icon type="caret-right" />
@@ -107,3 +115,7 @@ const mapStateToProps = state => ({
   currentUser: state.currentUser,
 });
 export default connect(mapStateToProps)(HowTestWorks);
+
+HowTestWorks.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+};

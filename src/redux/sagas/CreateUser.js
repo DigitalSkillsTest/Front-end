@@ -9,7 +9,6 @@ import * as routes from '../../Routes/path';
 
 function* createUser(action) {
   const { history, ...restData } = action.data;
-  console.log(restData);
   try {
     const response = yield call(userService.createUser, restData);
     if (response.status === 200) {

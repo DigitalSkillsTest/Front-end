@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Form, Row, Col, Radio, Button, Icon, Input,
+  Form, Row, Col, Radio, Button, Icon,
 } from 'antd';
 import Layout from '../components/Layout/Layout';
-// import RenderInput from '../components/FormComponent/Input';
+import RenderInput from '../components/FormComponent/FormElement';
 import { createUserReq } from '../redux/actions';
 
 const RadioGroup = Radio.Group;
@@ -21,12 +21,12 @@ class UserRegister extends Component {
     const { form, dispatch, history } = this.props;
     form.validateFields((err, values) => {
       if (!err) {
-        const { name, lastName, mail, comapany, position, age, gender } = values;
+        const { name, lastName, mail, company, position, age, gender } = values;
         const data = {
           name,
           lastName,
           mail,
-          comapany,
+          company,
           position,
           age,
           gender,
@@ -38,7 +38,7 @@ class UserRegister extends Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { form: { getFieldDecorator } } = this.props;
     return (
       <Layout sidebar>
         <div className="bodybg2" />
@@ -59,55 +59,44 @@ class UserRegister extends Component {
               <Col xs={24} sm={24} md={24} lg={14}>
                 <Row>
                   <Col>
-                    <FormItem>
-                      {getFieldDecorator('name', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
-                      })(
-                        <Input type="text" placeholder="Nombre" className="formInput" />,
-                      )}
-                    </FormItem>
+                    <RenderInput
+                      name="name"
+                      rules={[{ required: true, message: 'Please Input Your username!' }]}
+                      getFieldDecorator={getFieldDecorator}
+                    />
 
-                    <FormItem>
-                      {getFieldDecorator('lastName', {
-                        rules: [{ required: true, message: 'Please input your LastName!' }],
-                      })(
-                        <Input type="text" placeholder="Apellido" className="formInput" />,
-                      )}
-                    </FormItem>
+                    <RenderInput
+                      name="lastName"
+                      rules={[{ required: true, message: 'Please Input Your LastName!' }]}
+                      getFieldDecorator={getFieldDecorator}
+                    />
 
-                    <FormItem>
-                      {getFieldDecorator('mail', {
-                        rules: [{ required: true, message: 'Please input your Email!' }],
-                      })(
-                        <Input type="email" placeholder="Mail" className="formInput" />,
-                      )}
-                    </FormItem>
+                    <RenderInput
+                      name="mail"
+                      type="email"
+                      rules={[{ required: true, message: 'Please Input Your Email!' }]}
+                      getFieldDecorator={getFieldDecorator}
+                    />
 
-                    <FormItem>
-                      {getFieldDecorator('comapany', {
-                        rules: [{ required: true, message: 'Please input your company!' }],
-                      })(
-                        <Input type="text" placeholder="Empresa" className="formInput" />,
-                      )}
-                    </FormItem>
+                    <RenderInput
+                      name="company"
+                      rules={[{ required: true, message: 'Please Input Your company!' }]}
+                      getFieldDecorator={getFieldDecorator}
+                    />
 
-                    <FormItem>
-                      {getFieldDecorator('position', {
-                        rules: [{ required: true, message: 'Please input your Position!' }],
-                      })(
-                        <Input type="text" placeholder="Cargo" className="formInput" />,
-                      )}
-                    </FormItem>
+                    <RenderInput
+                      name="position"
+                      rules={[{ required: true, message: 'Please Input Your Position!' }]}
+                      getFieldDecorator={getFieldDecorator}
+                    />
 
-                    <FormItem>
-                      {getFieldDecorator('age', {
-                        rules: [{ required: true, message: 'Please input your Age!' }],
-                      })(
-                        <Input type="text" placeholder="Edad" className="formInput" />,
-                      )}
-                    </FormItem>
-
-                    {/* <RenderInput type="text" placeholder="Edad" /> */}
+                    <RenderInput
+                      name="age"
+                      type="number"
+                      min="1"
+                      rules={[{ required: true, message: 'Please Input Your Age!' }]}
+                      getFieldDecorator={getFieldDecorator}
+                    />
 
                   </Col>
                   <Col className="m-t-15">
@@ -115,7 +104,7 @@ class UserRegister extends Component {
                       {getFieldDecorator('gender', {
                         rules: [{ required: true, message: 'Please Select your Gender!' }],
                       })(
-                        <RadioGroup onChange={this.onChange}>
+                        <RadioGroup>
                           <Radio value="female">
                             Femenino
                           </Radio>
@@ -134,7 +123,7 @@ class UserRegister extends Component {
               <Col xs={24} sm={24} md={24} lg={10} className="userRegisterRightBlock">
                 <Row>
                   <Col>
-                    <Radio className="text-left">
+                    <Radio className="text-left" defaultChecked>
                       Acepto
                       <br />
                       <span className="terms">

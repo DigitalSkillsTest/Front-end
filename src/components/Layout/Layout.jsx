@@ -15,7 +15,7 @@ class MainLayout extends React.Component {
   }
 
   render() {
-    const { sidebar, children, currentUser } = this.props;
+    const { sidebar, children, currentUser, color } = this.props;
     return (
       <Layout style={{ minHeight: '100vh' }}>
         {sidebar && (
@@ -39,25 +39,31 @@ class MainLayout extends React.Component {
               </Col>
             </Row>
 
-            {currentUser !== null
+            {currentUser
               && (
                 <Row type="flex" justify="center" align="bottom">
                   <Col span={24} className="text-center userInfo">
                     <h2 className="username">
-                      {currentUser.data.name} {' '} {currentUser.data.lastName}
+                      {currentUser.data.name}
+                      {' '}
+                      {' '}
+                      {' '}
+                      {currentUser.data.lastName}
                       {' '}
                     </h2>
-                    {/* <p>
-                      info@pepehongo.com
+                    <p>
+                      {currentUser.data.mail}
                     </p>
                     <p>
-                      SODIMAC
-                    </p> */}
+                      {currentUser.data.company}
+                    </p>
                     <p>
                       {currentUser.data.position}
                     </p>
                     <p>
-                      {currentUser.data.age} años
+                      {currentUser.data.age}
+                      {' '}
+                      años
                     </p>
                   </Col>
                 </Row>
@@ -72,7 +78,7 @@ class MainLayout extends React.Component {
 
           </Sider>
         )}
-        <Layout style={{ background: '#ddd' }}>
+        <Layout style={{ background: color || '#F2F2F1' }}>
           <Content style={{ margin: '25px' }}>
             {children}
           </Content>
@@ -83,16 +89,18 @@ class MainLayout extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.currentUser.currentUser,
+  currentUser: state.currentUser,
 });
 export default connect(mapStateToProps)(MainLayout);
 
 MainLayout.propTypes = {
   sidebar: PropTypes.bool,
+  currentUser: PropTypes.shape({}),
   children: PropTypes.instanceOf(Array),
 };
 
 MainLayout.defaultProps = {
   sidebar: PropTypes.bool,
+  currentUser: PropTypes.shape({}),
   children: PropTypes.instanceOf(Array),
 };
