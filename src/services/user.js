@@ -1,7 +1,7 @@
 import api from '../utility/api';
 
 const createUser = (data) => {
-  const path = '/user/create';
+  const path = '/auth/register';
   return api().post(path, data).then(res => res).catch(error => error);
 };
 

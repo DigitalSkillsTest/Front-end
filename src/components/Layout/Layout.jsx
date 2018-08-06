@@ -6,7 +6,7 @@ import logoWhite from '../../images/logo-white.svg';
 import brainColor from '../../images/brain-color.svg';
 import 'antd/dist/antd.css';
 
-const { Content, Sider } = Layout;
+const { Content, Sider, Header } = Layout;
 
 class MainLayout extends React.Component {
   constructor(props) {
@@ -15,7 +15,9 @@ class MainLayout extends React.Component {
   }
 
   render() {
-    const { sidebar, children, currentUser, color } = this.props;
+    const {
+      sidebar, children, currentUser, color,
+    } = this.props;
     return (
       <Layout style={{ minHeight: '100vh' }}>
         {sidebar && (
@@ -79,6 +81,18 @@ class MainLayout extends React.Component {
           </Sider>
         )}
         <Layout style={{ background: color || '#F2F2F1' }}>
+          {sidebar && (
+            <Header className="responsiveHeader">
+              <div className="logo-responsive" />
+              <h1>
+                <span>
+                  Test de
+                  {' '}
+                </span>
+                Habilidades Digitales
+              </h1>
+            </Header>
+          )}
           <Content style={{ margin: '25px' }}>
             {children}
           </Content>

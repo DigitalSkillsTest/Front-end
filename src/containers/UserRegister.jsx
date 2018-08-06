@@ -125,7 +125,7 @@ class UserRegister extends Component {
                   <Col>
                     <Radio className="text-left" defaultChecked>
                       Acepto
-                      <br />
+                      <br className="termdevider" />
                       <span className="terms">
                         Términos y condiciones
                       </span>

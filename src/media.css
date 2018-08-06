@@ -3,22 +3,58 @@
   .container{width:auto}
 }
 
-@media(max-width:767px){
-  .bg-img{display: none;}
-  .testStartBlock{width: 100% !important;}
-  .userRegister,.howTestWorks,.testcategorywrapper{padding: 20px 20px 40px 20px;}
-  .progressWrapper{margin: 30px 0}
-}
-
 @media(max-width:990px){
-  .userRegisterRightBlock{
-    text-align: left;
-    margin-top: 20px;
-  }
+  .ant-layout-sider{display: none;}  
+  .responsiveHeader{display: block;height: 52px !important;line-height: 52px !important;background: #1B2027 !important;padding: 0 15px !important}
+  .logo-responsive{background: url('images/logo-responsive.svg') no-repeat top center;width: 32px;height: 34px;vertical-align: middle;display: inline-block;}
+  .responsiveHeader h1{font-size: 22px;line-height: 26px;font-weight: 700;display: inline;color: #ffffff;padding-left: 15px;vertical-align: middle;}
+  .responsiveHeader h1 span{font-weight: 300}
+  .userRegisterRightBlock{text-align: left;margin-top: 0px;}
   .userRegisterRightBlock .btn-green{margin-top: 20px;}
   .bodybg2{display: none}
-  .chartImage{width: auto;height: auto;}
+  .chartImage{width: 300px;height: 300px;float: left;}
+  .questiontimewrapper{float: left;margin: 90px 0 0 15px;}
+  .termdevider{display: none;}
+  .ant-radio-wrapper span.terms{padding-left: 10px !important}
 }
+
+@media(max-width:767px){ 
+  .ant-layout-content{margin: 15px 15px 0 15px !important;margin-bottom: calc(100vh - (100vh - 125px)) !important} 
+  .bg-img{background: url('images/brain.svg') no-repeat bottom center;background-size: contain;height: 190px;top:425px;left: 0;right: 0;bottom: 0}
+  .welcomeScreenLogoWrapper{text-align: center;}
+  .welcomeScreenLogo{width: 100%; max-width: 327px;}
+  .welcomeScreen{margin-top: 0;}
+  .testStartBlock{width: 100% !important;background: none;text-align: center;margin: 40px 0}
+  .testStartBlock h1{margin-bottom: 40px;}
+  .howTestWorks,.userRegister,.testcategorywrapper{padding: 0}
+  .chartImage{width: 187px;height: 187px;float: left;}
+  .questiontimewrapper{float: left;margin: 40px 0 0 15px;}
+  .questionMarkIcon, .timerIcon{font-size: 16px;line-height: 32px;padding-left:25px}
+  .questionMarkIcon::before,.timerIcon::before{width: 18px;height: 18px;top: 8px}
+  .testCategory li{padding: 0}
+  .testCategory::after{left: 0;}
+  .stepButtonWrapper,.mcqWrapper .stepButtonWrapper {position: fixed;left: 0;right: 0;bottom: 0;z-index: 9;padding: 15px}  
+  .progressWrapper.responsive{width: 100%;margin: 0 0 10px 0;}
+  .mcqWrapper,.mcqWrapper .mcqAnswer{width: 100%;}
+  .mcqWrapper .mcqQuestion .question{width: calc(100% - 65px);font-size: 20px;line-height: 24px}
+  .mcqWrapper .stepButtonWrapper{width: 100%;background: #ffffff !important;}
+  .mcqWrapper .mcqQuestion .questionNos{font-size: 20px;line-height: 20px;width: 40px;height: 40px;}
+  .stepButtonWrapper .btn-default{border-radius: 0 !important}
+  .stepButtonWrapper .ant-btn-group .btn-default:first-child{border-top-left-radius: 25px !important;border-bottom-left-radius: 25px !important;width: 50% !important;}
+  .stepButtonWrapper .ant-btn-group .btn-default:last-child{border-top-right-radius: 25px !important;border-bottom-right-radius: 25px !important;width: 50% !important;}
+  .testCategoryHeading{display: block;margin: 0 -15px 0 -15px;padding-left:20px;}
+  .questionSteps.responsive{display: flex !important;margin-top: 0 !important;}
+  .questionSteps.responsive .ant-steps-item-title:after{top: 13px !important;left: 0px !important;height: 10px !important;background: #E7E6E5 !important;
+    content: '' !important;
+    width: 9999px !important;
+    display: block !important;
+    position: absolute !important;
+}
+  .questionSteps.responsive .ant-steps-item-icon{margin-right: 0 !important;}
+  .questionSteps.responsive .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item{margin-right: 0 !important}
+  .questionSteps.responsive .ant-steps-horizontal.ant-steps-label-horizontal{display: flex !important;}
+}
+
 
 
 @media screen and (min-width:768px) and (max-width:1200px){
@@ -26,7 +62,11 @@
 }
 
 @media (max-width:480px){
-.testcategory h1{font-size: 40px;line-height: 40px;margin-bottom: 20px}
+.testcategory h1{font-size: 60px;line-height: 60px;}
 .testcategory ul{font-size: 18px; line-height: 24px;}
-.testcategory ul li{font-size: 18px; line-height: 24px;padding-left: 25px;}
+.testcategory ul li{font-size: 18px; line-height: 24px;padding-left: 5px;}
+.ant-radio-wrapper span:last-child{font-size: 16px !important;}
+}
+@media (min-width:481px){
+  .questionSteps.responsive{margin-bottom: 12px !important;}
 }

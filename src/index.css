@@ -20,6 +20,7 @@ body {
 .pull-right{float: right;}
 
 .container{width:1200px;margin: 0 auto;position: relative;overflow: hidden;}
+.responsiveHeader{display: none;}
 .ant-layout-sider-children{display: flex;flex-direction: column; justify-content: space-around;}
 .ant-layout-sider,.ant-layout-sider-trigger{background: #1B2027 !important}
 .ant-layout-sider-zero-width-trigger{background: #1c2027 !important;}
@@ -27,12 +28,10 @@ body {
 .ant-radio-inner{background: #e5e5e5 !important;border-color: #e5e5e5 !important;padding: 10px !important}
 .ant-radio-wrapper span:last-child{font-weight: 700 !important;color: #A0A0A0 !important;font-size: 18px !important;}
 .ant-radio-wrapper span.terms{font-weight: 300 !important;padding-left: 30px !important}
-
-
 .pageHeading{font-size: 30px;line-height: 36px;font-weight: 700;display: block;margin-bottom: 40px;}
 .pageSubHeading{font-size: 30px;line-height: 36px;font-weight: 300;display: block;}
 .formInput{background: #e5e5e5 !important;height: 40px !important;font-size: 16px !important;font-weight: 700;padding: 0 30px !important;border-radius: 25px !important; color: #A0A0A0 !important;margin-bottom: 15px !important;border-color: #e5e5e5 !important;margin: 0 !important}
-
+.stepButtonWrapper .ant-btn-group{width: 100%;}
 /*********************************** general css end **************************/
 
 /***************************** sidebar css start *************************/
@@ -100,7 +99,7 @@ body {
 /***************************** How Test Works page css start *************************/
 .howTestWorks{padding: 20px 50px;}
 .howTestWorks p.testinfo{font-size: 14px;line-height: 16px;font-weight: 300;color: #606060}
-h2.testCategoryTitle{font-size: 20px;font-weight: 700;color: #1B2027;line-height: 24px;margin:20px 0;}
+.howTestWorks h2.testCategoryTitle{font-size: 20px;font-weight: 700;color: #1B2027;line-height: 24px;margin:20px 0;}
 .testCategory li{font-size: 16px;line-height: 32px;font-weight: 300;color: #1B2027;list-style: none;padding-left: 10px;}
 .testCategory::after{
   content:'';
@@ -135,7 +134,7 @@ h2.testCategoryTitle{font-size: 20px;font-weight: 700;color: #1B2027;line-height
 /***************************** Test Category page css end *************************/
 
 /***************************** Test Component page css end *************************/
-.testCategoryTitle{font-size: 12px;line-height: 14px;color: #FFF;display: inline-block;padding: 8px 50px 8px 30px;margin-left: -25px;}
+.testCategoryHeading{font-size: 12px;line-height: 14px;color: #FFF;display: inline-block;padding: 8px 50px 8px 30px;margin-left: -25px;}
 .mcqWrapper{position: relative;display:block;float: left;width: calc(100% - 70px);}
 .mcqQuestion,.mcqAnswer{position: relative;display:block;margin: 10px 0;float: left;width: 100%;}
 .mcqWrapper .mcqQuestion .questionNos{float: left; color: #FFF;font-size: 30px;line-height: 36px;font-weight: 700;width: 60px;height: 60px;border-radius: 50%;text-align: center;padding-top: 10px;margin-right: 20px}
@@ -146,9 +145,9 @@ h2.testCategoryTitle{font-size: 20px;font-weight: 700;color: #1B2027;line-height
   border-radius : 6px !important;
   -moz-border-radius : 6px !important;
   -webkit-border-radius : 6px !important;
-  box-shadow: 0 2px 0px #ccc;
-  -moz-box-shadow: 0 2px 0px #ccc;
-  -webkit-box-shadow: 0 2px 0px #ccc;
+  box-shadow: 0 2px 0px #ccc !important;
+  -moz-box-shadow: 0 2px 0px #ccc !important;
+  -webkit-box-shadow: 0 2px 0px #ccc !important;
   margin: 0 0 15px;
   min-height: 100px;
   font-size: 16px;
@@ -173,13 +172,13 @@ h2.testCategoryTitle{font-size: 20px;font-weight: 700;color: #1B2027;line-height
 .testSubCategory .card .card-body{padding: 30px;min-height: 400px;height: auto;}
 .testSubCategory .card .card-body p.subCategory{line-height: 16px;margin: 0 0 10px 0}
 
-.questionSteps{position: relative;float: none;display: inline-block;width: auto; margin: 30px auto 0}
+.questionSteps{position: relative;float: none;display: inline-block;width: auto; margin: 40px auto 0}
 .questionSteps .ant-steps-vertical .ant-steps-item{height: 70px;}
 .questionSteps .ant-steps-item-icon{z-index: 99;position: relative;border: none;    width: 36px !important;
   height: 36px !important;
   line-height: 36px !important;
   border-radius: 36px !important;
-  background-color: #d4d4d4 !important;box-shadow: 0 0px 4px inset #999 !important;}
+  background-color: #d4d4d4 !important;box-shadow: 0 0px 15px inset #999 !important;}
 .questionSteps .ant-steps-vertical > .ant-steps-item > .ant-steps-item-tail{left: 13px !important;width: 10px !important;background: #E7E6E5;}
 .questionSteps .ant-steps-icon{display: none !important; background : #D2D2D2 !important;}
 .questionSteps .ant-steps-item-tail:after{background: none !important;}
@@ -189,5 +188,5 @@ h2.testCategoryTitle{font-size: 20px;font-weight: 700;color: #1B2027;line-height
 .progressWrapper .ant-progress-outer{padding-right: calc(4em + 8px) !important;margin-right: calc(-4em - 4px) !important;}
 .progressWrapper .ant-progress-text{font-size: 24px;line-height: 28px;font-weight: 700;}
 .step1 .ant-steps-item-icon{background-color: #0085C6 !important;box-shadow: 0 0px 6px inset #555 !important;}
-
+.testSubCategory .card .card-body{min-height: 250px;}
 /***************************** Test Component page css end *************************/

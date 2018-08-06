@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'antd';
 import PropTypes from 'prop-types';
-import * as routes from '../Routes/path';
+import * as routes from '../routes/path';
 import logo from '../images/logo.svg';
 import Layout from '../components/Layout/Layout';
 
@@ -21,7 +21,7 @@ class WelComepage extends Component {
       <Layout sidebar={false}>
         <div className="bg-img" />
         <Row gutter={{ xs: 8, sm: 16, md: 24 }}>
-          <Col span={12}>
+          <Col span={24} className="welcomeScreenLogoWrapper">
             <img src={logo} alt="logo" className="welcomeScreenLogo" />
           </Col>
         </Row>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Row, Col, Button, Icon,
 } from 'antd';
-import * as routes from '../Routes/path';
+import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
 import chartImage from '../images/chart.svg';
 
@@ -13,6 +13,12 @@ class HowTestWorks extends Component {
     super(props);
     this.state = {};
     this.onClickNextBtn = this.onClickNextBtn.bind(this);
+    this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
+  }
+
+  onClickPreviousBtn() {
+    const { history } = this.props;
+    history.push(routes.UserRegister);
   }
 
   onClickNextBtn() {
@@ -93,16 +99,18 @@ class HowTestWorks extends Component {
         <div className="stepButtonWrapper">
           <Row>
             <Col>
-              <Button className="btn-default">
-                <Icon type="caret-left" />
-                {''}
-                Anterior
-              </Button>
-              <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
-                Siguiente
-                {''}
-                <Icon type="caret-right" />
-              </Button>
+              <Button.Group>
+                <Button className="btn-default" onClick={this.onClickPreviousBtn}>
+                  <Icon type="caret-left" />
+                  {''}
+                  Anterior
+                </Button>
+                <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
+                  Siguiente
+                  {''}
+                  <Icon type="caret-right" />
+                </Button>
+              </Button.Group>
             </Col>
           </Row>
         </div>

@@ -5,7 +5,7 @@ import {
 } from 'redux-saga/effects';
 import { CREATE_USER_REQ, createUserSuccess, createUserFail } from '../actions';
 import userService from '../../services';
-import * as routes from '../../Routes/path';
+import * as routes from '../../routes/path';
 
 function* createUser(action) {
   const { history, ...restData } = action.data;

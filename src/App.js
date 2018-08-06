@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
-import * as routes from './Routes/path';
+import * as routes from './routes/path';
 import './App.css';
 
 import { WelComepage, UserRegister, HowTestWorks } from './containers';
