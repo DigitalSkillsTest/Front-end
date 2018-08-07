@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   Form, Row, Col, Radio, Button, Icon,
 } from 'antd';
 import Layout from '../components/Layout/Layout';
 import RenderInput from '../components/FormComponent/FormElement';
-import { createUserReq } from '../redux/actions';
+import { createUserReq, clearCurrentUser } from '../redux/actions';
 
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
@@ -16,12 +17,21 @@ class UserRegister extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillMount() {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userToken');
+    const { dispatch } = this.props;
+    dispatch(clearCurrentUser());
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     const { form, dispatch, history } = this.props;
     form.validateFields((err, values) => {
       if (!err) {
-        const { name, lastName, mail, company, position, age, gender } = values;
+        const {
+          name, lastName, mail, company, position, age, gender,
+        } = values;
         const data = {
           name,
           lastName,
@@ -36,6 +46,7 @@ class UserRegister extends Component {
       }
     });
   }
+
 
   render() {
     const { form: { getFieldDecorator } } = this.props;
@@ -151,3 +162,9 @@ class UserRegister extends Component {
 const UserRegisterForm = Form.create()(UserRegister);
 const mapStateToProps = state => state;
 export default connect(mapStateToProps)(UserRegisterForm);
+
+UserRegister.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+  form: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};

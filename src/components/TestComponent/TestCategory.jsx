@@ -26,7 +26,7 @@ class TestCategotyDescription extends Component {
 
   render() {
     return (
-      <Layout sidebar color="#0085C6">
+      <Layout sidebar bgColor="#0085C6">
         <div className="testcategorywrapper">
           <Row>
             <Col xs={24} className="testcategory">

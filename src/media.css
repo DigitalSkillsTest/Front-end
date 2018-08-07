@@ -44,15 +44,12 @@
   .stepButtonWrapper .ant-btn-group .btn-default:last-child{border-top-right-radius: 25px !important;border-bottom-right-radius: 25px !important;width: 50% !important;}
   .testCategoryHeading{display: block;margin: 0 -15px 0 -15px;padding-left:20px;}
   .questionSteps.responsive{display: flex !important;margin-top: 0 !important;}
-  .questionSteps.responsive .ant-steps-item-title:after{top: 13px !important;left: 0px !important;height: 10px !important;background: #E7E6E5 !important;
-    content: '' !important;
-    width: 9999px !important;
-    display: block !important;
-    position: absolute !important;
-}
+  .questionSteps.responsive .ant-steps-item-title:after{top: 13px !important;left: 0px !important;height: 10px !important;background: #E7E6E5 !important;content: '' !important;width: 9999px !important;display: block !important;position: absolute !important;}
   .questionSteps.responsive .ant-steps-item-icon{margin-right: 0 !important;}
   .questionSteps.responsive .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item{margin-right: 0 !important}
   .questionSteps.responsive .ant-steps-horizontal.ant-steps-label-horizontal{display: flex !important;}
+  .testFinishWrapper{margin-top: 0}
+  .testFinishWrapper ~ .stepButtonWrapper{position: fixed;left: 15px;right: 15px;}
 }
 
 

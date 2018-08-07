@@ -2,10 +2,11 @@ import {
   fork,
   all,
 } from 'redux-saga/effects';
-import watchCreateUser from './CreateUser';
+import { watcherCreateUser, watcherFetchUser } from './user';
 
 export default function* root() {
   yield all([
-    fork(watchCreateUser),
+    fork(watcherCreateUser),
+    fork(watcherFetchUser),
   ]);
 }

@@ -5,6 +5,7 @@ import { Layout, Row, Col } from 'antd';
 import logoWhite from '../../images/logo-white.svg';
 import brainColor from '../../images/brain-color.svg';
 import 'antd/dist/antd.css';
+import { fetchUserReq } from '../../redux/actions';
 
 const { Content, Sider, Header } = Layout;
 
@@ -14,9 +15,17 @@ class MainLayout extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    const { dispatch, currentUser, sidebar } = this.props;
+    const userId = localStorage.getItem('userId');
+    if (userId && sidebar && !currentUser) {
+      dispatch(fetchUserReq(userId));
+    }
+  }
+
   render() {
     const {
-      sidebar, children, currentUser, color,
+      sidebar, children, currentUser, bgColor,
     } = this.props;
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -80,7 +89,7 @@ class MainLayout extends React.Component {
 
           </Sider>
         )}
-        <Layout style={{ background: color || '#F2F2F1' }}>
+        <Layout style={{ background: bgColor || '#F2F2F1' }}>
           {sidebar && (
             <Header className="responsiveHeader">
               <div className="logo-responsive" />
@@ -93,7 +102,7 @@ class MainLayout extends React.Component {
               </h1>
             </Header>
           )}
-          <Content style={{ margin: '25px' }}>
+          <Content>
             {children}
           </Content>
         </Layout>
@@ -109,6 +118,7 @@ export default connect(mapStateToProps)(MainLayout);
 
 MainLayout.propTypes = {
   sidebar: PropTypes.bool,
+  dispatch: PropTypes.func.isRequired,
   currentUser: PropTypes.shape({}),
   children: PropTypes.instanceOf(Array),
 };

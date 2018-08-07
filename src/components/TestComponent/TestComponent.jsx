@@ -37,13 +37,13 @@ class TestComponent extends Component {
           <Col xs={24}>
             {clientWidth < 768 && (
               <div className="questionSteps responsive">
-                <Steps current={0}>
+                <Steps current={3}>
                   <Step className="step1" />
-                  <Step />
-                  <Step />
-                  <Step />
-                  <Step />
-                  <Step />
+                  <Step className="step2" />
+                  <Step className="step3" />
+                  <Step className="step4" />
+                  <Step className="step5" />
+                  <Step className="step6" />
                 </Steps>
               </div>
             )}
@@ -108,8 +108,8 @@ class TestComponent extends Component {
             {clientWidth > 768 && (
               <React.Fragment>
                 <div className="questionSteps">
-                  <Steps direction="vertical" current={0}>
-                    <Step className="step1" />
+                  <Steps direction="vertical" current={3}>
+                    <Step />
                     <Step />
                     <Step />
                     <Step />

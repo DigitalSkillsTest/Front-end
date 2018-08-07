@@ -8,10 +8,10 @@ import Layout from '../components/Layout/Layout';
 class WelComepage extends Component {
   constructor(props) {
     super(props);
-    this.onClickStartTest = this.onClickStartTest.bind(this);
+    this.onClickNextBtn = this.onClickNextBtn.bind(this);
   }
 
-  onClickStartTest() {
+  onClickNextBtn() {
     const { history } = this.props;
     history.push(routes.UserRegister);
   }
@@ -38,7 +38,7 @@ class WelComepage extends Component {
                 <br />
                 Digitales
               </h1>
-              <Button className="btn-green" onClick={this.onClickStartTest}>
+              <Button className="btn-green" onClick={this.onClickNextBtn}>
                 Comenzar
               </Button>
             </Col>
