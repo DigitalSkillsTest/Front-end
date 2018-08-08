@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {
   Row, Col, Button, Icon, Radio, Progress, Steps,
 } from 'antd';
+import PropTypes from 'prop-types';
 import Layout from '../Layout/Layout';
+import * as routes from '../../routes/path';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -15,6 +17,8 @@ class TestComponent extends Component {
       clientWidth: window.innerWidth,
     };
     this.handleResize = this.handleResize.bind(this);
+    this.onClickNextBtn = this.onClickNextBtn.bind(this);
+    this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +28,17 @@ class TestComponent extends Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
+
+  onClickPreviousBtn() {
+    const { history } = this.props;
+    history.push(routes.TestCategoty);
+  }
+
+  onClickNextBtn() {
+    const { history } = this.props;
+    history.push(routes.TestFinish);
+  }
+
 
   handleResize() {
     this.setState({ clientWidth: window.innerWidth });
@@ -89,12 +104,12 @@ class TestComponent extends Component {
                       </div>
                     )}
                     <Button.Group>
-                      <Button className="btn-default">
+                      <Button className="btn-default" onClick={this.onClickPreviousBtn}>
                         <Icon type="caret-left" />
                         {''}
                         Anterior
                       </Button>
-                      <Button className="btn-default pull-right">
+                      <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
                         Siguiente
                         {''}
                         <Icon type="caret-right" />
@@ -156,3 +171,7 @@ class TestComponent extends Component {
 }
 
 export default TestComponent;
+
+TestComponent.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+};

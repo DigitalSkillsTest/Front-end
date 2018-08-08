@@ -104,7 +104,7 @@ class HowTestWorks extends Component {
                   <Icon type="caret-left" />
                   {''}
                   Anterior
-                </Button>
+                </Button>                
                 <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
                   Siguiente
                   {''}

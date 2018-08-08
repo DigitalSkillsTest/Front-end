@@ -32,7 +32,8 @@
   .questionMarkIcon, .timerIcon{font-size: 16px;line-height: 32px;padding-left:25px}
   .questionMarkIcon::before,.timerIcon::before{width: 18px;height: 18px;top: 8px}
   .testCategory li{padding: 0}
-  .testCategory::after{left: 0;}
+  .testCategory::after,.testResult .testCategory::after{left: 0;}
+  .testResult .testCategory{padding-left: 20px;}
   .stepButtonWrapper,.mcqWrapper .stepButtonWrapper {position: fixed;left: 0;right: 0;bottom: 0;z-index: 9;padding: 15px}  
   .progressWrapper.responsive{width: 100%;margin: 0 0 10px 0;}
   .mcqWrapper,.mcqWrapper .mcqAnswer{width: 100%;}
@@ -50,12 +51,18 @@
   .questionSteps.responsive .ant-steps-horizontal.ant-steps-label-horizontal{display: flex !important;}
   .testFinishWrapper{margin-top: 0}
   .testFinishWrapper ~ .stepButtonWrapper{position: fixed;left: 15px;right: 15px;}
+  .strenthWeakDesc{margin-bottom: 0}
+  .stepButtonWrapper p.keyarearesult{display: none;}
+  .testResultbyCategory .strenthWeakDesc,.testResultbyCategory p.resultDesc{margin: 20px 0}
+  .subCategoryScoreWrapper{width: 300px;}
+  .sendMailWrapper{padding: 15px}
+  .sendMailWrapper .welcomeScreenLogoWrapper{display: none}
+  .bg-image{width: 100%;height: 400px;top: 350px;left: 0;right: 0;background-position: 0 0}
 }
-
-
 
 @media screen and (min-width:768px) and (max-width:1200px){
   .bg-img{width: 66%;left: -80px;}
+  .subCategoryScoreWrapper{width: 100%;}
 }
 
 @media (max-width:480px){
@@ -63,6 +70,11 @@
 .testcategory ul{font-size: 18px; line-height: 24px;}
 .testcategory ul li{font-size: 18px; line-height: 24px;padding-left: 5px;}
 .ant-radio-wrapper span:last-child{font-size: 16px !important;}
+.testResult canvas{width: 320px !important;height: 320px !important;}
+.bg-image{height: 200px;}
+.sendMailWrapper .userRegisterRightBlock{margin: 20px 0 }
+.sendMailWrapper h1{margin-bottom:20px;}
+
 }
 @media (min-width:481px){
   .questionSteps.responsive{margin-bottom: 12px !important;}

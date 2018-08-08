@@ -17,12 +17,12 @@ class TestFinish extends Component {
 
   onClickPreviousBtn() {
     const { history } = this.props;
-    history.push(routes.TestCategoty);
+    history.push(routes.TestComponent);
   }
 
   onClickNextBtn() {
     const { history } = this.props;
-    history.push(routes.TestCategoty);
+    history.push(routes.TestResult);
   }
 
   render() {

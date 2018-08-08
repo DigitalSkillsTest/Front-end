@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-  Row, Col, Button, Icon,
+  Row, Col, Button, Icon, Steps,
 } from 'antd';
 import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
+
+const { Step } = Steps;
 
 const data = [
   {
@@ -42,43 +44,70 @@ const data = [
 
 ];
 
-class TestResult extends Component {
+class TestResultByCategory extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      clientWidth: window.innerWidth,
+    };
+    this.handleResize = this.handleResize.bind(this);
     this.onClickNextBtn = this.onClickNextBtn.bind(this);
     this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+
   onClickPreviousBtn() {
     const { history } = this.props;
-    history.push(routes.TestFinish);
+    history.push(routes.TestResult);
   }
 
   onClickNextBtn() {
     const { history } = this.props;
-    history.push(routes.TestResultByCategory);
+    history.push(routes.SendMail);
+  }
+
+  handleResize() {
+    this.setState({ clientWidth: window.innerWidth });
   }
 
   render() {
+    const { clientWidth } = this.state;
     return (
       <Layout sidebar>
-        <div className="testResult">
+        <div className="testResultbyCategory">
           <Row>
-            <Col xs={24} sm={24} md={12} className="m-b-15">
+            <Col xs={24}>
+              {clientWidth < 768 && (
+                <div className="questionSteps responsive">
+                  <Steps current={0}>
+                    <Step className="step1" />
+                    <Step />
+                    <Step />
+                    <Step />
+                    <Step />
+                    <Step />
+                  </Steps>
+                </div>
+              )}
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={24} sm={24} md={16} className="m-b-15">
               <Row>
                 <Col xs={24}>
-                  <h2>
-                    Overall Score
-                  </h2>
-                  <h1>
-                    75
-                    <span>
-                      %
-                    </span>
-                  </h1>
+                  <div className="testCategoryHeading" style={{ background: '#0085C6' }}>
+                    Virtual Language
+                  </div>
                   <p className="resultDesc">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                   </p>
                 </Col>
 
@@ -120,30 +149,50 @@ class TestResult extends Component {
               </Row>
             </Col>
 
-            <Col xs={24} sm={24} md={12} className="m-b-15">
-              <PolarAreaChart data={data} width="400" height="400" />
+            <Col xs={24} sm={24} md={8} className="m-b-15 text-center">
+              <PolarAreaChart data={data} width="200" height="200" />
               <Row>
                 <Col xs={24}>
-                  <ul className="testCategory">
-                    <li>
-                      Virtual Language
-                    </li>
-                    <li>
-                      Adaptación al Cambio
-                    </li>
-                    <li>
-                      Virtual Work habilities
-                    </li>
-                    <li>
-                      Digital Leadership
-                    </li>
-                    <li>
-                      Digital mindset
-                    </li>
-                    <li>
-                      Virtual Core Business mindset
-                    </li>
-                  </ul>
+                  <h3 className="categoryName">
+                    Virtual
+                    <br />
+                    Language Score
+                  </h3>
+                  <p className="score">
+                    3.0
+                  </p>
+                  <div className="subCategoryScoreWrapper">
+                    <p className="subcategoryScore">
+                      1
+                      <span>
+                        Technical-Language
+                      </span>
+                    </p>
+                    <p className="subcategoryScore">
+                      2
+                      <span>
+                        Conocimiento específico del rol
+                      </span>
+                    </p>
+                    <p className="subcategoryScore">
+                      3
+                      <span>
+                        Creación digital vs analógica
+                      </span>
+                    </p>
+                    <p className="subcategoryScore">
+                      4
+                      <span>
+                        Aprendizaje digital y desarrollo
+                      </span>
+                    </p>
+                    <p className="subcategoryScore">
+                      5
+                      <span>
+                        Conocimientos básicos de tecnologías
+                      </span>
+                    </p>
+                  </div>
                 </Col>
               </Row>
             </Col>
@@ -159,11 +208,6 @@ class TestResult extends Component {
                   {''}
                   Anterior
                 </Button>
-                <p className="keyarearesult">
-                  A cotinuación podrás ver los detalles de cada
-                  <br />
-                  área clave del desarrollo de habilidades digitales
-                </p>
                 <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
                   Siguiente
                   {''}
@@ -179,8 +223,8 @@ class TestResult extends Component {
 }
 
 const mapStateToProps = state => state;
-export default connect(mapStateToProps)(TestResult);
+export default connect(mapStateToProps)(TestResultByCategory);
 
-TestResult.propTypes = {
+TestResultByCategory.propTypes = {
   history: PropTypes.shape({}).isRequired,
 };

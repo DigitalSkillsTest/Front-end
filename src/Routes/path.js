@@ -5,3 +5,5 @@ export const TestCategoty = '/category';
 export const TestComponent = '/category/1';
 export const TestFinish = '/test-finish';
 export const TestResult = '/test-result';
+export const TestResultByCategory = '/test-result-category';
+export const SendMail = '/send-mail';

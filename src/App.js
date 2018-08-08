@@ -13,6 +13,8 @@ import {
   HowTestWorks,
   TestFinish,
   TestResult,
+  TestResultByCategory,
+  SendMail,
 } from './containers';
 
 function App(props) {
@@ -29,6 +31,8 @@ function App(props) {
           <PrivateRoute component={TestCategoty} path={routes.TestCategoty} />
           <PrivateRoute component={TestFinish} path={routes.TestFinish} />
           <PrivateRoute component={TestResult} path={routes.TestResult} />
+          <PrivateRoute component={TestResultByCategory} path={routes.TestResultByCategory} />
+          <PrivateRoute component={SendMail} path={routes.SendMail} />
         </Switch>
       </BrowserRouter>
     </div>
