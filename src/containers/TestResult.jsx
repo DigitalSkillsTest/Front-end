@@ -7,6 +7,7 @@ import {
 import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
+import { Card } from '../components/CommonComponent';
 
 const data = [
   {
@@ -57,7 +58,7 @@ class TestResult extends Component {
 
   onClickNextBtn() {
     const { history } = this.props;
-    history.push(routes.TestResultByCategory);
+    history.push('/test/result/vertual');
   }
 
   render() {
@@ -89,30 +90,18 @@ class TestResult extends Component {
                     }}
                     >
                       <Col xs={24} sm={24} md={24} lg={12}>
-                        <div className="card">
-                          <div className="card-head" style={{ background: '#E7E7E8' }}>
-                            <Icon type="plus" style={{ fontSize: 24, color: '#5AB38A', paddingRight: 10 }} />
-                            Fortalezas
-                          </div>
-                          <div className="card-body">
-                            <p className="strenthDesc">
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                            </p>
-                          </div>
-                        </div>
+                        <Card title="Fortalezas" icon="plus">
+                          <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                          </p>
+                        </Card>
                       </Col>
                       <Col xs={24} sm={24} md={24} lg={12}>
-                        <div className="card">
-                          <div className="card-head" style={{ background: '#E7E7E8' }}>
-                            <Icon type="minus" style={{ fontSize: 24, color: '#E34640', paddingRight: 10 }} />
-                            Debilidades
-                          </div>
-                          <div className="card-body">
-                            <p className="strenthDesc">
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                            </p>
-                          </div>
-                        </div>
+                        <Card title="Debilidades" icon="minus">
+                          <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                          </p>
+                        </Card>
                       </Col>
                     </Row>
                   </div>

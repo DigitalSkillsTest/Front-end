@@ -1,9 +1,9 @@
 export const WelComepage = '/';
-export const UserRegister = '/user-create';
+export const UserRegister = '/user/create';
 export const HowTestWorks = '/how-test-works';
-export const TestCategoty = '/category';
-export const TestComponent = '/category/1';
-export const TestFinish = '/test-finish';
-export const TestResult = '/test-result';
-export const TestResultByCategory = '/test-result-category';
-export const SendMail = '/send-mail';
+export const TestCategoty = '/test/category';
+export const TestComponent = '/test/start';
+export const TestFinish = '/test/finish';
+export const TestResult = '/test/result';
+export const TestResultByCategory = '/test/result/:id';
+export const SendMail = '/test/result/mail';

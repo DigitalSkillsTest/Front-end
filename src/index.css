@@ -41,25 +41,10 @@ body {
 
 /***************************** sidebar css start *************************/
 
-.sidebarLogo{
-  width: 73px;
-  height: 110px;
-  margin: 15px auto;
-}
-.brainColor{
-  width: 97px;
-  height: 80px;
-  margin: 0 auto 10px;
-}
-.sidebarTop h2{
-  font-size: 22px;
-  line-height: 26px;
-  font-weight: 700;
-  color: #FFF;
-}
-.sidebarTop h2 span{
-  font-weight: 300;
-}
+.sidebarLogo{width: 73px;height: 110px;margin: 15px auto;}
+.brainColor{width: 97px;height: 80px;margin: 0 auto 10px;}
+.sidebarTop h2{font-size: 22px;line-height: 26px;font-weight: 700;color: #FFF;}
+.sidebarTop h2 span{font-weight: 300;}
 .userInfo{padding: 0 10px !important;}
 .userInfo h2{font-size: 22px;line-height: 28px;font-weight: 700;color: #FFF;margin-bottom: 15px;}
 .userInfo p{font-size: 12px;line-height: 14px;font-weight: 300;color: #FFF;margin-bottom: 8px;}
@@ -70,33 +55,18 @@ body {
 
 .welcomeScreenLogo{width: 325px;height: 50px;}
 .welcomeScreen{margin-top: 50px;height: 100%;width:100%;}
-.bg-img{background: url('images/body-bg.svg') no-repeat bottom left;background-size:contain; background-position-x: 0%;background-position-y: 0%;position: absolute;left:0;
-  top:200px;height: 510px;width:100%;left: -125px;}
+.bg-img{background: url('images/body-bg.svg') no-repeat bottom left;background-size:contain; background-position-x: 0%;background-position-y: 0%;position: absolute;top:200px;height: 510px;width:100%;left: -150px;}
 .testStartBlock{background: url('images/steps.svg') no-repeat top right;float: right !important;margin-top: 80px;}
-.testStartBlock h1{
-  margin-bottom: 70px;
-  font-size: 40px;
-  line-height: 45px;
-  font-weight: 700;
-}
-.testStartBlock h1 span{
-  font-weight: 300;
-}
+.testStartBlock h1{margin-bottom: 70px;font-size: 40px;line-height: 45px;font-weight: 700;}
+.testStartBlock h1 span{font-weight: 300;}
+
 /***************************** welcome page css end *************************/
 
 /***************************** User Register page css start *************************/
 .userRegister{padding: 20px 50px;}
-.userRegisterRightBlock{
-  text-align: center
-}
-.btn-green i.anticon{
-  font-size: 22px !important;
-}
-.bodybg2{background: url('images/bodyBg-2.svg') no-repeat bottom right;width: 564px;
-  height: 300px;
-  position: absolute;
-  top: 400px;
-  right: 0px;}
+.userRegisterRightBlock{text-align: center}
+.btn-green i.anticon{font-size: 22px !important;}
+.bodybg2{background: url('images/bodyBg-2.svg') no-repeat bottom right;width: 564px;height: 300px;position: absolute;top: 400px;right: 0px;}
 .userRegisterRightBlock .ant-radio-wrapper span:last-child{color: #1B2027 !important }
 
 /***************************** User Register page css end *************************/
@@ -106,15 +76,7 @@ body {
 .howTestWorks p.testinfo{font-size: 14px;line-height: 16px;font-weight: 300;color: #606060}
 .howTestWorks h2.testCategoryTitle{font-size: 20px;font-weight: 700;color: #1B2027;line-height: 24px;margin:20px 0;}
 .testCategory li{font-size: 16px;line-height: 32px;font-weight: 300;color: #1B2027;list-style: none;padding-left: 10px;}
-.testCategory::after{
-  content:'';
-  width: 17px;
-  height: 183px;
-  background: url('images/steps.svg') no-repeat top center;
-  position: absolute;
-  top: 7px;
-  left: 15px;
-}
+.testCategory::after{content:'';width: 17px;height: 183px;background: url('images/steps.svg') no-repeat top center;position: absolute;top: 7px;left: 15px;}
 .chartImage{width: 100%;height: 370px;float: right;}
 .questiontimewrapper{position: relative;display: inline-block;float: none;;width: auto;text-align: left;margin-bottom: 20px}
 .questionMarkIcon,.timerIcon{font-size: 24px;line-height: 48px;font-weight: 700;padding-left: 35px;position: relative;margin-bottom: 0}
@@ -123,11 +85,7 @@ body {
 /***************************** How Test Works page css end *************************/
 
 /***************************** Test Category page css start *************************/
-.testcategorywrapper{
-  position: relative;
-  display: block;
-  padding: 80px;
-}
+.testcategorywrapper{position: relative;display: block;padding: 80px;}
 .testcategory h1{font-size: 80px;line-height: 80px;font-weight: 700;color: #FFF;margin-bottom: 30px}
 .testcategory p{font-size: 20px; line-height: 24px; font-weight: 300;color: #FFF;margin-bottom: 40px;}
 .testcategory ul{font-size: 20px; line-height: 24px; font-weight: 700;color: #000;margin: 0;padding:0}
@@ -179,11 +137,7 @@ body {
 
 .questionSteps{position: relative;float: none;display: inline-block;width: auto; margin: 40px auto 0}
 .questionSteps .ant-steps-vertical .ant-steps-item{height: 70px;}
-.questionSteps .ant-steps-item-icon{z-index: 99;position: relative;border: none;width: 36px !important;
-  height: 36px !important;
-  line-height: 36px !important;
-  border-radius: 36px !important;
-  background-color: #d4d4d4 !important;box-shadow: 0 0px 15px inset #999 !important;}
+.questionSteps .ant-steps-item-icon{z-index: 99;position: relative;border: none;width: 36px !important;height: 36px !important;line-height: 36px !important;border-radius: 36px !important;background-color: #d4d4d4 !important;box-shadow: 0 0px 15px inset #999 !important;}
 .questionSteps .ant-steps-vertical > .ant-steps-item > .ant-steps-item-tail{left: 13px !important;width: 10px !important;background: #E7E6E5;}
 .questionSteps .ant-steps-icon{display: none !important; background : #D2D2D2 !important;}
 .questionSteps .ant-steps-item-tail:after{background: none !important;}
@@ -222,8 +176,7 @@ body {
 .strenthWeakDesc{margin: 30px 0}
 .testResult .card{position: relative;display: block;background: #FFF;margin-bottom: 20px}
 .testResult .card .card-head{font-size: 24px;line-height: 24px;font-weight: 700;padding: 15px 5px}
-.testResult .card .card-body{padding:25px 20px;min-height: 50px;height: auto;text-align: left;}
-.testResult .card .card-body p.strenthDesc{line-height: 16px;margin: 0 0 10px 0;color: #606060;}
+.testResult .card .card-body{padding:25px 20px;min-height: 50px;height: auto;text-align: left;line-height: 16px;color: #606060;}
 .testResult .testCategory{text-align: left;margin-top: 20px;}
 .testResult .testCategory li{text-align: left;font-size: 12px;line-height: 18px;}
 .testResult .testCategory::after{width: 10px;height: 100px;top: 25px;left: 30px;}
@@ -238,8 +191,7 @@ body {
 .testResultbyCategory p.resultDesc{font-size: 14px;line-height: 16px;font-weight: 300;text-align: left;color: #606060;margin: 40px}
 .testResultbyCategory .card{position: relative;display: block;background: #FFF;margin-bottom: 20px}
 .testResultbyCategory .card .card-head{font-size: 24px;line-height: 24px;font-weight: 700;padding: 15px 5px}
-.testResultbyCategory .card .card-body{padding:25px 20px;min-height: 50px;height: auto;text-align: left;}
-.testResultbyCategory .card .card-body p.strenthDesc{line-height: 16px;margin: 0 0 10px 0;color: #606060;}
+.testResultbyCategory .card .card-body{padding:25px 20px;min-height: 50px;height: auto;text-align: left;line-height: 16px;color: #606060;}
 .testResultbyCategory .strenthWeakDesc{margin: 30px 40px}
 .testResultbyCategory h3.categoryName{font-size: 24px;line-height: 28px;font-weight: 300;margin-top: 10px;}
 .testResultbyCategory p.score{font-size: 70px;line-height: 84px;font-weight: 700;margin: 20px 0;}
@@ -250,14 +202,7 @@ body {
 /***************************** Test Result By Category page css end *************************/
 
 /***************************** Test Mail page css start *************************/
-.bg-image{    background: url('images/bodyBg-2.svg') no-repeat bottom right;
-  background-size: contain;
-  position: absolute;
-  top: 100px;
-  height: 500px;
-  width: 55%;
-  right: 0;
-  }
+.bg-image{background: url('images/bodyBg-2.svg') no-repeat bottom right;background-size: contain;position: absolute;top: 100px;height: 500px;width: 55%;right: 0;}
 .sendMailWrapper{padding: 100px}
 .sendMailWrapper h1{font-weight: 30px;line-height: 36px;font-weight: 700;margin-bottom: 40px;color: #1B2027;}
 .sendMailWrapper h1 span{font-weight: 300;display: block;}

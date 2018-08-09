@@ -3,7 +3,7 @@ import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as routes from './routes/path';
-import Loader from './components/Loader';
+import { Loader } from './components/CommonComponent';
 import PrivateRoute from './components/HOC/PrivateRoute';
 import TestCategoty from './components/TestComponent/TestCategory';
 import TestComponent from './components/TestComponent/TestComponent';
@@ -30,9 +30,9 @@ function App(props) {
           <PrivateRoute component={TestComponent} path={routes.TestComponent} />
           <PrivateRoute component={TestCategoty} path={routes.TestCategoty} />
           <PrivateRoute component={TestFinish} path={routes.TestFinish} />
-          <PrivateRoute component={TestResult} path={routes.TestResult} />
-          <PrivateRoute component={TestResultByCategory} path={routes.TestResultByCategory} />
           <PrivateRoute component={SendMail} path={routes.SendMail} />
+          <PrivateRoute component={TestResultByCategory} path={routes.TestResultByCategory} />
+          <PrivateRoute component={TestResult} path={routes.TestResult} />
         </Switch>
       </BrowserRouter>
     </div>
