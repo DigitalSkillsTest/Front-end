@@ -6,6 +6,7 @@ import {
 } from 'antd';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
+import { clearExam } from '../redux/actions';
 
 class TestFinish extends Component {
   constructor(props) {
@@ -15,9 +16,14 @@ class TestFinish extends Component {
     this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(clearExam());
+  }
+
   onClickPreviousBtn() {
     const { history } = this.props;
-    history.push(routes.TestComponent);
+    history.push(routes.TestStart);
   }
 
   onClickNextBtn() {

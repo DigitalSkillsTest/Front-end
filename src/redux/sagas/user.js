@@ -11,7 +11,7 @@ import {
   fetchUserSuccess,
   fetchUserFail,
 } from '../actions';
-import userService from '../../services';
+import { userService } from '../../services';
 import * as routes from '../../routes/path';
 
 function* createUser(action) {

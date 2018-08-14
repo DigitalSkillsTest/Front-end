@@ -58,7 +58,7 @@ class TestResult extends Component {
 
   onClickNextBtn() {
     const { history } = this.props;
-    history.push('/test/result/vertual');
+    history.push(routes.TestResultByCategory);
   }
 
   render() {

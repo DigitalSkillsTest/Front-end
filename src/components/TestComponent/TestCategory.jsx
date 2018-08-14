@@ -3,58 +3,35 @@ import {
   Row, Col, Button, Icon,
 } from 'antd';
 import PropTypes from 'prop-types';
-import * as routes from '../../routes/path';
 import Layout from '../Layout/Layout';
+import { getBgColor, categoryData, getSteps } from '../../utility/common';
 
 class TestCategotyDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.onClickNextBtn = this.onClickNextBtn.bind(this);
-    this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
-  }
-
-  onClickPreviousBtn() {
-    const { history } = this.props;
-    history.push(routes.HowTestWorks);
-  }
-
-  onClickNextBtn() {
-    const { history } = this.props;
-    history.push(routes.TestComponent);
   }
 
   render() {
+    const { onClickNextBtn, onClickPreviousBtn, category } = this.props;
     return (
-      <Layout sidebar bgColor="#0085C6">
+      <Layout sidebar bgColor={getBgColor(category)}>
         <div className="testcategorywrapper">
           <Row>
             <Col xs={24} className="testcategory">
               <h1>
-                Virtual
-                <br />
-                Language
+                {categoryData[getSteps(category) - 1].category}
               </h1>
               <p>
                 El dominio de la terminología tech especifica para tu rol
               </p>
               <ul>
                 ¿Qué analizaremos?
-                <li>
-                  Technical-Language
-                </li>
-                <li>
-                  Conocimiento específico del rol
-                </li>
-                <li>
-                  Creación digital vs analógica
-                </li>
-                <li>
-                  Aprendizaje digital y desarrollo
-                </li>
-                <li>
-                  Aprendizaje digital y desarrollo
-                </li>
+                {categoryData[getSteps(category) - 1].subcategory.map(item => (
+                  <li className="subCategory" key={Math.random()}>
+                    {item.sub_cat}
+                  </li>
+                ))}
               </ul>
             </Col>
           </Row>
@@ -63,12 +40,12 @@ class TestCategotyDescription extends Component {
           <Row>
             <Col>
               <Button.Group>
-                <Button className="btn-default transparent" onClick={this.onClickPreviousBtn}>
+                <Button className="btn-default transparent" onClick={onClickPreviousBtn} disabled={this.props.index > 1 ? false : true}>
                   <Icon type="caret-left" />
                   {''}
                   Anterior
                 </Button>
-                <Button className="btn-default transparent pull-right" onClick={this.onClickNextBtn}>
+                <Button className="btn-default transparent pull-right" onClick={onClickNextBtn}>
                   Siguiente
                   {''}
                   <Icon type="caret-right" />
@@ -85,5 +62,6 @@ class TestCategotyDescription extends Component {
 export default TestCategotyDescription;
 
 TestCategotyDescription.propTypes = {
-  history: PropTypes.shape({}).isRequired,
+  onClickNextBtn: PropTypes.func.isRequired,
+  onClickPreviousBtn: PropTypes.func.isRequired,
 };

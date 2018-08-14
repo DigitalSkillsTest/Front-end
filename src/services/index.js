@@ -1,3 +1,8 @@
 import userService from './user';
+import examService from './exam';
 
-export default userService;
+
+export {
+  userService,
+  examService,
+};

@@ -35,10 +35,12 @@
   .testCategory::after,.testResult .testCategory::after{left: 0;}
   .testResult .testCategory{padding-left: 20px;}
   .stepButtonWrapper,.mcqWrapper .stepButtonWrapper {position: fixed;left: 0;right: 0;bottom: 0;z-index: 9;padding: 15px}  
+  .mcqWrapper .stepButtonWrapper .ant-form-item{margin-bottom: 0 !important;}
   .progressWrapper.responsive{width: 100%;margin: 0 0 10px 0;}
   .mcqWrapper,.mcqWrapper .mcqAnswer{width: 100%;}
   .mcqWrapper .mcqQuestion .question{width: calc(100% - 65px);font-size: 20px;line-height: 24px}
   .mcqWrapper .stepButtonWrapper{width: 100%;background: #ffffff !important;}
+  .mcqWrapper .stepButtonWrapper::before{content: '';background: url('images/shadow.svg')no-repeat top center;position: absolute;top: -12px;z-index: 9;width: 357px;height: 20px;}
   .mcqWrapper .mcqQuestion .questionNos{font-size: 20px;line-height: 20px;width: 40px;height: 40px;}
   .stepButtonWrapper .btn-default{border-radius: 0 !important}
   .stepButtonWrapper .ant-btn-group .btn-default:first-child{border-top-left-radius: 25px !important;border-bottom-left-radius: 25px !important;width: 50% !important;}

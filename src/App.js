@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import * as routes from './routes/path';
 import { Loader } from './components/CommonComponent';
 import PrivateRoute from './components/HOC/PrivateRoute';
-import TestCategoty from './components/TestComponent/TestCategory';
-import TestComponent from './components/TestComponent/TestComponent';
+
 import {
   WelComepage,
   UserRegister,
   HowTestWorks,
+  TestStart,
   TestFinish,
   TestResult,
   TestResultByCategory,
@@ -27,8 +27,7 @@ function App(props) {
           <Route component={WelComepage} path={routes.WelComepage} exact />
           <Route component={UserRegister} path={routes.UserRegister} />
           <PrivateRoute component={HowTestWorks} path={routes.HowTestWorks} />
-          <PrivateRoute component={TestComponent} path={routes.TestComponent} />
-          <PrivateRoute component={TestCategoty} path={routes.TestCategoty} />
+          <PrivateRoute component={TestStart} path={routes.TestStart} />
           <PrivateRoute component={TestFinish} path={routes.TestFinish} />
           <PrivateRoute component={SendMail} path={routes.SendMail} />
           <PrivateRoute component={TestResultByCategory} path={routes.TestResultByCategory} />

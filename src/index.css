@@ -20,7 +20,7 @@ body {
 .btn-default i.anticon{font-size: 15px;vertical-align: middle}
 .pull-right{float: right;}
 
-.loader {position: fixed;top: 0;right: 0;bottom: 0;left: 0;background: rgb(255, 255, 255, 0.5);z-index: 9999;display: flex;align-items: center;justify-content: center;}
+.loader {position: fixed;top: 0;right: 0;bottom: 0;left: 0;background: rgb(255, 255, 255, 1);z-index: 9999;display: flex;align-items: center;justify-content: center;}
 
 .container{width:1200px;margin: 0 auto;position: relative;overflow: hidden;}
 .responsiveHeader{display: none;}
