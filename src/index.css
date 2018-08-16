@@ -119,7 +119,15 @@ body {
   padding: 15px;
   height: auto;
   width: 100%;
-  border: none !important;
+  border: 2px solid transparent !important;
+  background: #EBEBEA;
+  color: #774040 !important;
+}
+.mcqWrapper .mcqAnswer .ant-radio-group .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{
+  background: #FFF;
+  box-shadow: 0 0px 0px #ccc !important;
+  -moz-box-shadow: 0 0px 0px #ccc !important;
+  -webkit-box-shadow: 0 0px 0px #ccc !important;
 }
 .ant-radio-button-wrapper-checked:first-child{
   box-shadow: 0 2px 0px #ccc !important;
@@ -152,7 +160,12 @@ body {
 .step4 .ant-steps-item-icon{background-color: #F7B713 !important;box-shadow: 0 0px 2px inset #777 !important;}
 .step5 .ant-steps-item-icon{background-color: #E34640 !important;box-shadow: 0 0px 2px inset #777 !important;}
 .step6 .ant-steps-item-icon{background-color: #94378D !important;box-shadow: 0 0px 2px inset #777 !important;}
-
+.mcqAnswer.step1 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #0085C6 !important}
+.mcqAnswer.step2 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #009F49 !important} 
+.mcqAnswer.step3 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #BDCF31 !important} 
+.mcqAnswer.step4 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #F7B713 !important} 
+.mcqAnswer.step5 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #E34640 !important} 
+.mcqAnswer.step6 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #94378D !important} 
 /***************************** Test Component page css end *************************/
 
 /***************************** Test Finish page css start *************************/

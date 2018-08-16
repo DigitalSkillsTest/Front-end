@@ -64,29 +64,18 @@ class TestStart extends Component {
     const { dispatch } = this.props;
     // call previous question
     dispatch(previousQuestion());
-    // if (showCategory) {
-    //   const data = {
-    //     examId,
-    //     QIndex: QIndex - 1,
-    //   };
-
-    //   dispatch(fetchQuestionReq(data));
-    // } else {
-    //   dispatch(previousQuestion());
-    // }
   }
 
   onClickNextBtn(e) {
     this.setState({ prevClick: false });
     e.preventDefault();
     const { showCategory } = this.state;
-    const { form, exam: { examId, QIndex, currentQuestion }, dispatch, } = this.props;
+    const { form, exam: { examId, QIndex, currentQuestion }, dispatch } = this.props;
     if (QIndex === 30) {
       const { history } = this.props;
       history.push(routes.TestFinish);
     }
     form.validateFields((err, values) => {
-
       if (!err && examId) {
         if (currentQuestion && !showCategory) {
           const questionCode = Object.values(values)[0];
@@ -117,7 +106,6 @@ class TestStart extends Component {
       }
     });
   }
-
 
   render() {
     const { showCategory } = this.state;

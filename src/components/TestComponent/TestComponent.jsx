@@ -45,7 +45,7 @@ class TestComponent extends Component {
     } = this.props;
     if (currentQuestion) {
       const {
-        categories_COD, question, options, category,
+        categories_COD, question, options, category, userCode,
       } = currentQuestion.question;
       return (
         <Layout sidebar>
@@ -74,9 +74,10 @@ class TestComponent extends Component {
                       {question}
                     </div>
                   </div>
-                  <div className="mcqAnswer">
+                  <div className={`mcqAnswer answer-options step${getSteps(categories_COD)}`}>
                     <FormItem>
                       {getFieldDecorator(`answerOptions${QIndex}`, {
+                        initialValue: userCode,
                         rules: [{
                           required: true, message: 'Please select an option.',
                         }],
@@ -161,4 +162,6 @@ export default TestComponent;
 TestComponent.propTypes = {
   exam: PropTypes.shape({}).isRequired,
   form: PropTypes.shape({}).isRequired,
+  onClickNextBtn: PropTypes.func.isRequired,
+  onClickPreviousBtn: PropTypes.func.isRequired,
 };
