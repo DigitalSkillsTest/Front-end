@@ -183,7 +183,7 @@ body {
 
 .testResult{position: relative;display: block;width: 100%;margin: 20px 0;text-align: center;}
 .testResult h2{font-size: 24px;line-height: 28px;font-weight: 300;margin-bottom: 0}
-.testResult h1{font-size: 70px;line-height: 84px;font-weight: 700}
+.testResult h1{font-size: 70px;line-height: 84px;font-weight: 700;margin-bottom: 20px}
 .testResult h1 span{font-weight: 300} 
 .testResult p.resultDesc{font-size: 14px;line-height: 16px;font-weight: 300;text-align: left;color: #606060;}
 .strenthWeakDesc{margin: 30px 0}
@@ -195,7 +195,14 @@ body {
 .testResult .testCategory::after{width: 10px;height: 100px;top: 25px;left: 30px;}
 .stepButtonWrapper p.keyarearesult{position: absolute;right: 150px;top: 10px; font-size: 14px;line-height: 16px;margin: 0;padding: 0;font-weight: 700;}
 .stepButtonWrapper p.keyarearesult::before{content: '';background: url('images/icon1.svg') no-repeat;width: 45px;height: 45px;position: absolute;left: -55px;top:-5px;}
-
+.testResult .slider{width: 100%;margin: 0 auto;max-width: 300px;}
+.testResult .slider .ant-slider-disabled,.testResult .slider .ant-slider-disabled.ant-slider-dot{cursor: default !important;}
+.testResult .slider .ant-slider-rail{background: #E7E7E8 !important;height: 7px !important;}
+.testResult .slider .ant-slider-track{background: #5AB38A !important;height: 7px !important;}
+.ant-slider-step{height: 10px !important;}
+.ant-slider-handle{display: none;}
+.ant-slider-dot{top: -5px !important;width: 18px !important;height: 18px !important;border: none !important;background-color:#E7E7E8 !important}
+.ant-slider-dot.ant-slider-dot-active{background-color: #5AB38A !important}
 /***************************** Test Result page css end *************************/
 
 /***************************** Test Result By Category page css start *************************/

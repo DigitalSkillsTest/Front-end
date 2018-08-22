@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-  Row, Col, Button, Icon,
+  Row, Col, Button, Icon, Slider,
 } from 'antd';
 import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
@@ -78,6 +78,15 @@ class TestResult extends Component {
                       %
                     </span>
                   </h1>
+                  <div className="slider">
+                    <Slider
+                      marks={{
+                        0: '', 33: '', 66: '', 100: '',
+                      }}
+                      defaultValue={75}
+                      disabled
+                    />
+                  </div>
                   <p className="resultDesc">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
                   </p>
