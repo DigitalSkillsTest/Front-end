@@ -1,9 +1,10 @@
-import { FETCH_QUESTION_REQ, FETCH_QUESTION_FAIL, FETCH_QUESTION_SUCCESS, EXAM_START_REQ, EXAM_START_FAIL, EXAM_START_SUCCESS, NEXT_QUESTION, PREVIOUS_QUESTION, SET_EXAM_ID, CLEAR_EXAM } from '../actions';
+import { FETCH_QUESTION_REQ, FETCH_QUESTION_FAIL, FETCH_QUESTION_SUCCESS, EXAM_START_REQ, EXAM_START_FAIL, EXAM_START_SUCCESS, NEXT_QUESTION, PREVIOUS_QUESTION, SET_EXAM_ID, CLEAR_EXAM, SET_EXAM_STATUS } from '../actions';
 
 const INITIAL_STATE = {
   currentQuestion: null,
   examId: null,
   QIndex: 1,
+  isexamCompleted: false,
 };
 
 function decrement(index) {
@@ -61,6 +62,11 @@ const exam = (state = INITIAL_STATE, action) => {
         currentQuestion: null,
         examId: null,
         QIndex: 1,
+      };
+    case SET_EXAM_STATUS:
+      return {
+        ...state,
+        isexamCompleted: !state.isexamCompleted,
       };
     default:
       return state;

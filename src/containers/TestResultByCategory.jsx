@@ -2,192 +2,209 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-  Row, Col, Button, Icon, Steps,
+  Row, Col, Button, Icon,
 } from 'antd';
 import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
+import Steps from '../components/CommonComponent/Steps';
 import Layout from '../components/Layout/Layout';
 import { Card } from '../components/CommonComponent';
+import { fetchResultByCategoryReq, fetchExamResultReq } from '../redux/actions';
+import {
+  getCategory,
+  getBgColor,
+  renderLongDesc,
+  renderStrenth,
+  renderWeakness,
+} from '../utility/common';
 
-const { Step } = Steps;
+function renderCategoryWiseScore(data) {
+  return data.map(item => (
+    <p className="subcategoryScore" key={Math.random()}>
+      <span>
+        {parseFloat(item.isScore).toFixed(1)}
+      </span>
+      {getCategory(item.categories_COD)}
+    </p>
+  ));
+}
 
-const data = [
-  {
-    value: 300,
-    color: '#F7464A',
-    highlight: '#FF5A5E',
-    label: 'Red',
-  },
-  {
-    value: 50,
-    color: '#46BFBD',
-    highlight: '#5AD3D1',
-    label: 'Green',
-  },
-  {
-    value: 100,
-    color: '#FDB45C',
-    highlight: '#FFC870',
-    label: 'Yellow',
-  },
-  {
-    value: 40,
-    color: '#949FB1',
-    highlight: '#A8B3C5',
-    label: 'Grey',
-  },
-  {
-    value: 120,
-    color: '#4D5360',
-    highlight: '#616774',
-    label: 'Dark Grey',
-  },
+function chartData(chartdata, color) {
+  const chart = chartdata.map(item => ({
+    value: item.isScore,
+    color: color === item.categories_COD ? getBgColor(item.categories_COD) : '#CCC',
+    label: getCategory(item.categories_COD),
+  }));
+  return chart;
+}
 
-];
+function avgScore(avg) {
+  return avg.map(item => item.isScore).reduce((acc, val) => acc + val) / 5;
+}
 
 class TestResultByCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
       clientWidth: window.innerWidth,
+      resultData: null,
+      categoryIndex: 1,
     };
     this.handleResize = this.handleResize.bind(this);
     this.onClickNextBtn = this.onClickNextBtn.bind(this);
     this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
+    this.renderResult = this.renderResult.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
+
+    const { dispatch } = this.props;
+    const examId = localStorage.getItem('examId');
+    if (examId) {
+      dispatch(fetchExamResultReq({ examId }));
+      dispatch(fetchResultByCategoryReq({ examId }));
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { resultByCategory } = this.props;
+    const { categoryIndex } = this.state;
+    if (resultByCategory !== prevProps.resultByCategory) {
+      this.renderResult(resultByCategory.data, categoryIndex);
+    }
+    if (categoryIndex !== prevState.categoryIndex) {
+      this.renderResult(resultByCategory.data, categoryIndex);
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
 
-
   onClickPreviousBtn() {
     const { history } = this.props;
-    history.push(routes.TestResult);
+    const { categoryIndex } = this.state;
+    if (categoryIndex === 1) {
+      history.push(routes.TestResult);
+    }
+    this.setState(prevState => ({ categoryIndex: prevState.categoryIndex > 1 ? prevState.categoryIndex - 1 : 1 }));
   }
 
   onClickNextBtn() {
     const { history } = this.props;
-    history.push(routes.SendMail);
+    const { categoryIndex } = this.state;
+    if (categoryIndex === 6) {
+      history.push(routes.SendMail);
+    }
+    this.setState(prevState => ({ categoryIndex: prevState.categoryIndex < 6 ? prevState.categoryIndex + 1 : 6 }));
   }
 
   handleResize() {
     this.setState({ clientWidth: window.innerWidth });
   }
 
+  renderResult(result, index) {
+    const resultData = result.filter((item) => {
+      if (index === 1 && item.categories_COD === 'A') {
+        return item;
+      }
+      if (index === 2 && item.categories_COD === 'B') {
+        return item;
+      }
+      if (index === 3 && item.categories_COD === 'C') {
+        return item;
+      }
+      if (index === 4 && item.categories_COD === 'D') {
+        return item;
+      }
+      if (index === 5 && item.categories_COD === 'E') {
+        return item;
+      }
+      if (index === 6 && item.categories_COD === 'F') {
+        return item;
+      }
+      return null;
+    });
+    this.setState({ resultData });
+  }
+
   render() {
-    const { clientWidth } = this.state;
+    const { clientWidth, resultData } = this.state;
+    const { result } = this.props;
     return (
       <Layout sidebar>
-        <div className="testResultbyCategory">
-          <Row>
-            <Col xs={24}>
-              {clientWidth < 768 && (
-                <div className="questionSteps responsive">
-                  <Steps current={0}>
-                    <Step className="step1" />
-                    <Step />
-                    <Step />
-                    <Step />
-                    <Step />
-                    <Step />
-                  </Steps>
-                </div>
-              )}
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={24} sm={24} md={16} className="m-b-15">
-              <Row>
-                <Col xs={24}>
-                  <div className="testCategoryHeading" style={{ background: '#0085C6' }}>
-                    Virtual Language
+        {resultData && (
+          <div className="testResultbyCategory">
+            <Row>
+              <Col xs={24}>
+                {clientWidth < 768 && (
+                  <div className="questionSteps responsive">
+                    <Steps current={resultData[0].categories_COD} />
                   </div>
-                  <p className="resultDesc">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                  </p>
-                </Col>
+                )}
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={24} sm={24} md={16} className="m-b-15">
+                <Row>
+                  <Col xs={24}>
+                    <div className="testCategoryHeading" style={{ background: getBgColor(resultData[0].categories_COD) }}>
+                      {getCategory(resultData[0].categories_COD)}
+                    </div>
+                    <p className="resultDesc">
+                      {renderLongDesc(resultData)}
+                    </p>
+                  </Col>
 
-                <Col xs={24}>
-                  <div className="strenthWeakDesc">
-                    <Row gutter={{
-                      lg: 32,
-                    }}
-                    >
-                      <Col xs={24} sm={24} md={24} lg={12}>
-                        <Card title="Fortalezas" icon="plus">
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                          </p>
-                        </Card>
-                      </Col>
-                      <Col xs={24} sm={24} md={24} lg={12}>
-                        <Card title="Debilidades" icon="minus">
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                          </p>                          
-                        </Card>
-                      </Col>
-                    </Row>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
+                  <Col xs={24}>
+                    <div className="strenthWeakDesc">
+                      <Row gutter={{
+                        lg: 32,
+                      }}
+                      >
+                        <Col xs={24} sm={24} md={24} lg={12}>
+                          <Card title="Fortalezas" icon="plus">
+                            <p>
+                              {renderStrenth(resultData).every(x => x === false) ? 'None' : renderStrenth(resultData)}
+                            </p>
+                          </Card>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={12}>
+                          <Card title="Debilidades" icon="minus">
+                            <p>
+                              {renderWeakness(resultData).every(x => x === false) ? 'None' : renderWeakness(resultData)}
+                            </p>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
 
-            <Col xs={24} sm={24} md={8} className="m-b-15 text-center">
-              <PolarAreaChart data={data} width="200" height="200" />
-              <Row>
-                <Col xs={24}>
-                  <h3 className="categoryName">
-                    Virtual
-                    <br />
-                    Language Score
-                  </h3>
-                  <p className="score">
-                    3.0
-                  </p>
-                  <div className="subCategoryScoreWrapper">
-                    <p className="subcategoryScore">
-                      1
-                      <span>
-                        Technical-Language
-                      </span>
+              <Col xs={24} sm={24} md={8} className="m-b-15 text-center">
+                {result && (<PolarAreaChart data={chartData(result.data, resultData[0].categories_COD)} width="200" height="200" />)}
+                <Row>
+                  <Col xs={24}>
+                    <h3 className="categoryName">
+                      {getCategory(resultData[0].categories_COD)}
+                      {' '}
+                      Score
+                    </h3>
+                    <p className="score">
+                      {parseFloat(avgScore(resultData)).toFixed(1)}
                     </p>
-                    <p className="subcategoryScore">
-                      2
-                      <span>
-                        Conocimiento específico del rol
-                      </span>
-                    </p>
-                    <p className="subcategoryScore">
-                      3
-                      <span>
-                        Creación digital vs analógica
-                      </span>
-                    </p>
-                    <p className="subcategoryScore">
-                      4
-                      <span>
-                        Aprendizaje digital y desarrollo
-                      </span>
-                    </p>
-                    <p className="subcategoryScore">
-                      5
-                      <span>
-                        Conocimientos básicos de tecnologías
-                      </span>
-                    </p>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
+                    <div className="subCategoryScoreWrapper">
+                      {result && (renderCategoryWiseScore(result.data))}
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
 
-          </Row>
-        </div>
+            </Row>
+          </div>
+        )}
         <div className="stepButtonWrapper">
           <Row>
             <Col xs={24}>
@@ -211,9 +228,20 @@ class TestResultByCategory extends Component {
   }
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => ({
+  exam: state.exam,
+  result: state.result.overallResult,
+  resultByCategory: state.result.resultByCategory,
+});
 export default connect(mapStateToProps)(TestResultByCategory);
+
+TestResultByCategory.defaultProps = {
+  resultByCategory: PropTypes.shape({}),
+};
 
 TestResultByCategory.propTypes = {
   history: PropTypes.shape({}).isRequired,
+  resultByCategory: PropTypes.shape({}),
+  result: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };

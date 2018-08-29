@@ -66,9 +66,15 @@ export const previousQuestion = () => ({
 
 export const SET_EXAM_ID = 'SET_EXAM_ID';
 export const CLEAR_EXAM = 'CLEAR_EXAM';
+export const SET_EXAM_STATUS = 'SET_EXAM_STATUS';
 export const setExamId = () => ({
   type: SET_EXAM_ID,
 });
+
 export const clearExam = () => ({
   type: CLEAR_EXAM,
+});
+
+export const setExamStatus = () => ({
+  type: SET_EXAM_STATUS,
 });

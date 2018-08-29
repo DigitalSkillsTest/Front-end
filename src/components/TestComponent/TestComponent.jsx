@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import Layout from '../Layout/Layout';
 import Steps from '../CommonComponent/Steps';
 import ProgressBar from '../CommonComponent/ProgressBar';
-import { getBgColor, categoryData, getSteps } from '../../utility/common';
+import { getBgColor, getSteps } from '../../utility/common';
+import CountDownTimer from '../CommonComponent/CountDown';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
@@ -37,7 +38,6 @@ class TestComponent extends Component {
     this.setState({ clientWidth: window.innerWidth });
   }
 
-
   render() {
     const { clientWidth } = this.state;
     const {
@@ -49,52 +49,54 @@ class TestComponent extends Component {
       } = currentQuestion.question;
       return (
         <Layout sidebar>
-          <Row>
-            <Col xs={24}>
-              {clientWidth < 768 && (
-                <div className="questionSteps responsive">
-                  <Steps current={categories_COD} />
-                </div>
-              )}
-              <div className="testCategoryHeading" style={{ background: getBgColor(categories_COD) }}>
-                {category}
-              </div>
-            </Col>
-          </Row>
-
-          <Row>
-            <Form onSubmit={onClickNextBtn} className="login-form">
-              <Col sm={24} md={18}>
-                <div className="mcqWrapper">
-                  <div className="mcqQuestion">
-                    <div className="questionNos" style={{ background: getBgColor(categories_COD) }}>
-                      {QIndex}
+              <Row>
+                <Col xs={24}>
+                  {clientWidth < 768 && (
+                    <div className="questionSteps responsive">
+                      <Steps current={categories_COD} />
                     </div>
-                    <div className="question">
-                      {question}
-                    </div>
+                  )}
+                  <div className="testCategoryHeading" style={{ background: getBgColor(categories_COD) }}>
+                    {category}
                   </div>
-                  <div className={`mcqAnswer answer-options step${getSteps(categories_COD)}`}>
-                    <FormItem>
-                      {getFieldDecorator(`answerOptions${QIndex}`, {
-                        initialValue: userCode,
-                        rules: [{
-                          required: true, message: 'Please select an option.',
-                        }],
-                      })(
-                        <RadioGroup size="large">
-                          {options.map(option => (
-                            <RadioButton key={option._id} value={option.code}>
-                              {option.answer}
-                            </RadioButton>
-                          ))
-                          }
-                        </RadioGroup>,
-                      )}
-                    </FormItem>
+                </Col>
+              </Row>
+          <Form onSubmit={onClickNextBtn} className="test-form">
+            <div className="testWrapper">
 
-                  </div>
-                  <div className="stepButtonWrapper">
+              <Row>
+                <CountDownTimer time={this.props.timer} currentCounter={this.props.currentCounter} />
+                <Col sm={24}>
+                  <div className="mcqWrapper">
+                    <div className="mcqQuestion">
+                      <div className="questionNos" style={{ background: getBgColor(categories_COD) }}>
+                        {QIndex}
+                      </div>
+                      <div className="question">
+                        {question}
+                      </div>
+                    </div>
+                    <div className={`mcqAnswer answer-options step${getSteps(categories_COD)}`}>
+                      <FormItem>
+                        {getFieldDecorator(`answerOptions${QIndex}`, {
+                          initialValue: userCode,
+                          rules: [{
+                            required: true, message: 'Please select an option.',
+                          }],
+                        })(
+                          <RadioGroup size="large">
+                            {options.map(option => (
+                              <RadioButton key={option._id} value={option.code}>
+                                {option.answer}
+                              </RadioButton>
+                            ))
+                            }
+                          </RadioGroup>,
+                        )}
+                      </FormItem>
+
+                    </div>
+                    {/* <div className="stepButtonWrapper">
                     <Row>
                       <Col>
                         {clientWidth < 768 && (
@@ -118,21 +120,48 @@ class TestComponent extends Component {
                         </FormItem>
                       </Col>
                     </Row>
+                  </div> */}
                   </div>
-                </div>
 
-                {clientWidth > 768 && (
-                  <React.Fragment>
-                    <div className="questionSteps">
-                      <Steps current={categories_COD} direction="vertical" />
-                    </div>
-                    <div className="progressWrapper">
-                      <ProgressBar percent={getPercent(QIndex)} />
-                    </div>
-                  </React.Fragment>
-                )}
-              </Col>
-              <Col sm={24} md={6}>
+                  {clientWidth > 768 && (
+                    <React.Fragment>
+                      <div className="questionSteps">
+                        <Steps current={categories_COD} direction="vertical" />
+                      </div>
+                      {/* <div className="progressWrapper">
+                          <ProgressBar percent={getPercent(QIndex)} />
+                        </div> */}
+                    </React.Fragment>
+                  )}
+
+                  {/* <div className="stepButtonWrapper">
+                  <Row>
+                    <Col>
+                      {clientWidth < 768 && (
+                        <div className="progressWrapper responsive">
+                          <ProgressBar percent={getPercent(QIndex)} />
+                        </div>
+                      )}
+                      <FormItem>
+                        <Button.Group>
+                          <Button className="btn-default" onClick={onClickPreviousBtn}>
+                            <Icon type="caret-left" />
+                            {''}
+                            Anterior
+                          </Button>
+                          <Button className="btn-default pull-right" htmlType="submit">
+                            Siguiente
+                            {''}
+                            <Icon type="caret-right" />
+                          </Button>
+                        </Button.Group>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                </div> */}
+
+                </Col>
+                {/* <Col sm={24} md={6}>
 
                 <div className="testSubCategory">
                   <div className="card">
@@ -148,9 +177,33 @@ class TestComponent extends Component {
                     </div>
                   </div>
                 </div>
-              </Col>
-            </Form>
-          </Row>
+              </Col> */}
+              </Row>
+            </div>
+            <div className="stepButtonWrapper">
+              <Row>
+                <Col>
+                  <div className="progressWrapper responsive">
+                    <ProgressBar percent={getPercent(QIndex)} />
+                  </div>
+                  <FormItem>
+                    <Button.Group>
+                      <Button className="btn-default" onClick={onClickPreviousBtn}>
+                        <Icon type="caret-left" />
+                        {''}
+                        Anterior
+                      </Button>
+                      <Button className="btn-default pull-right" htmlType="submit">
+                        Siguiente
+                        {''}
+                        <Icon type="caret-right" />
+                      </Button>
+                    </Button.Group>
+                  </FormItem>
+                </Col>
+              </Row>
+            </div>
+          </Form>
         </Layout>
       );
     } return '';

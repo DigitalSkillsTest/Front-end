@@ -4,6 +4,7 @@ import {
 } from 'redux-saga/effects';
 import { watcherCreateUser, watcherFetchUser } from './user';
 import { watcherExamStart, watcherFetchQuestion, watcherSaveAnswer } from './exam';
+import { watcherFetchExamResult, watcherFetchResultByCategory } from './result';
 
 export default function* root() {
   yield all([
@@ -12,5 +13,7 @@ export default function* root() {
     fork(watcherExamStart),
     fork(watcherFetchQuestion),
     fork(watcherSaveAnswer),
+    fork(watcherFetchExamResult),
+    fork(watcherFetchResultByCategory),
   ]);
 }

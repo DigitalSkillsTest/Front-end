@@ -25,13 +25,13 @@ function App(props) {
       <BrowserRouter>
         <Switch>
           <Route component={WelComepage} path={routes.WelComepage} exact />
-          <Route component={UserRegister} path={routes.UserRegister} />
-          <PrivateRoute component={HowTestWorks} path={routes.HowTestWorks} />
-          <PrivateRoute component={TestStart} path={routes.TestStart} />
-          <PrivateRoute component={TestFinish} path={routes.TestFinish} />
-          <PrivateRoute component={SendMail} path={routes.SendMail} />
-          <PrivateRoute component={TestResultByCategory} path={routes.TestResultByCategory} />
-          <PrivateRoute component={TestResult} path={routes.TestResult} />
+          <Route component={UserRegister} path={routes.UserRegister} exact />
+          <PrivateRoute component={HowTestWorks} path={routes.HowTestWorks} exact />
+          <PrivateRoute component={TestStart} path={routes.TestStart} exact />
+          <PrivateRoute component={TestFinish} path={routes.TestFinish} exact />
+          <PrivateRoute component={SendMail} path={routes.SendMail} exact />
+          <PrivateRoute component={TestResultByCategory} path={routes.TestResultByCategory} exact />
+          <PrivateRoute component={TestResult} path={routes.TestResult} exact />
         </Switch>
       </BrowserRouter>
     </div>

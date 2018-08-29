@@ -136,7 +136,7 @@ body {
 }
 .mcqWrapper .mcqAnswer .ant-radio-group .ant-radio-button-wrapper::before{display: none !important;}
 .mcqWrapper .stepButtonWrapper{width: calc(100% - 25px);float: left;display: block;position: relative;}
-
+.mcqWrapper .mcqAnswer .ant-row{margin-bottom: 0 !important;}
 .testSubCategory{display: block;position: relative;float: left; width: 100%;}
 .testSubCategory .card{position: relative;display: block;background: #FFF}
 .testSubCategory .card .card-head{color:#FFF;font-size: 16px;line-height: 20px;font-weight: 300;padding: 8px 30px;}
@@ -150,7 +150,7 @@ body {
 .questionSteps .ant-steps-icon{display: none !important; background : #D2D2D2 !important;}
 .questionSteps .ant-steps-item-tail:after{background: none !important;}
 
-.progressWrapper{width: calc(100% - 125px);margin: 50px 0 20px;float: left;display: block;position: relative;}
+.progressWrapper{width: calc(100% - 25px);margin: 0px 0 20px;float: left;display: block;position: relative;}
 .progressWrapper .ant-progress-inner{padding: 7px !important;background: #E7E6E5 !important;}
 .progressWrapper .ant-progress-outer{padding-right: calc(4em + 8px) !important;margin-right: calc(-4em - 4px) !important;}
 .progressWrapper .ant-progress-text{font-size: 24px;line-height: 28px;font-weight: 700;}
@@ -166,6 +166,7 @@ body {
 .mcqAnswer.step4 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #F7B713 !important} 
 .mcqAnswer.step5 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #E34640 !important} 
 .mcqAnswer.step6 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #94378D !important} 
+.test-form .stepButtonWrapper .ant-row{margin-bottom: 0 !important}
 /***************************** Test Component page css end *************************/
 
 /***************************** Test Finish page css start *************************/
@@ -207,16 +208,16 @@ body {
 
 /***************************** Test Result By Category page css start *************************/
 
-.testResultbyCategory .testCategoryHeading {font-size: 22px;line-height: 26px;padding: 10px 100px 10px 60px;font-weight: 700;}
+.testCategoryHeading {font-size: 22px;line-height: 26px;padding: 10px 100px 10px 60px;font-weight: 700;}
 .testResultbyCategory p.resultDesc{font-size: 14px;line-height: 16px;font-weight: 300;text-align: left;color: #606060;margin: 40px}
 .testResultbyCategory .card{position: relative;display: block;background: #FFF;margin-bottom: 20px}
 .testResultbyCategory .card .card-head{font-size: 24px;line-height: 24px;font-weight: 700;padding: 15px 5px}
 .testResultbyCategory .card .card-body{padding:25px 20px;min-height: 50px;height: auto;text-align: left;line-height: 16px;color: #606060;}
 .testResultbyCategory .strenthWeakDesc{margin: 30px 40px}
-.testResultbyCategory h3.categoryName{font-size: 24px;line-height: 28px;font-weight: 300;margin-top: 10px;}
+.testResultbyCategory h3.categoryName{font-size: 24px;line-height: 28px;font-weight: 300;margin-top: 10px;padding:0 50px}
 .testResultbyCategory p.score{font-size: 70px;line-height: 84px;font-weight: 700;margin: 20px 0;}
-.testResultbyCategory p.subcategoryScore{padding: 0;margin: 0;color:#0085C6;font-weight: 700}
-.testResultbyCategory p.subcategoryScore span{padding-left: 10px;color:#606060;font-weight: 300}
+.testResultbyCategory p.subcategoryScore{padding: 0;margin: 0;font-weight: 300;color:#606060}
+.testResultbyCategory p.subcategoryScore span{color:#0085C6;font-weight: 700;width: 40px;float: left;}
 .subCategoryScoreWrapper{width: 80%;margin: 0 auto;text-align: left;}
 
 /***************************** Test Result By Category page css end *************************/
@@ -229,3 +230,11 @@ body {
 .sendMailWrapper p.help-text{font-size: 16px;line-height: 19px;font-weight: 300;margin: 5px 0 10px 5px;}
 .sendMailWrapper .userRegisterRightBlock{text-align: left;margin: 40px 0 }
 /***************************** Test Mail page css end *************************/
+
+@media (min-width:768px){
+ 
+}
+
+/* .testcomponentWrapper .stepButtonWrapper{
+  position: ;
+} */

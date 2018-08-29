@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const getBgColor = (color) => {
   switch (color) {
     case 'A':
@@ -17,24 +19,24 @@ export const getBgColor = (color) => {
   }
 };
 
-// export const getCategory = (category) => {
-//   switch (category) {
-//     case 'A':
-//       return 'Virtual Language';
-//     case 'B':
-//       return 'Adaptación al Cambio';
-//     case 'C':
-//       return 'Virtual Work abilities';
-//     case 'D':
-//       return 'Digital Leadership';
-//     case 'E':
-//       return 'Digital mindset';
-//     case 'F':
-//       return 'Virtual Core Business mindset';
-//     default:
-//       return '';
-//   }
-// };
+export const getCategory = (category) => {
+  switch (category) {
+    case 'A':
+      return 'Virtual Language';
+    case 'B':
+      return 'Adaptación al Cambio';
+    case 'C':
+      return 'Virtual Work abilities';
+    case 'D':
+      return 'Digital Leadership';
+    case 'E':
+      return 'Digital mindset';
+    case 'F':
+      return 'Virtual Core Business mindset';
+    default:
+      return '';
+  }
+};
 
 export const getSteps = (current) => {
   switch (current) {
@@ -178,3 +180,31 @@ export const categoryData = [
     ],
   },
 ];
+
+
+export function renderLongDesc(longDesc) {
+  return longDesc.map(item => (
+    <span key={Math.random()}>
+      {item.longVersionTxt}
+      {'. '}
+    </span>
+  ));
+}
+
+export function renderStrenth(strenth) {
+  return strenth.map(item => item.isScore >= 3 && (
+    <React.Fragment key={Math.random()}>
+      {item.sortVersionTxt}
+      {'. '}
+    </React.Fragment>
+  ));
+}
+
+export function renderWeakness(weakness) {
+  return weakness.map(item => item.isScore < 3 && (
+    <React.Fragment key={Math.random()}>
+      {item.sortVersionTxt}
+      {'. '}
+    </React.Fragment>
+  ));
+}

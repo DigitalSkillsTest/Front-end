@@ -6,7 +6,6 @@ import {
 } from 'antd';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
-import { clearExam } from '../redux/actions';
 
 class TestFinish extends Component {
   constructor(props) {
@@ -17,8 +16,10 @@ class TestFinish extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(clearExam());
+    const { exam: { isexamCompleted }, history } = this.props;
+    if (!isexamCompleted) {
+      history.push(routes.TestStart);
+    }
   }
 
   onClickPreviousBtn() {
@@ -75,9 +76,12 @@ class TestFinish extends Component {
   }
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => ({
+  exam: state.exam,
+});
 export default connect(mapStateToProps)(TestFinish);
 
 TestFinish.propTypes = {
   history: PropTypes.shape({}).isRequired,
+  exam: PropTypes.shape({}).isRequired,
 };

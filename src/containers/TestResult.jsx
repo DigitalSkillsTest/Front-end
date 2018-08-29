@@ -8,40 +8,26 @@ import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
 import { Card } from '../components/CommonComponent';
+import { fetchExamResultReq } from '../redux/actions';
+import {
+  getBgColor,
+  getCategory,
+  renderLongDesc,
+  renderStrenth,
+  renderWeakness,
+} from '../utility/common';
 
-const data = [
-  {
-    value: 300,
-    color: '#F7464A',
-    highlight: '#FF5A5E',
-    label: 'Red',
-  },
-  {
-    value: 50,
-    color: '#46BFBD',
-    highlight: '#5AD3D1',
-    label: 'Green',
-  },
-  {
-    value: 100,
-    color: '#FDB45C',
-    highlight: '#FFC870',
-    label: 'Yellow',
-  },
-  {
-    value: 40,
-    color: '#949FB1',
-    highlight: '#A8B3C5',
-    label: 'Grey',
-  },
-  {
-    value: 120,
-    color: '#4D5360',
-    highlight: '#616774',
-    label: 'Dark Grey',
-  },
+function renderPercent(percent) {
+  return percent.map(item => item.isScore * 5).reduce((acc, val) => acc + val) / 120 * 100;
+}
 
-];
+function chartData(chartdata) {
+  return chartdata.map(item => ({
+    value: item.isScore,
+    color: getBgColor(item.categories_COD),
+    label: getCategory(item.categories_COD),
+  }));
+}
 
 class TestResult extends Component {
   constructor(props) {
@@ -49,6 +35,16 @@ class TestResult extends Component {
     this.state = {};
     this.onClickNextBtn = this.onClickNextBtn.bind(this);
     this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch, history } = this.props;
+    const examId = localStorage.getItem('examId');
+    if (examId) {
+      dispatch(fetchExamResultReq({ examId }));
+    } else {
+      history.push(routes.TestStart);
+    }
   }
 
   onClickPreviousBtn() {
@@ -62,91 +58,95 @@ class TestResult extends Component {
   }
 
   render() {
+    const { result: { overallResult } } = this.props;
     return (
       <Layout sidebar>
         <div className="testResult">
-          <Row>
-            <Col xs={24} sm={24} md={12} className="m-b-15">
-              <Row>
-                <Col xs={24}>
-                  <h2>
-                    Overall Score
-                  </h2>
-                  <h1>
-                    75
-                    <span>
-                      %
-                    </span>
-                  </h1>
-                  <div className="slider">
-                    <Slider
-                      marks={{
-                        0: '', 33: '', 66: '', 100: '',
+          {overallResult && (
+
+            <Row>
+              <Col xs={24} sm={24} md={12} className="m-b-15">
+                <Row>
+                  <Col xs={24}>
+                    <h2>
+                      Overall Score
+                    </h2>
+                    <h1>
+                      {parseFloat(renderPercent(overallResult.data)).toFixed(0)}
+                      <span>
+                        %
+                      </span>
+                    </h1>
+                    <div className="slider">
+                      <Slider
+                        marks={{
+                          0: '', 33: '', 66: '', 100: '',
+                        }}
+                        defaultValue={renderPercent(overallResult.data)}
+                        disabled
+                      />
+                    </div>
+                    <p className="resultDesc">
+                      {renderLongDesc(overallResult.data)}
+                    </p>
+                  </Col>
+
+                  <Col xs={24}>
+                    <div className="strenthWeakDesc">
+                      <Row gutter={{
+                        lg: 32,
                       }}
-                      defaultValue={75}
-                      disabled
-                    />
-                  </div>
-                  <p className="resultDesc">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                  </p>
-                </Col>
+                      >
+                        <Col xs={24} sm={24} md={24} lg={12}>
+                          <Card title="Fortalezas" icon="plus">
+                            <p>
+                              {renderStrenth(overallResult.data).every(x => x === false) ? 'None' : renderStrenth(overallResult.data)}
+                            </p>
+                          </Card>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={12}>
+                          <Card title="Debilidades" icon="minus">
+                            <p>
+                              {renderWeakness(overallResult.data).every(x => x === false) ? 'None' : renderWeakness(overallResult.data)}
+                            </p>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
 
-                <Col xs={24}>
-                  <div className="strenthWeakDesc">
-                    <Row gutter={{
-                      lg: 32,
-                    }}
-                    >
-                      <Col xs={24} sm={24} md={24} lg={12}>
-                        <Card title="Fortalezas" icon="plus">
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                          </p>
-                        </Card>
-                      </Col>
-                      <Col xs={24} sm={24} md={24} lg={12}>
-                        <Card title="Debilidades" icon="minus">
-                          <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                          </p>
-                        </Card>
-                      </Col>
-                    </Row>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
+              <Col xs={24} sm={24} md={12} className="m-b-15">
+                <PolarAreaChart data={chartData(overallResult.data)} width="400" height="400" />
+                <Row>
+                  <Col xs={24}>
+                    <ul className="testCategory">
+                      <li>
+                        Virtual Language
+                      </li>
+                      <li>
+                        Adaptación al Cambio
+                      </li>
+                      <li>
+                        Virtual Work habilities
+                      </li>
+                      <li>
+                        Digital Leadership
+                      </li>
+                      <li>
+                        Digital mindset
+                      </li>
+                      <li>
+                        Virtual Core Business mindset
+                      </li>
+                    </ul>
+                  </Col>
+                </Row>
+              </Col>
 
-            <Col xs={24} sm={24} md={12} className="m-b-15">
-              <PolarAreaChart data={data} width="400" height="400" />
-              <Row>
-                <Col xs={24}>
-                  <ul className="testCategory">
-                    <li>
-                      Virtual Language
-                    </li>
-                    <li>
-                      Adaptación al Cambio
-                    </li>
-                    <li>
-                      Virtual Work habilities
-                    </li>
-                    <li>
-                      Digital Leadership
-                    </li>
-                    <li>
-                      Digital mindset
-                    </li>
-                    <li>
-                      Virtual Core Business mindset
-                    </li>
-                  </ul>
-                </Col>
-              </Row>
-            </Col>
-
-          </Row>
+            </Row>
+          )}
         </div>
         <div className="stepButtonWrapper">
           <Row>
@@ -176,9 +176,14 @@ class TestResult extends Component {
   }
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => ({
+  exam: state.exam,
+  result: state.result,
+});
 export default connect(mapStateToProps)(TestResult);
 
 TestResult.propTypes = {
   history: PropTypes.shape({}).isRequired,
+  result: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
