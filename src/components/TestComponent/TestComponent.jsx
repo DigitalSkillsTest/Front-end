@@ -5,7 +5,7 @@ import {
 import PropTypes from 'prop-types';
 import Layout from '../Layout/Layout';
 import { getBgColor, getSteps } from '../../utility/common';
-import { CountDownTimer, ProgressBar, Steps } from '../CommonComponent';
+import { ProgressBar, Steps } from '../CommonComponent';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
@@ -39,7 +39,7 @@ class TestComponent extends Component {
   render() {
     const { clientWidth } = this.state;
     const {
-      exam: { currentQuestion, QIndex }, form: { getFieldDecorator }, onClickNextBtn, onClickPreviousBtn, timer, currentCounter,
+      exam: { currentQuestion, QIndex }, form: { getFieldDecorator }, onClickNextBtn, onClickPreviousBtn,
     } = this.props;
     if (currentQuestion) {
       const {
@@ -215,6 +215,6 @@ TestComponent.propTypes = {
   form: PropTypes.shape({}).isRequired,
   onClickNextBtn: PropTypes.func.isRequired,
   onClickPreviousBtn: PropTypes.func.isRequired,
-  timer: PropTypes.number.isRequired,
-  currentCounter: PropTypes.func.isRequired,
+  // timer: PropTypes.number.isRequired,
+  // currentCounter: PropTypes.func.isRequired,
 };
