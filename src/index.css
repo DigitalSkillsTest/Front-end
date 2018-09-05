@@ -102,8 +102,9 @@ body {
 .mcqQuestion,.mcqAnswer{position: relative;display:block;margin: 10px 0;float: left;width: 100%;}
 .mcqWrapper .mcqQuestion .questionNos{float: left; color: #FFF;font-size: 30px;line-height: 36px;font-weight: 700;width: 60px;height: 60px;border-radius: 50%;text-align: center;padding-top: 10px;margin-right: 20px}
 .mcqWrapper .mcqQuestion .question{font-size: 24px;line-height: 28px;font-weight: 700;float: left;width: calc(100% - 100px);}
-.mcqWrapper .mcqAnswer{float: left;width: calc(100% - 25px);position: relative;display: block;}
+.mcqWrapper .mcqAnswer{float: left;width: calc(100% - 25px);position: relative;display: block;margin-top: 25px}
 .mcqWrapper .mcqAnswer .ant-radio-group,.mcqWrapper .mcqAnswer .ant-radio-group .ant-radio-button-wrapper{width: 100% !important;display: block !important;}
+.mcqAnswer .ant-form-explain{position: absolute;top: -25px;}
 .mcqWrapper .mcqAnswer .ant-radio-group .ant-radio-button-wrapper{
   border-radius : 6px !important;
   -moz-border-radius : 6px !important;
@@ -230,10 +231,6 @@ body {
 .sendMailWrapper p.help-text{font-size: 16px;line-height: 19px;font-weight: 300;margin: 5px 0 10px 5px;}
 .sendMailWrapper .userRegisterRightBlock{text-align: left;margin: 40px 0 }
 /***************************** Test Mail page css end *************************/
-
-@media (min-width:768px){
- 
-}
 
 /* .testcomponentWrapper .stepButtonWrapper{
   position: ;

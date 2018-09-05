@@ -4,10 +4,8 @@ import {
 } from 'antd';
 import PropTypes from 'prop-types';
 import Layout from '../Layout/Layout';
-import Steps from '../CommonComponent/Steps';
-import ProgressBar from '../CommonComponent/ProgressBar';
 import { getBgColor, getSteps } from '../../utility/common';
-import CountDownTimer from '../CommonComponent/CountDown';
+import { CountDownTimer, ProgressBar, Steps } from '../CommonComponent';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
@@ -41,7 +39,7 @@ class TestComponent extends Component {
   render() {
     const { clientWidth } = this.state;
     const {
-      exam: { currentQuestion, QIndex }, form: { getFieldDecorator }, onClickNextBtn, onClickPreviousBtn,
+      exam: { currentQuestion, QIndex }, form: { getFieldDecorator }, onClickNextBtn, onClickPreviousBtn, timer, currentCounter,
     } = this.props;
     if (currentQuestion) {
       const {
@@ -49,23 +47,23 @@ class TestComponent extends Component {
       } = currentQuestion.question;
       return (
         <Layout sidebar>
-              <Row>
-                <Col xs={24}>
-                  {clientWidth < 768 && (
-                    <div className="questionSteps responsive">
-                      <Steps current={categories_COD} />
-                    </div>
-                  )}
-                  <div className="testCategoryHeading" style={{ background: getBgColor(categories_COD) }}>
-                    {category}
-                  </div>
-                </Col>
-              </Row>
+          <Row>
+            <Col xs={24}>
+              {clientWidth < 768 && (
+                <div className="questionSteps responsive">
+                  <Steps current={categories_COD} />
+                </div>
+              )}
+              <div className="testCategoryHeading" style={{ background: getBgColor(categories_COD) }}>
+                {category}
+              </div>
+            </Col>
+          </Row>
           <Form onSubmit={onClickNextBtn} className="test-form">
             <div className="testWrapper">
 
               <Row>
-                <CountDownTimer time={this.props.timer} currentCounter={this.props.currentCounter} />
+                {/* <CountDownTimer timer={timer} currentCounter={currentCounter} /> */}
                 <Col sm={24}>
                   <div className="mcqWrapper">
                     <div className="mcqQuestion">
@@ -217,4 +215,6 @@ TestComponent.propTypes = {
   form: PropTypes.shape({}).isRequired,
   onClickNextBtn: PropTypes.func.isRequired,
   onClickPreviousBtn: PropTypes.func.isRequired,
+  timer: PropTypes.number.isRequired,
+  currentCounter: PropTypes.func.isRequired,
 };

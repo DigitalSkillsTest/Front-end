@@ -38,7 +38,7 @@ function App(props) {
   );
 }
 
-const mapStateToProps = state => ({ isLoading: state.loader.isLoading });
+const mapStateToProps = state => ({ isLoading: state.loader.isLoading, color:'' });
 
 export default connect(mapStateToProps)(App);
 

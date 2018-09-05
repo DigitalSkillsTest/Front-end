@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'antd';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import TestCategory from '../components/TestComponent/TestCategory';
 import TestComponent from '../components/TestComponent/TestComponent';
 import * as routes from '../routes/path';
@@ -10,18 +9,20 @@ import {
   fetchQuestionReq, examStartReq, saveAnswerReq, nextQuestion, previousQuestion, setExamId, setExamStatus,
 } from '../redux/actions';
 
+let timer = null;
+
 class TestStart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showCategory: true,
       prevClick: false,
-      timer: null,
     };
     this.onClickNextBtn = this.onClickNextBtn.bind(this);
     this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
-    this.createTimer = this.createTimer.bind(this);
-    // this.getTime = this.getTime.bind(this);
+    this.getTime = this.getTime.bind(this);
+    this.sendTimeToServer = this.sendTimeToServer.bind(this);
+    this.setTimer = this.setTimer.bind(this);
   }
 
   componentDidMount() {
@@ -35,8 +36,8 @@ class TestStart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { prevClick, timer } = this.state;
-    const { exam: { currentQuestion }, QIndex } = this.props;
+    const { prevClick } = this.state;
+    const { exam: { currentQuestion } } = this.props;
     if (nextProps.exam.currentQuestion) {
       this.setState({ showCategory: false });
     }
@@ -72,10 +73,9 @@ class TestStart extends Component {
   onClickNextBtn(e) {
     e.preventDefault();
     const { showCategory } = this.state;
-    const { form, exam: { examId, QIndex, currentQuestion }, dispatch } = this.props;
+    const { form, exam: { examId, QIndex, currentQuestion }, dispatch, history } = this.props;
     this.setState({ prevClick: false });
     if (QIndex === 30) {
-      const { history, dispatch } = this.props;
       dispatch(setExamStatus());
       history.push(routes.TestFinish);
     }
@@ -112,26 +112,25 @@ class TestStart extends Component {
   }
 
   getTime(hours, minutes, seconds) {
-    const milliseconds = moment.duration({ seconds, minutes, hours }).as('milliseconds');
-    // console.log(milliseconds)
+    if (seconds % 5 === 0) {
+      this.sendTimeToServer(hours, minutes, seconds);
+    }
+    timer = Date.now() + ((Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds)) * 1000);
   }
 
-  createTimer() {
-    const { timer } = this.state;
-    const date = Date.now() + (30 * 60 * 1000);
-    if (timer === null) {
-      this.setState({
-        timer: date,
-      });
-      return date;
-    }
-    return date;
-    // this.getTime();
+  setTimer() {
+    const startTime = Date.now() + (30 * 60 * 1000);
+    return startTime;
+  }
+
+  sendTimeToServer(hours, minutes, seconds) {
+    console.log('Send Time to server', hours, minutes, seconds);
   }
 
   render() {
     const { showCategory } = this.state;
     const { exam: { currentQuestion, QIndex }, exam, form } = this.props;
+
     return (
       <div>
         {showCategory
@@ -144,7 +143,6 @@ class TestStart extends Component {
             />
           )
         }
-
         {!showCategory
           && (
             <TestComponent
@@ -152,7 +150,7 @@ class TestStart extends Component {
               onClickPreviousBtn={this.onClickPreviousBtn}
               exam={exam}
               form={form}
-              timer={Date.now() + (3 * 60 * 1000)}
+              timer={timer !== null ? timer : this.setTimer()}
               currentCounter={this.getTime}
             />
           )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'moment';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Countdown from 'react-countdown-now';
 import * as routes from '../../routes/path';
@@ -7,37 +7,22 @@ import * as routes from '../../routes/path';
 class CountDownTimer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      timer: null,
-    };
-    this.sendTimeToServer = this.sendTimeToServer.bind(this);
-  }
-
-  componentDidMount() {
-    const { time } = this.props;
-    this.setState({
-      timer: time,
-    });
-  }
-
-  sendTimeToServer(hours, minutes, seconds) {
-    console.log('s', moment.duration({ seconds, minutes, hours }).as('milliseconds'));
+    this.state = {};
   }
 
   render() {
-    const { timer } = this.state;
+    const { timer, currentCounter } = this.props;
     const renderer = ({
       hours, minutes, seconds, completed,
     }) => {
       if (completed) {
         // Render a completed state
-        console.log('s', moment.duration({ seconds, minutes, hours }).as('milliseconds'));
-        return <Redirect to={routes.TestFinish} />;
+        currentCounter(hours, minutes, seconds);
+        return <Redirect to={routes.TestResult} />;
       }
       return (
         <span>
-          {seconds === '00' && this.sendTimeToServer(hours, minutes, seconds)}
-          {this.props.currentCounter(hours, minutes, seconds)}
+          {currentCounter(hours, minutes, seconds)}
           {hours}
           :
           {minutes}
@@ -62,3 +47,8 @@ class CountDownTimer extends Component {
 }
 
 export default CountDownTimer;
+
+CountDownTimer.propTypes = {
+  timer: PropTypes.number.isRequired,
+  currentCounter: PropTypes.func.isRequired,
+};

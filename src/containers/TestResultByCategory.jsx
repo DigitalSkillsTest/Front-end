@@ -6,9 +6,8 @@ import {
 } from 'antd';
 import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
-import Steps from '../components/CommonComponent/Steps';
 import Layout from '../components/Layout/Layout';
-import { Card } from '../components/CommonComponent';
+import { Card, Steps } from '../components/CommonComponent';
 import { fetchResultByCategoryReq, fetchExamResultReq } from '../redux/actions';
 import {
   getCategory,
@@ -32,7 +31,7 @@ function renderCategoryWiseScore(data) {
 function chartData(chartdata, color) {
   const chart = chartdata.map(item => ({
     value: item.isScore,
-    color: color === item.categories_COD ? getBgColor(item.categories_COD) : '#CCC',
+    color: color === item.categories_COD ? getBgColor(item.categories_COD) : '#E7E6E5',
     label: getCategory(item.categories_COD),
   }));
   return chart;
@@ -68,9 +67,9 @@ class TestResultByCategory extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { resultByCategory } = this.props;
+    const { result: { resultByCategory } } = this.props;
     const { categoryIndex } = this.state;
-    if (resultByCategory !== prevProps.resultByCategory) {
+    if (resultByCategory !== prevProps.result.resultByCategory) {
       this.renderResult(resultByCategory.data, categoryIndex);
     }
     if (categoryIndex !== prevState.categoryIndex) {
@@ -131,7 +130,7 @@ class TestResultByCategory extends Component {
 
   render() {
     const { clientWidth, resultData } = this.state;
-    const { result } = this.props;
+    const { result: { overallResult } } = this.props;
     return (
       <Layout sidebar>
         {resultData && (
@@ -184,7 +183,7 @@ class TestResultByCategory extends Component {
               </Col>
 
               <Col xs={24} sm={24} md={8} className="m-b-15 text-center">
-                {result && (<PolarAreaChart data={chartData(result.data, resultData[0].categories_COD)} width="200" height="200" />)}
+                {overallResult && (<PolarAreaChart data={chartData(overallResult.data, resultData[0].categories_COD)} width="200" height="200" redraw />)}
                 <Row>
                   <Col xs={24}>
                     <h3 className="categoryName">
@@ -196,7 +195,7 @@ class TestResultByCategory extends Component {
                       {parseFloat(avgScore(resultData)).toFixed(1)}
                     </p>
                     <div className="subCategoryScoreWrapper">
-                      {result && (renderCategoryWiseScore(result.data))}
+                      {overallResult && (renderCategoryWiseScore(overallResult.data))}
                     </div>
                   </Col>
                 </Row>
@@ -230,18 +229,12 @@ class TestResultByCategory extends Component {
 
 const mapStateToProps = state => ({
   exam: state.exam,
-  result: state.result.overallResult,
-  resultByCategory: state.result.resultByCategory,
+  result: state.result,
 });
 export default connect(mapStateToProps)(TestResultByCategory);
 
-TestResultByCategory.defaultProps = {
-  resultByCategory: PropTypes.shape({}),
-};
-
 TestResultByCategory.propTypes = {
   history: PropTypes.shape({}).isRequired,
-  resultByCategory: PropTypes.shape({}),
   result: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
