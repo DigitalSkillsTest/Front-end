@@ -41,6 +41,10 @@ function avgScore(avg) {
   return avg.map(item => item.isScore).reduce((acc, val) => acc + val) / 5;
 }
 
+const options = {
+  showTooltips: false,
+};
+
 class TestResultByCategory extends Component {
   constructor(props) {
     super(props);
@@ -57,12 +61,13 @@ class TestResultByCategory extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
-
-    const { dispatch } = this.props;
+    const { dispatch, history } = this.props;
     const examId = localStorage.getItem('examId');
     if (examId) {
       dispatch(fetchExamResultReq({ examId }));
       dispatch(fetchResultByCategoryReq({ examId }));
+    } else {
+      history.push(routes.HowTestWorks);
     }
   }
 
@@ -97,6 +102,13 @@ class TestResultByCategory extends Component {
       history.push(routes.SendMail);
     }
     this.setState(prevState => ({ categoryIndex: prevState.categoryIndex < 6 ? prevState.categoryIndex + 1 : 6 }));
+  }
+  
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { exam: { isexamCompleted }, history } = this.props;
+    if (!nextProps.exam.isexamCompleted && nextProps.exam.isexamCompleted !== isexamCompleted) {
+      history.push(routes.HowTestWorks);
+    }
   }
 
   handleResize() {
@@ -133,7 +145,7 @@ class TestResultByCategory extends Component {
     const { result: { overallResult } } = this.props;
     return (
       <Layout sidebar>
-        {resultData && (
+        {resultData && resultData.length > 0 && (
           <div className="testResultbyCategory">
             <Row>
               <Col xs={24}>
@@ -183,7 +195,7 @@ class TestResultByCategory extends Component {
               </Col>
 
               <Col xs={24} sm={24} md={8} className="m-b-15 text-center">
-                {overallResult && (<PolarAreaChart data={chartData(overallResult.data, resultData[0].categories_COD)} width="200" height="200" redraw />)}
+                {overallResult && (<PolarAreaChart data={chartData(overallResult.data, resultData[0].categories_COD)} width="200" height="200" redraw options={options} />)}
                 <Row>
                   <Col xs={24}>
                     <h3 className="categoryName">

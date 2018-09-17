@@ -6,6 +6,7 @@ import {
 } from 'antd';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
+import { setExamId, resetExamStatus } from '../redux/actions';
 
 class TestFinish extends Component {
   constructor(props) {
@@ -16,20 +17,32 @@ class TestFinish extends Component {
   }
 
   componentDidMount() {
-    const { exam: { isexamCompleted }, history } = this.props;
-    if (!isexamCompleted) {
-      history.push(routes.TestStart);
+    const { history, dispatch } = this.props;
+    const examId = localStorage.getItem('examId');
+    if (examId) {
+      dispatch(setExamId());
+    } else {
+      history.push(routes.HowTestWorks);
     }
   }
 
   onClickPreviousBtn() {
-    const { history } = this.props;
-    history.push(routes.TestStart);
+    const { history, dispatch } = this.props;
+    dispatch(resetExamStatus());
+    history.push(routes.UserRegister);
   }
 
   onClickNextBtn() {
     const { history } = this.props;
     history.push(routes.TestResult);
+  }
+
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { exam: { isexamCompleted }, history } = this.props;
+    if (!nextProps.exam.isexamCompleted && nextProps.exam.isexamCompleted !== isexamCompleted) {
+      history.push(routes.HowTestWorks);
+    }
   }
 
   render() {

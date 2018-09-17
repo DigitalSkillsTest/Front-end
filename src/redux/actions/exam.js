@@ -44,7 +44,7 @@ export const saveAnswerReq = data => ({
   data,
 });
 
-export const saveAnserSuccess = data => ({
+export const saveAnswerSuccess = data => ({
   type: SAVE_ANSWER_SUCCESS,
   data,
 });
@@ -66,7 +66,8 @@ export const previousQuestion = () => ({
 
 export const SET_EXAM_ID = 'SET_EXAM_ID';
 export const CLEAR_EXAM = 'CLEAR_EXAM';
-export const SET_EXAM_STATUS = 'SET_EXAM_STATUS';
+export const RESET_EXAM_STATUS = 'RESET_EXAM_STATUS';
+
 export const setExamId = () => ({
   type: SET_EXAM_ID,
 });
@@ -75,6 +76,25 @@ export const clearExam = () => ({
   type: CLEAR_EXAM,
 });
 
-export const setExamStatus = () => ({
-  type: SET_EXAM_STATUS,
+export const resetExamStatus = () => ({
+  type: RESET_EXAM_STATUS,
 });
+
+
+export const SET_EXAM_STATUS_REQ = 'SET_EXAM_STATUS_REQ';
+export const SET_EXAM_STATUS_SUCCESS = 'SET_EXAM_STATUS_SUCCESS';
+export const SET_EXAM_STATUS_FAIL = 'SET_EXAM_STATUS_FAIL';
+
+export const setExamStatusReq = data => ({
+  type: SET_EXAM_STATUS_REQ,
+  data,
+});
+export const setExamStatusSuccess = data => ({
+  type: SET_EXAM_STATUS_SUCCESS,
+  data,
+});
+export const setExamStatusFail = data => ({
+  type: SET_EXAM_STATUS_FAIL,
+  data,
+});
+

@@ -18,17 +18,17 @@ class CountDownTimer extends Component {
       if (completed) {
         // Render a completed state
         currentCounter(hours, minutes, seconds);
-        return <Redirect to={routes.TestResult} />;
+        return <Redirect to={routes.Timeout} />;
       }
       return (
-        <span>
+        <h3>
           {currentCounter(hours, minutes, seconds)}
           {hours}
           :
           {minutes}
           :
           {seconds}
-        </span>
+        </h3>
       );
     };
     return (

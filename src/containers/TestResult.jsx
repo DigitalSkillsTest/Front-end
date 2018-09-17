@@ -43,7 +43,7 @@ class TestResult extends Component {
     if (examId) {
       dispatch(fetchExamResultReq({ examId }));
     } else {
-      history.push(routes.TestStart);
+      history.push(routes.HowTestWorks);
     }
   }
 
@@ -57,13 +57,19 @@ class TestResult extends Component {
     history.push(routes.TestResultByCategory);
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { exam: { isexamCompleted }, history } = this.props;
+    if (!nextProps.exam.isexamCompleted && nextProps.exam.isexamCompleted !== isexamCompleted) {
+      history.push(routes.HowTestWorks);
+    }
+  }
+
   render() {
     const { result: { overallResult } } = this.props;
     return (
       <Layout sidebar>
         <div className="testResult">
-          {overallResult && (
-
+          {overallResult && overallResult.data.length > 0 && (
             <Row>
               <Col xs={24} sm={24} md={12} className="m-b-15">
                 <Row>

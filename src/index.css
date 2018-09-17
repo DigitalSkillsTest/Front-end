@@ -100,7 +100,7 @@ body {
 .testCategoryHeading{font-size: 12px;line-height: 14px;color: #FFF;display: inline-block;padding: 8px 50px 8px 30px;margin-left: -25px;}
 .mcqWrapper{position: relative;display:block;float: left;width: calc(100% - 70px);}
 .mcqQuestion,.mcqAnswer{position: relative;display:block;margin: 10px 0;float: left;width: 100%;}
-.mcqWrapper .mcqQuestion .questionNos{float: left; color: #FFF;font-size: 30px;line-height: 36px;font-weight: 700;width: 60px;height: 60px;border-radius: 50%;text-align: center;padding-top: 10px;margin-right: 20px}
+.mcqWrapper .mcqQuestion .questionNos{float: left; color: #FFF;font-size: 30px;line-height: 36px;font-weight: 700;width: 60px;height: 60px;border-radius: 50%;text-align: center;padding-top: 10px;margin-right: 20px;overflow: hidden;}
 .mcqWrapper .mcqQuestion .question{font-size: 24px;line-height: 28px;font-weight: 700;float: left;width: calc(100% - 100px);}
 .mcqWrapper .mcqAnswer{float: left;width: calc(100% - 25px);position: relative;display: block;margin-top: 25px}
 .mcqWrapper .mcqAnswer .ant-radio-group,.mcqWrapper .mcqAnswer .ant-radio-group .ant-radio-button-wrapper{width: 100% !important;display: block !important;}

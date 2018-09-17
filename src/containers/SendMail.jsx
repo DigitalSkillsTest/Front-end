@@ -1,7 +1,10 @@
-import React, { Component } from 'react' ;
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Row, Col, Button, Icon, Radio,
 } from 'antd';
+import PropTypes from 'prop-types';
+import * as routes from '../routes/path';
 import logo from '../images/logo.svg';
 import Layout from '../components/Layout/Layout';
 
@@ -9,6 +12,16 @@ class SendMail extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentWillMount() {
+    localStorage.removeItem('examId');
+  }
+
+  handleClick() {
+    const { history } = this.props;
+    history.push(routes.WelComepage);
   }
 
   render() {
@@ -27,7 +40,7 @@ class SendMail extends Component {
             </Col>
 
             <Col xs={24}>
-              <Button htmlType="submit" className="btn-green">
+              <Button htmlType="submit" className="btn-green" onClick={this.handleClick}>
                 Enviar al mail
                 {''}
                 <Icon type="caret-right" />
@@ -57,4 +70,10 @@ class SendMail extends Component {
   }
 }
 
-export default SendMail;
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(SendMail);
+
+SendMail.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+};

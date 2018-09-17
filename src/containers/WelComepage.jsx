@@ -11,6 +11,10 @@ class WelComepage extends Component {
     this.onClickNextBtn = this.onClickNextBtn.bind(this);
   }
 
+  componentWillMount() {
+    localStorage.clear();
+  }
+
   onClickNextBtn() {
     const { history } = this.props;
     history.push(routes.UserRegister);

@@ -3,9 +3,8 @@ import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as routes from './routes/path';
-import { Loader } from './components/CommonComponent';
+import { Loader, Timeout } from './components/CommonComponent';
 import PrivateRoute from './components/HOC/PrivateRoute';
-
 import {
   WelComepage,
   UserRegister,
@@ -32,6 +31,7 @@ function App(props) {
           <PrivateRoute component={SendMail} path={routes.SendMail} exact />
           <PrivateRoute component={TestResultByCategory} path={routes.TestResultByCategory} exact />
           <PrivateRoute component={TestResult} path={routes.TestResult} exact />
+          <Route component={Timeout} path={routes.Timeout} exact />
         </Switch>
       </BrowserRouter>
     </div>

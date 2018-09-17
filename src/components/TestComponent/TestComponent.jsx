@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-  Form, Row, Col, Button, Icon, Radio,
+  Form, Row, Col, Radio,
 } from 'antd';
 import PropTypes from 'prop-types';
 import Layout from '../Layout/Layout';
 import { getBgColor, getSteps } from '../../utility/common';
-import { ProgressBar, Steps } from '../CommonComponent';
+import { ProgressBar, Steps, CountDownTimer } from '../CommonComponent';
 
 const FormItem = Form.Item;
 const RadioButton = Radio.Button;
@@ -20,6 +20,7 @@ class TestComponent extends Component {
     super(props);
     this.state = {
       clientWidth: window.innerWidth,
+      isAnsweSelected: false,
     };
     this.handleResize = this.handleResize.bind(this);
   }
@@ -32,6 +33,18 @@ class TestComponent extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
+  static getDerivedStateFromProps(props, state) {
+    const { onClickNextBtn } = props;
+    if (state.isAnsweSelected) {
+      setTimeout(() => onClickNextBtn(), 200);
+      return {
+        isAnsweSelected: false,
+        clientWidth: state.clientWidth,
+      };
+    }
+    return null;
+  }
+
   handleResize() {
     this.setState({ clientWidth: window.innerWidth });
   }
@@ -39,7 +52,7 @@ class TestComponent extends Component {
   render() {
     const { clientWidth } = this.state;
     const {
-      exam: { currentQuestion, QIndex }, form: { getFieldDecorator }, onClickNextBtn, onClickPreviousBtn,
+      exam: { currentQuestion, QIndex }, form: { getFieldDecorator }, onClickNextBtn, timer, currentCounter,
     } = this.props;
     if (currentQuestion) {
       const {
@@ -61,9 +74,8 @@ class TestComponent extends Component {
           </Row>
           <Form onSubmit={onClickNextBtn} className="test-form">
             <div className="testWrapper">
-
               <Row>
-                {/* <CountDownTimer timer={timer} currentCounter={currentCounter} /> */}
+                <CountDownTimer timer={timer} currentCounter={currentCounter} />
                 <Col sm={24}>
                   <div className="mcqWrapper">
                     <div className="mcqQuestion">
@@ -84,7 +96,7 @@ class TestComponent extends Component {
                         })(
                           <RadioGroup size="large">
                             {options.map(option => (
-                              <RadioButton key={option._id} value={option.code}>
+                              <RadioButton key={option._id} value={option.code} onClick={() => this.setState({ isAnsweSelected: true })}>
                                 {option.answer}
                               </RadioButton>
                             ))
@@ -121,7 +133,7 @@ class TestComponent extends Component {
                   </div> */}
                   </div>
 
-                  {clientWidth > 768 && (
+                  {clientWidth >= 768 && (
                     <React.Fragment>
                       <div className="questionSteps">
                         <Steps current={categories_COD} direction="vertical" />
@@ -184,7 +196,7 @@ class TestComponent extends Component {
                   <div className="progressWrapper responsive">
                     <ProgressBar percent={getPercent(QIndex)} />
                   </div>
-                  <FormItem>
+                  {/* <FormItem>
                     <Button.Group>
                       <Button className="btn-default" onClick={onClickPreviousBtn}>
                         <Icon type="caret-left" />
@@ -197,7 +209,7 @@ class TestComponent extends Component {
                         <Icon type="caret-right" />
                       </Button>
                     </Button.Group>
-                  </FormItem>
+                  </FormItem> */}
                 </Col>
               </Row>
             </div>
@@ -214,7 +226,6 @@ TestComponent.propTypes = {
   exam: PropTypes.shape({}).isRequired,
   form: PropTypes.shape({}).isRequired,
   onClickNextBtn: PropTypes.func.isRequired,
-  onClickPreviousBtn: PropTypes.func.isRequired,
-  // timer: PropTypes.number.isRequired,
-  // currentCounter: PropTypes.func.isRequired,
+  timer: PropTypes.number.isRequired,
+  currentCounter: PropTypes.func.isRequired,
 };

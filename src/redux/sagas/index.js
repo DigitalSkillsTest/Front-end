@@ -3,7 +3,7 @@ import {
   all,
 } from 'redux-saga/effects';
 import { watcherCreateUser, watcherFetchUser } from './user';
-import { watcherExamStart, watcherFetchQuestion, watcherSaveAnswer } from './exam';
+import { watcherExamStart, watcherFetchQuestion, watcherSaveAnswer, watcherSetExamStatus } from './exam';
 import { watcherFetchExamResult, watcherFetchResultByCategory } from './result';
 
 export default function* root() {
@@ -15,5 +15,6 @@ export default function* root() {
     fork(watcherSaveAnswer),
     fork(watcherFetchExamResult),
     fork(watcherFetchResultByCategory),
+    fork(watcherSetExamStatus),
   ]);
 }

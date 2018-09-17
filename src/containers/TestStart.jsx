@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'antd';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import TestCategory from '../components/TestComponent/TestCategory';
 import TestComponent from '../components/TestComponent/TestComponent';
 import * as routes from '../routes/path';
 import {
-  fetchQuestionReq, examStartReq, saveAnswerReq, nextQuestion, previousQuestion, setExamId, setExamStatus,
+  fetchQuestionReq, examStartReq, saveAnswerReq, nextQuestion, previousQuestion, setExamId, setExamStatusReq,
 } from '../redux/actions';
 
-let timer = null;
 
 class TestStart extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class TestStart extends Component {
       showCategory: true,
       prevClick: false,
     };
+    this.timer = null;
     this.onClickNextBtn = this.onClickNextBtn.bind(this);
     this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
     this.getTime = this.getTime.bind(this);
@@ -54,6 +55,10 @@ class TestStart extends Component {
   componentDidUpdate(nextProps) {
     const { dispatch, exam: { examId, QIndex } } = this.props;
 
+    if (nextProps.exam.examId !== examId) {
+      dispatch(setExamStatusReq({ examId }));
+    }
+
     if (nextProps.exam.QIndex !== QIndex) {
       const data = {
         examId,
@@ -70,15 +75,14 @@ class TestStart extends Component {
     dispatch(previousQuestion());
   }
 
-  onClickNextBtn(e) {
-    e.preventDefault();
+  onClickNextBtn() {
+    // e.preventDefault();
     const { showCategory } = this.state;
-    const { form, exam: { examId, QIndex, currentQuestion }, dispatch, history } = this.props;
+    const {
+      form, exam: { examId, QIndex, currentQuestion }, dispatch, history
+    } = this.props;
     this.setState({ prevClick: false });
-    if (QIndex === 30) {
-      dispatch(setExamStatus());
-      history.push(routes.TestFinish);
-    }
+
     form.validateFields((err, values) => {
       if (!err && examId) {
         if (currentQuestion && !showCategory) {
@@ -87,13 +91,19 @@ class TestStart extends Component {
           // get Answer from code
           const { score } = currentQuestion.question.options.filter(answer => answer.code === questionCode)[0];
           // save Answer
+          const examStatus = QIndex === 30 ? 'end' : 'start';
           const saveAnswerData = {
             examId,
             questionId,
             userCode: questionCode,
             userScore: score,
+            examStatus,
           };
           dispatch(saveAnswerReq(saveAnswerData));
+          if (QIndex === 30) {
+            dispatch(setExamStatusReq({ examId: localStorage.getItem('examId') }));
+            history.push(routes.TestFinish);
+          }
         }
 
         // call next question
@@ -115,11 +125,11 @@ class TestStart extends Component {
     if (seconds % 5 === 0) {
       this.sendTimeToServer(hours, minutes, seconds);
     }
-    timer = Date.now() + ((Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds)) * 1000);
+    this.timer = Date.now() + ((Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds)) * 1000);
   }
 
   setTimer() {
-    const startTime = Date.now() + (30 * 60 * 1000);
+    const startTime = Date.now() + (5 * 60 * 1000);
     return startTime;
   }
 
@@ -129,8 +139,10 @@ class TestStart extends Component {
 
   render() {
     const { showCategory } = this.state;
-    const { exam: { currentQuestion, QIndex }, exam, form } = this.props;
-
+    const { exam: { currentQuestion, QIndex, isexamCompleted }, exam, form } = this.props;
+    if (isexamCompleted !== null && isexamCompleted) {
+      return <Redirect to={routes.TestFinish} />;
+    }
     return (
       <div>
         {showCategory
@@ -150,7 +162,7 @@ class TestStart extends Component {
               onClickPreviousBtn={this.onClickPreviousBtn}
               exam={exam}
               form={form}
-              timer={timer !== null ? timer : this.setTimer()}
+              timer={this.timer !== null ? this.timer : this.setTimer()}
               currentCounter={this.getTime}
             />
           )

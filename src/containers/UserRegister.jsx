@@ -6,10 +6,18 @@ import {
 } from 'antd';
 import Layout from '../components/Layout/Layout';
 import RenderInput from '../components/FormComponent/FormElement';
-import { createUserReq, clearCurrentUser } from '../redux/actions';
+import { createUserReq, clearCurrentUser, clearExam, resetExamStatus } from '../redux/actions';
 
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
+
+function validateUsername(rule, value, callback) {
+  if (value && value.indexOf(' ') >= 0) {
+    callback('space is not allow in username');
+  }
+  callback();
+}
+
 class UserRegister extends Component {
   constructor(props) {
     super(props);
@@ -18,10 +26,11 @@ class UserRegister extends Component {
   }
 
   componentWillMount() {
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userToken');
+    localStorage.clear();
     const { dispatch } = this.props;
     dispatch(clearCurrentUser());
+    dispatch(clearExam());
+    dispatch(resetExamStatus());
   }
 
   handleSubmit(e) {
@@ -47,7 +56,6 @@ class UserRegister extends Component {
     });
   }
 
-
   render() {
     const { form: { getFieldDecorator } } = this.props;
     return (
@@ -72,32 +80,48 @@ class UserRegister extends Component {
                   <Col>
                     <RenderInput
                       name="name"
-                      rules={[{ required: true, message: 'Please Input Your username!' }]}
+                      rules={[
+                        { required: true, message: 'Please input your username!' },
+                        { validator: validateUsername },
+                        { pattern: new RegExp('[a-zA-Z][a-zA-Z0-9]'), message: 'Please input valid username!' },
+                      ]}
                       getFieldDecorator={getFieldDecorator}
                     />
 
                     <RenderInput
                       name="lastName"
-                      rules={[{ required: true, message: 'Please Input Your LastName!' }]}
+                      rules={[
+                        { required: true, message: 'Please input your lastName!' },
+                        { whitespace: true, message: 'Please input your lastName!' },
+                      ]}
+
                       getFieldDecorator={getFieldDecorator}
                     />
 
                     <RenderInput
                       name="mail"
                       type="email"
-                      rules={[{ required: true, message: 'Please Input Your Email!' }]}
+                      rules={[
+                        { required: true, message: 'Please input your email!' },
+                      ]}
                       getFieldDecorator={getFieldDecorator}
                     />
 
                     <RenderInput
                       name="company"
-                      rules={[{ required: true, message: 'Please Input Your company!' }]}
+                      rules={[
+                        { required: true, message: 'Please input your company!' },
+                        { whitespace: true, message: 'Please input your company!' },
+                      ]}
                       getFieldDecorator={getFieldDecorator}
                     />
 
                     <RenderInput
                       name="position"
-                      rules={[{ required: true, message: 'Please Input Your Position!' }]}
+                      rules={[
+                        { required: true, message: 'Please input your position!' },
+                        { whitespace: true, message: 'Please input your position!' },
+                      ]}
                       getFieldDecorator={getFieldDecorator}
                     />
 
@@ -105,7 +129,7 @@ class UserRegister extends Component {
                       name="age"
                       type="number"
                       min="1"
-                      rules={[{ required: true, message: 'Please Input Your Age!' }]}
+                      rules={[{ required: true, message: 'Please input your age!' }]}
                       getFieldDecorator={getFieldDecorator}
                     />
 
@@ -113,7 +137,7 @@ class UserRegister extends Component {
                   <Col className="m-t-15">
                     <FormItem>
                       {getFieldDecorator('gender', {
-                        rules: [{ required: true, message: 'Please Select your Gender!' }],
+                        rules: [{ required: true, message: 'Please select your gender!' }],
                       })(
                         <RadioGroup>
                           <Radio value="female">

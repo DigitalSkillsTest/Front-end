@@ -7,3 +7,4 @@ export const TestFinish = '/test/finish';
 export const TestResult = '/test/result';
 export const TestResultByCategory = '/test/result/category';
 export const SendMail = '/test/result/mail';
+export const Timeout = '/test/timeout';

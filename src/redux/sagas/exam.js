@@ -11,8 +11,11 @@ import {
   examStartSuccess,
   examStartFail,
   SAVE_ANSWER_REQ,
-  saveAnserSuccess,
+  saveAnswerSuccess,
   saveAnswerFail,
+  SET_EXAM_STATUS_REQ,
+  setExamStatusSuccess,
+  setExamStatusFail,
 } from '../actions';
 import { examService } from '../../services';
 
@@ -47,7 +50,7 @@ function* saveAnswer(action) {
   try {
     const response = yield call(examService.saveAnswer, action.data);
     if (response.status === 200) {
-      yield put(saveAnserSuccess(response.data));
+      yield put(saveAnswerSuccess(response.data));
     } else {
       throw response.message;
     }
@@ -55,6 +58,20 @@ function* saveAnswer(action) {
     yield put(saveAnswerFail(error));
   }
 }
+
+function* setExamStatus(action) {
+  try {
+    const response = yield call(examService.setExamStatus, action.data);
+    if (response.status === 200) {
+      yield put(setExamStatusSuccess(response.data));
+    } else {
+      throw response.message;
+    }
+  } catch (error) {
+    yield put(setExamStatusFail(error));
+  }
+}
+
 
 export function* watcherExamStart() {
   yield takeEvery(EXAM_START_REQ, examStart);
@@ -66,4 +83,8 @@ export function* watcherFetchQuestion() {
 
 export function* watcherSaveAnswer() {
   yield takeEvery(SAVE_ANSWER_REQ, saveAnswer);
+}
+
+export function* watcherSetExamStatus() {
+  yield takeEvery(SET_EXAM_STATUS_REQ, setExamStatus);
 }

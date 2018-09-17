@@ -4,6 +4,7 @@ import Notification from './Notification';
 import CountDownTimer from './CountDown';
 import ProgressBar from './ProgressBar';
 import Steps from './Steps';
+import Timeout from './Timeout';
 
 export {
   Card,
@@ -12,4 +13,5 @@ export {
   CountDownTimer,
   ProgressBar,
   Steps,
+  Timeout,
 };

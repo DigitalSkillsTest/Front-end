@@ -7,6 +7,7 @@ import {
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
 import chartImage from '../images/chart.svg';
+import { setExamId, setExamStatusReq } from '../redux/actions';
 
 class HowTestWorks extends Component {
   constructor(props) {
@@ -16,14 +17,27 @@ class HowTestWorks extends Component {
     this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    const examId = localStorage.getItem('examId');
+    if (examId) {
+      dispatch(setExamId());
+      dispatch(setExamStatusReq({ examId }));
+    }
+  }
+
   onClickPreviousBtn() {
     const { history } = this.props;
     history.push(routes.UserRegister);
   }
 
   onClickNextBtn() {
-    const { history } = this.props;
-    history.push(routes.TestStart);
+    const { history, exam: { isexamCompleted } } = this.props;
+    if (isexamCompleted) {
+      history.push(routes.TestFinish);
+    } else {
+      history.push(routes.TestStart);
+    }
   }
 
   render() {
@@ -121,6 +135,7 @@ class HowTestWorks extends Component {
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
+  exam: state.exam,
 });
 export default connect(mapStateToProps)(HowTestWorks);
 

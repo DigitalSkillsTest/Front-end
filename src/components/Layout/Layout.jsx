@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Layout, Row, Col } from 'antd';
+import { Redirect } from 'react-router-dom';
 import logoWhite from '../../images/logo-white.svg';
+import * as routes from '../../routes/path';
 import brainColor from '../../images/brain-color.svg';
 import 'antd/dist/antd.css';
-import { fetchUserReq } from '../../redux/actions';
+import { fetchUserReq, setExamStatusReq } from '../../redux/actions';
 
 const { Content, Sider, Header } = Layout;
 
@@ -16,10 +18,14 @@ class MainLayout extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch, currentUser, sidebar } = this.props;
+    const { dispatch, currentUser, sidebar, exam: { isexamCompleted } } = this.props;
     const userId = localStorage.getItem('userId');
+    const examId = localStorage.getItem('examId');
     if (userId && sidebar && !currentUser) {
       dispatch(fetchUserReq(userId));
+    }
+    if (isexamCompleted === null && examId) {
+      dispatch(setExamStatusReq({ examId }));
     }
   }
 
@@ -27,6 +33,10 @@ class MainLayout extends React.Component {
     const {
       sidebar, children, currentUser, bgColor,
     } = this.props;
+
+    if (currentUser && !currentUser.data) {
+      return <Redirect to={routes.UserRegister} />;
+    }
     return (
       <Layout style={{ minHeight: '100vh' }}>
         {sidebar && (
@@ -113,6 +123,7 @@ class MainLayout extends React.Component {
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
+  exam: state.exam,
 });
 export default connect(mapStateToProps)(MainLayout);
 
