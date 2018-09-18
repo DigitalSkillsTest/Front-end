@@ -60,6 +60,7 @@ const exam = (state = INITIAL_STATE, action) => {
         currentQuestion: action.data.data,
       };
     case EXAM_START_SUCCESS:
+      localStorage.removeItem('attribute');
       return {
         ...state,
         examId: action.data.data.examId,

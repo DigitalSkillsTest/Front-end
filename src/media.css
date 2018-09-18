@@ -19,7 +19,7 @@
 }
 
 @media(max-width:767px){ 
-  .ant-layout-content{margin: 15px 15px 0 15px !important;margin-bottom: calc(100vh - (100vh - 125px)) !important} 
+  .ant-layout-content{margin: 15px 15px 0 15px !important;margin-bottom: calc(100vh - (100vh - 70px)) !important} 
   .bg-img{background: url('images/brain.svg') no-repeat bottom center;background-size: contain;height: 190px;top:425px;left: 0;right: 0;bottom: 0}
   .welcomeScreenLogoWrapper{text-align: center;}
   .welcomeScreenLogo{width: 100%; max-width: 327px;}

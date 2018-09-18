@@ -18,6 +18,7 @@ class CountDownTimer extends Component {
       if (completed) {
         // Render a completed state
         currentCounter(hours, minutes, seconds);
+        localStorage.removeItem('attribute');
         return <Redirect to={routes.Timeout} />;
       }
       return (

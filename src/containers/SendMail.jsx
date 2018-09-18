@@ -21,7 +21,7 @@ class SendMail extends Component {
 
   handleClick() {
     const { history } = this.props;
-    history.push(routes.WelComepage);
+    history.push(routes.UserRegister);
   }
 
   render() {

@@ -79,7 +79,7 @@ class TestStart extends Component {
     // e.preventDefault();
     const { showCategory } = this.state;
     const {
-      form, exam: { examId, QIndex, currentQuestion }, dispatch, history
+      form, exam: { examId, QIndex, currentQuestion }, dispatch, history,
     } = this.props;
     this.setState({ prevClick: false });
 
@@ -102,6 +102,7 @@ class TestStart extends Component {
           dispatch(saveAnswerReq(saveAnswerData));
           if (QIndex === 30) {
             dispatch(setExamStatusReq({ examId: localStorage.getItem('examId') }));
+            localStorage.removeItem('attribute');
             history.push(routes.TestFinish);
           }
         }
@@ -126,10 +127,15 @@ class TestStart extends Component {
       this.sendTimeToServer(hours, minutes, seconds);
     }
     this.timer = Date.now() + ((Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds)) * 1000);
+    localStorage.setItem('attribute', this.timer);
   }
 
   setTimer() {
     const startTime = Date.now() + (5 * 60 * 1000);
+    if (localStorage.getItem('attribute')) {
+      return Number(localStorage.getItem('attribute'))
+    }
+    localStorage.setItem('attribute', startTime);
     return startTime;
   }
 
