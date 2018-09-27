@@ -55,8 +55,8 @@ body {
 
 .welcomeScreenLogo{width: 325px;height: 50px;}
 .welcomeScreen{margin-top: 50px;height: 100%;width:100%;}
-.bg-img{background: url('images/body-bg.svg') no-repeat bottom left;background-size:contain; background-position-x: 0%;background-position-y: 0%;position: absolute;top:200px;height: 510px;width:100%;left: -150px;}
-.testStartBlock{background: url('images/steps.svg') no-repeat top right;float: right !important;margin-top: 80px;}
+.bg-img{background: url('/assets/images/body-bg.svg') no-repeat bottom left;background-size:contain; background-position-x: 0%;background-position-y: 0%;position: absolute;top:200px;height: 510px;width:100%;left: -150px;}
+.testStartBlock{background: url('/assets/images/steps.svg') no-repeat top right;float: right !important;margin-top: 80px;}
 .testStartBlock h1{margin-bottom: 70px;font-size: 40px;line-height: 45px;font-weight: 700;}
 .testStartBlock h1 span{font-weight: 300;}
 
@@ -66,7 +66,7 @@ body {
 .userRegister{padding: 20px 50px;}
 .userRegisterRightBlock{text-align: center}
 .btn-green i.anticon{font-size: 22px !important;}
-.bodybg2{background: url('images/bodyBg-2.svg') no-repeat bottom right;width: 564px;height: 300px;position: absolute;top: 400px;right: 0px;}
+.bodybg2{background: url('/assets/images/bodyBg-2.svg') no-repeat bottom right;width: 564px;height: 300px;position: absolute;top: 400px;right: 0px;}
 .userRegisterRightBlock .ant-radio-wrapper span:last-child{color: #1B2027 !important }
 
 /***************************** User Register page css end *************************/
@@ -76,12 +76,12 @@ body {
 .howTestWorks p.testinfo{font-size: 14px;line-height: 16px;font-weight: 300;color: #606060}
 .howTestWorks h2.testCategoryTitle{font-size: 20px;font-weight: 700;color: #1B2027;line-height: 24px;margin:20px 0;}
 .testCategory li{font-size: 16px;line-height: 32px;font-weight: 300;color: #1B2027;list-style: none;padding-left: 10px;}
-.testCategory::after{content:'';width: 17px;height: 183px;background: url('images/steps.svg') no-repeat top center;position: absolute;top: 7px;left: 15px;}
+.testCategory::after{content:'';width: 17px;height: 183px;background: url('/assets/images/steps.svg') no-repeat top center;position: absolute;top: 7px;left: 15px;}
 .chartImage{width: 100%;height: 370px;float: right;}
 .questiontimewrapper{position: relative;display: inline-block;float: none;;width: auto;text-align: left;margin-bottom: 20px}
 .questionMarkIcon,.timerIcon{font-size: 24px;line-height: 48px;font-weight: 700;padding-left: 35px;position: relative;margin-bottom: 0}
-.questionMarkIcon::before{content: '';width: 29px;height: 29px;position: absolute;top: 10px; left: 0;background: url('images/question.svg') no-repeat}
-.timerIcon::before{content: '';width: 29px;height: 29px;position: absolute;top: 10px; left: 0;background: url('images/timer.svg') no-repeat}
+.questionMarkIcon::before{content: '';width: 29px;height: 29px;position: absolute;top: 10px; left: 0;background: url('/assets/images/question.svg') no-repeat}
+.timerIcon::before{content: '';width: 29px;height: 29px;position: absolute;top: 10px; left: 0;background: url('/assets/images/timer.svg') no-repeat}
 /***************************** How Test Works page css end *************************/
 
 /***************************** Test Category page css start *************************/
@@ -196,8 +196,8 @@ body {
 .testResult .testCategory li{text-align: left;font-size: 12px;line-height: 18px;}
 .testResult .testCategory::after{width: 10px;height: 100px;top: 25px;left: 30px;}
 .stepButtonWrapper p.keyarearesult{position: absolute;right: 150px;top: 10px; font-size: 14px;line-height: 16px;margin: 0;padding: 0;font-weight: 700;}
-.stepButtonWrapper p.keyarearesult::before{content: '';background: url('images/icon1.svg') no-repeat;width: 45px;height: 45px;position: absolute;left: -55px;top:-5px;}
-.testResult .slider{width: 100%;margin: 0 auto;max-width: 300px;}
+.stepButtonWrapper p.keyarearesult::before{content: '';background: url('/assets/images/icon1.svg') no-repeat;width: 45px;height: 45px;position: absolute;left: -55px;top:-5px;}
+.testResult .slider{width: 100%;margin: 0 auto;max-width: 300px;height: 40px;}
 .testResult .slider .ant-slider-disabled,.testResult .slider .ant-slider-disabled.ant-slider-dot{cursor: default !important;}
 .testResult .slider .ant-slider-rail{background: #E7E7E8 !important;height: 7px !important;}
 .testResult .slider .ant-slider-track{background: #5AB38A !important;height: 7px !important;}
@@ -218,17 +218,18 @@ body {
 .testResultbyCategory h3.categoryName{font-size: 24px;line-height: 28px;font-weight: 300;margin-top: 10px;padding:0 50px}
 .testResultbyCategory p.score{font-size: 70px;line-height: 84px;font-weight: 700;margin: 20px 0;}
 .testResultbyCategory p.subcategoryScore{padding: 0;margin: 0;font-weight: 300;color:#606060}
-.testResultbyCategory p.subcategoryScore span{color:#0085C6;font-weight: 700;width: 40px;float: left;}
+.testResultbyCategory p.subcategoryScore span{color:#0085C6;font-weight: 700;width: 20px;float: left;}
 .subCategoryScoreWrapper{width: 80%;margin: 0 auto;text-align: left;}
-
+.subcatchartwrapper{width: 200px;margin: 0 auto}
 /***************************** Test Result By Category page css end *************************/
 
 /***************************** Test Mail page css start *************************/
-.bg-image{background: url('images/bodyBg-2.svg') no-repeat bottom right;background-size: contain;position: absolute;top: 100px;height: 500px;width: 55%;right: 0;}
+.bg-image{background: url('/assets/images/bodyBg-2.svg') no-repeat bottom right;background-size: contain;position: absolute;top: 100px;height: 500px;width: 55%;right: 0;}
 .sendMailWrapper{padding: 100px}
+.sendMailWrapper a.btn-green:focus{text-decoration: none !important}
 .sendMailWrapper h1{font-weight: 30px;line-height: 36px;font-weight: 700;margin-bottom: 40px;color: #1B2027;}
 .sendMailWrapper h1 span{font-weight: 300;display: block;}
-.sendMailWrapper p.help-text{font-size: 16px;line-height: 19px;font-weight: 300;margin: 5px 0 10px 5px;}
+.sendMailWrapper p.help-text{font-size: 16px;line-height: 19px;font-weight: 300;margin: 15px 0 10px 5px;}
 .sendMailWrapper .userRegisterRightBlock{text-align: left;margin: 40px 0 }
 /***************************** Test Mail page css end *************************/
 

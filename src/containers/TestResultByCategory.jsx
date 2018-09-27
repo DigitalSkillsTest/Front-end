@@ -4,29 +4,20 @@ import PropTypes from 'prop-types';
 import {
   Row, Col, Button, Icon,
 } from 'antd';
+import html2canvas from 'html2canvas';
 import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
 import { Card, Steps } from '../components/CommonComponent';
-import { fetchResultByCategoryReq, fetchExamResultReq } from '../redux/actions';
+import { fetchResultByCategoryReq } from '../redux/actions';
 import {
   getCategory,
   getBgColor,
   renderLongDesc,
   renderStrenth,
   renderWeakness,
+  categoryData,
 } from '../utility/common';
-
-function renderCategoryWiseScore(data) {
-  return data.map(item => (
-    <p className="subcategoryScore" key={Math.random()}>
-      <span>
-        {parseFloat(item.isScore).toFixed(1)}
-      </span>
-      {getCategory(item.categories_COD)}
-    </p>
-  ));
-}
 
 function chartData(chartdata, color) {
   const chart = chartdata.map(item => ({
@@ -43,6 +34,7 @@ function avgScore(avg) {
 
 const options = {
   showTooltips: false,
+  animateRotate: false,
 };
 
 class TestResultByCategory extends Component {
@@ -52,6 +44,7 @@ class TestResultByCategory extends Component {
       clientWidth: window.innerWidth,
       resultData: null,
       categoryIndex: 1,
+      mailData: [],
     };
     this.handleResize = this.handleResize.bind(this);
     this.onClickNextBtn = this.onClickNextBtn.bind(this);
@@ -64,7 +57,6 @@ class TestResultByCategory extends Component {
     const { dispatch, history } = this.props;
     const examId = localStorage.getItem('examId');
     if (examId) {
-      dispatch(fetchExamResultReq({ examId }));
       dispatch(fetchResultByCategoryReq({ examId }));
     } else {
       history.push(routes.HowTestWorks);
@@ -95,15 +87,23 @@ class TestResultByCategory extends Component {
     this.setState(prevState => ({ categoryIndex: prevState.categoryIndex > 1 ? prevState.categoryIndex - 1 : 1 }));
   }
 
-  onClickNextBtn() {
+  async onClickNextBtn() {
     const { history } = this.props;
-    const { categoryIndex } = this.state;
-    if (categoryIndex === 6) {
-      history.push(routes.SendMail);
-    }
+    const { categoryIndex, resultData, mailData } = this.state;
+
+    const chartImg = await html2canvas(document.querySelector('.subcatchartwrapper'),
+      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
+
+    const scoreImg = await html2canvas(document.querySelector('.subCategoryScroeWrapper'),
+      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
+
     this.setState(prevState => ({ categoryIndex: prevState.categoryIndex < 6 ? prevState.categoryIndex + 1 : 6 }));
+    mailData[categoryIndex - 1] = { data: resultData, chartImg, scoreImg };
+    if (categoryIndex === 6) {
+      history.push(routes.SendMail, { query: { mailData } });
+    }
   }
-  
+
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { exam: { isexamCompleted }, history } = this.props;
     if (!nextProps.exam.isexamCompleted && nextProps.exam.isexamCompleted !== isexamCompleted) {
@@ -141,7 +141,7 @@ class TestResultByCategory extends Component {
   }
 
   render() {
-    const { clientWidth, resultData } = this.state;
+    const { clientWidth, resultData, categoryIndex } = this.state;
     const { result: { overallResult } } = this.props;
     return (
       <Layout sidebar>
@@ -195,9 +195,11 @@ class TestResultByCategory extends Component {
               </Col>
 
               <Col xs={24} sm={24} md={8} className="m-b-15 text-center">
-                {overallResult && (<PolarAreaChart data={chartData(overallResult.data, resultData[0].categories_COD)} width="200" height="200" redraw options={options} />)}
+                <div className="subcatchartwrapper">
+                  {overallResult && (<PolarAreaChart data={chartData(overallResult.data, resultData[0].categories_COD)} width="200" height="200" redraw options={options} />)}
+                </div>
                 <Row>
-                  <Col xs={24}>
+                  <Col xs={24} className="subCategoryScroeWrapper">
                     <h3 className="categoryName">
                       {getCategory(resultData[0].categories_COD)}
                       {' '}
@@ -206,9 +208,16 @@ class TestResultByCategory extends Component {
                     <p className="score">
                       {parseFloat(avgScore(resultData)).toFixed(1)}
                     </p>
-                    <div className="subCategoryScoreWrapper">
-                      {overallResult && (renderCategoryWiseScore(overallResult.data))}
-                    </div>
+                    {/* <div className="subCategoryScoreWrapper">
+                      {categoryData[categoryIndex - 1].subcategory.map((item, i) => (
+                        <p className="subcategoryScore" key={Math.random()}>
+                          <span>
+                            {resultData[i].isScore}
+                          </span>
+                          {item.sub_cat}
+                        </p>
+                      ))}
+                    </div> */}
                   </Col>
                 </Row>
               </Col>

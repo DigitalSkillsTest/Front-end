@@ -6,7 +6,6 @@ import {
 } from 'antd';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
-import chartImage from '../images/chart.svg';
 import { setExamId, setExamStatusReq } from '../redux/actions';
 
 class HowTestWorks extends Component {
@@ -98,7 +97,7 @@ class HowTestWorks extends Component {
             </Col>
 
             <Col xs={24} sm={24} md={24} lg={12} className="m-b-15 text-center">
-              <img src={chartImage} alt="chart" className="chartImage" />
+              <img src="/assets/images/chart.svg" alt="chart" className="chartImage" />
               <div className="questiontimewrapper">
                 <h5 className="questionMarkIcon">
                   30 preguntas

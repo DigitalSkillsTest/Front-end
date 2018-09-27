@@ -2,10 +2,11 @@
   "name": "digital-skills-test",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
+  "dependencies": {    
     "antd": "^3.7.3",
     "axios": "^0.18.0",
     "chart.js": "^1.1.1",
+    "html2canvas": "^1.0.0-alpha.12",
     "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
@@ -17,7 +18,9 @@
     "react-scripts": "1.1.4",
     "react-spinners": "^0.3.3",
     "redux": "^4.0.0",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "yoga-layout": "github:naminho/yoga-layout-windows",
+    "@react-pdf/renderer": "^1.0.0-alpha.17"
   },
   "scripts": {
     "start": "react-scripts start",

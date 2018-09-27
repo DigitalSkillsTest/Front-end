@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Layout, Row, Col } from 'antd';
 import { Redirect } from 'react-router-dom';
-import logoWhite from '../../images/logo-white.svg';
 import * as routes from '../../routes/path';
-import brainColor from '../../images/brain-color.svg';
 import 'antd/dist/antd.css';
 import { fetchUserReq, setExamStatusReq } from '../../redux/actions';
 
@@ -46,7 +44,7 @@ class MainLayout extends React.Component {
           >
             <Row type="flex" justify="center" align="top">
               <Col span={24} className="text-center sidebarTop">
-                <img src={brainColor} alt="logo-white" className="brainColor" />
+                <img src="/assets/images/brain-color.svg" alt="logo-white" className="brainColor" />
                 <h2>
                   <span>
                     Test de
@@ -93,7 +91,7 @@ class MainLayout extends React.Component {
 
             <Row type="flex" justify="center" align="bottom">
               <Col span={24} className="text-center">
-                <img src={logoWhite} alt="logo-white" className="sidebarLogo" />
+                <img src="/assets/images/logo-white.svg" alt="logo-white" className="sidebarLogo" />
               </Col>
             </Row>
 

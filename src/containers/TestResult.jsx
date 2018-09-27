@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Row, Col, Button, Icon, Slider,
 } from 'antd';
+import html2canvas from 'html2canvas';
 import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
@@ -17,6 +18,10 @@ import {
   renderWeakness,
 } from '../utility/common';
 
+const options = {
+  animateRotate: false,
+};
+
 function renderPercent(percent) {
   return percent.map(item => item.isScore * 5).reduce((acc, val) => acc + val) / 120 * 100;
 }
@@ -28,6 +33,7 @@ function chartData(chartdata) {
     label: getCategory(item.categories_COD),
   }));
 }
+
 
 class TestResult extends Component {
   constructor(props) {
@@ -52,8 +58,13 @@ class TestResult extends Component {
     history.push(routes.TestFinish);
   }
 
-  onClickNextBtn() {
+  async onClickNextBtn() {
     const { history } = this.props;
+    await html2canvas(document.querySelector('.overallScroreWrapper'),
+      { scale: 4 }).then(canvas => sessionStorage.setItem('chartImg', canvas.toDataURL('image/jpeg')));
+
+    await html2canvas(document.querySelector('.polarAreaChartWrapper'),
+      { scale: 4 }).then(canvas => sessionStorage.setItem('scoreImg', canvas.toDataURL('image/jpeg')));
     history.push(routes.TestResultByCategory);
   }
 
@@ -68,29 +79,31 @@ class TestResult extends Component {
     const { result: { overallResult } } = this.props;
     return (
       <Layout sidebar>
-        <div className="testResult">
+        <div className="testResult" id="testResult">
           {overallResult && overallResult.data.length > 0 && (
             <Row>
               <Col xs={24} sm={24} md={12} className="m-b-15">
                 <Row>
                   <Col xs={24}>
-                    <h2>
-                      Overall Score
-                    </h2>
-                    <h1>
-                      {parseFloat(renderPercent(overallResult.data)).toFixed(0)}
-                      <span>
-                        %
-                      </span>
-                    </h1>
-                    <div className="slider">
-                      <Slider
-                        marks={{
-                          0: '', 33: '', 66: '', 100: '',
-                        }}
-                        defaultValue={renderPercent(overallResult.data)}
-                        disabled
-                      />
+                    <div className="overallScroreWrapper">
+                      <h2>
+                        Overall Score
+                      </h2>
+                      <h1>
+                        {parseFloat(renderPercent(overallResult.data)).toFixed(0)}
+                        <span>
+                          %
+                        </span>
+                      </h1>
+                      <div className="slider">
+                        <Slider
+                          marks={{
+                            0: '', 33: '', 66: '', 100: '',
+                          }}
+                          defaultValue={renderPercent(overallResult.data)}
+                          disabled
+                        />
+                      </div>
                     </div>
                     <p className="resultDesc">
                       {renderLongDesc(overallResult.data)}
@@ -123,8 +136,8 @@ class TestResult extends Component {
                 </Row>
               </Col>
 
-              <Col xs={24} sm={24} md={12} className="m-b-15">
-                <PolarAreaChart data={chartData(overallResult.data)} width="400" height="400" />
+              <Col xs={24} sm={24} md={12} className="m-b-15 polarAreaChartWrapper">
+                <PolarAreaChart data={chartData(overallResult.data)} width="400" height="400" options={options} />
                 <Row>
                   <Col xs={24}>
                     <ul className="testCategory">
