@@ -5,7 +5,7 @@ import {
 } from 'antd';
 import PropTypes from 'prop-types';
 import {
-  Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image,
+  Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image, BlobProvider,
 } from '@react-pdf/renderer';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
@@ -18,9 +18,6 @@ import {
 } from '../utility/common';
 
 const styles = StyleSheet.create({
-  section: {
-    padding: 15,
-  },
   container: {
     flex: 1,
     flexDirection: 'row',
@@ -30,7 +27,6 @@ const styles = StyleSheet.create({
   },
   Column: {
     flexDirection: 'column',
-    paddingTop: 30,
     paddingRight: 15,
   },
   sidebar: {
@@ -42,18 +38,19 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   Section: {
-    padding: 15,
+    paddingLeft: 15,
   },
   longtext: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#605F62',
     textAlign: 'justify',
   },
   categoryheader: {
     padding: '10px 30px 0px;',
     color: '#FFF',
-    marginTop: '15px',
     fontSize: 12,
+    marginTop: 30,
+    marginBottom: 20,
     width: '200px',
   },
   cardhead: {
@@ -66,9 +63,10 @@ const styles = StyleSheet.create({
   },
   cardbody: {
     color: '#605F62',
-    fontSize: 12,
+    fontSize: 11,
     padding: 15,
     border: '1px solid #DDDCDD',
+    textAlign: 'justify',
   },
   card: {
     marginTop: 15,
@@ -77,26 +75,10 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
   },
-  chartImg: {
-    marginTop: 25,
-  },
 });
 
-// Font.register('/assets/fonts/Lato-Bold.ttf', {
-//   family: 'Lato Bold',
-// });
-// Font.register('/assets/fonts/Lato-Light.ttf', {
-//   family: 'Lato Light',
-// });
-// Font.register('/assets/fonts/Lato-Medium.ttf', {
-//   family: 'Lato Medium',
-// });
-// Font.register('/assets/fonts/Lato-Regular.ttf', {
-//   family: 'Lato Regular',
-// });
-
 const Sidebar = () => (
-  <View style={[styles.leftColumn, styles.sidebar]}>
+  <View style={[styles.Column, styles.sidebar]}>
     <Image
       src="/assets/images/sidebar_logo1.png"
       style={{ width: 75, marginTop: 40, marginLeft: 20 }}
@@ -108,19 +90,75 @@ const Sidebar = () => (
   </View>
 );
 
-const CategoryContent = ({ props }) => {
+const ResultContent = ({ props }) => {
+  const {
+    data, chartImg, scoreImg,
+  } = props;
   return (
-    <View style={[styles.leftColumn, styles.content]}>
+    <View style={[styles.Column, styles.content]}>
+      <View style={{ marginTop: 30, alignItems: 'center' }}>
+        <Image
+          src={scoreImg}
+          style={{ width: 350 }}
+        />
+      </View>
+      <View style={styles.Section}>
+        <Text style={styles.longtext}>
+          {renderLongDesc(data)}
+        </Text>
+
+        <View style={styles.container}>
+          <View style={[styles.card, { width: 215, marginRight: 15 }]}>
+            <Text style={styles.cardhead}>
+              Fortalezas
+            </Text>
+            <Text style={styles.cardbody}>
+              {renderStrenth(data).every(x => x === false) ? 'None' : renderStrenth(data)}
+            </Text>
+          </View>
+
+          <View style={[styles.card, { width: 215 }]}>
+            <Text style={styles.cardhead}>
+              Debilidades
+            </Text>
+            <Text style={styles.cardbody}>
+              {renderWeakness(data).every(x => x === false) ? 'None' : renderWeakness(data)}
+            </Text>
+          </View>
+        </View>
+
+        <View style={[styles.container, styles.chartWrapper]}>
+          <View style={[styles.Column, styles.chartImg]}>
+            <Image
+              src={chartImg}
+              style={{ width: 250, marginLeft: 20 }}
+            />
+          </View>
+
+          <View style={styles.Column}>
+            <Image
+              src="/assets/images/result-category.png"
+              style={{ width: 100, marginLeft: 10, marginTop: 40 }}
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const CategoryContent = ({ props }) => {
+  const { data, chartImg, scoreImg } = props;
+  return (
+    <View style={[styles.Column, styles.content]}>
       <View>
-        <Text style={[styles.categoryheader, { backgroundColor: getBgColor(props.data[0].categories_COD) }]}>
-          {getCategory(props.data[0].categories_COD)}
+        <Text style={[styles.categoryheader, { backgroundColor: getBgColor(data[0].categories_COD) }]}>
+          {getCategory(data[0].categories_COD)}
         </Text>
       </View>
       <View style={styles.Section}>
         <Text style={styles.longtext}>
-          loren lipsum
-          {/* {console.log(Object.entries(props).map(value => value))} */}
-          {/* {renderLongDesc(props.data)} */}
+          {renderLongDesc(data)}
         </Text>
 
         <View style={styles.card}>
@@ -128,8 +166,7 @@ const CategoryContent = ({ props }) => {
             Fortalezas
           </Text>
           <Text style={styles.cardbody}>
-            Fortalezas
-            {/* {renderStrenth(props).every(x => x === false) ? 'None' : renderStrenth(props)} */}
+            {renderStrenth(data).every(x => x === false) ? 'None' : renderStrenth(data)}
           </Text>
         </View>
 
@@ -138,54 +175,51 @@ const CategoryContent = ({ props }) => {
             Debilidades
           </Text>
           <Text style={styles.cardbody}>
-            Debilidades
-            {/* {renderWeakness(props).every(x => x === false) ? 'None' : renderWeakness(props)} */}
+            {renderWeakness(data).every(x => x === false) ? 'None' : renderWeakness(data)}
           </Text>
         </View>
 
         <View style={[styles.container, styles.chartWrapper]}>
-          <View style={[styles.leftColumn, styles.chartImg]}>
+          <View style={[styles.Column, styles.chartImg]}>
             <Image
-              src={props.chartImg}
-              style={{ width: 200 }}
+              src={chartImg}
+              style={{ width: 200, marginLeft: 15 }}
             />
           </View>
-
-          <View style={styles.leftColumn}>
+          <View style={styles.Column}>
             <Image
-              src={props.scoreImg}
+              src={scoreImg}
               style={{ width: 200 }}
             />
           </View>
         </View>
-
       </View>
-    </View >
+    </View>
   );
 };
 
-function MyDoc(props) {
-  console.log(props);
+function MyDoc({ mailData, resultData }) {
   return (
     <Document>
-      {/* <Page size="A4">
-        <View style={{ margin: 50 }}>
+      <Page size="A4">
+        <View style={{ margin: 30 }}>
           <Image
             src="/assets/images/welcome.png"
           />
         </View>
       </Page>
+
       <Page size="A4" wrap>
         <View style={styles.container}>
           <Sidebar />
-          <View style={[styles.leftColumn, styles.content]}>
+          <View style={[styles.Column, styles.content]}>
             <View style={{ padding: 30 }}>
 
-              <View style={{ marginTop: 30 }}>
-                <Text style={{ fontWight: 700 }}>
+              <View style={{ marginTop: 15 }}>
+                <Text>
                   Cómo funciona el test
                 </Text>
-                <Text style={{ fontWight: 300 }}>
+                <Text>
                   Instrucciones y etapas
                 </Text>
               </View>
@@ -198,7 +232,7 @@ function MyDoc(props) {
 
               <View style={{ marginTop: 30 }}>
                 <Image
-                  src="/assets/images/catgory.png"
+                  src="/assets/images/category.png"
                   style={{ width: 200 }}
                 />
               </View>
@@ -213,20 +247,15 @@ function MyDoc(props) {
           </View>
         </View>
       </Page>
-      <Page size="A4">
+
+      <Page size="A4" wrap>
         <View style={styles.container}>
           <Sidebar />
-          <View style={[styles.leftColumn, styles.content]}>
-            <View style={{ margin: 50 }}>
-              <Image
-                src="/assets/images/info.png"
-              />
-            </View>
-          </View>
+          <ResultContent props={resultData} />
         </View>
-      </Page> */}
+      </Page>
 
-      {props.map((item, i) => (
+      {mailData.map((item, i) => (
         <Page size="A4" wrap key={i}>
           <View style={styles.container}>
             <Sidebar />
@@ -234,10 +263,23 @@ function MyDoc(props) {
           </View>
         </Page>
       ))}
+
+      <Page size="A4">
+        <View style={styles.container}>
+          <Sidebar />
+          <View style={[styles.Column, styles.content]}>
+            <View style={{ margin: 30 }}>
+              <Image
+                src="/assets/images/info.png"
+              />
+            </View>
+          </View>
+        </View>
+      </Page>
+
     </Document>
   );
 }
-
 
 class SendMail extends Component {
   constructor(props) {
@@ -252,7 +294,7 @@ class SendMail extends Component {
       const { history } = this.props;
       history.push(routes.TestResult);
     }
-    // localStorage.removeItem('examId');
+    localStorage.removeItem('examId');
   }
 
   handleClick() {
@@ -283,11 +325,21 @@ class SendMail extends Component {
                 <Icon type="caret-right" />
               </Button> */}
               {state && (
-                <PDFDownloadLink document={MyDoc(state.query.mailData)} fileName="result.pdf" className="btn-green" onClick={this.handleClick}>
-                  Enviar al mail
-                  {''}
-                  <Icon type="caret-right" />
-                </PDFDownloadLink>
+                <div onClick={this.handleClick}>
+                  <PDFDownloadLink document={MyDoc(state.query)} fileName="result.pdf" className="btn-green">
+                    Enviar al mail
+                    {''}
+                    <Icon type="caret-right" />
+                  </PDFDownloadLink>
+                  {/* <BlobProvider document={MyDoc(state.query)}>
+                    {({ blob, url, loading, error }) => {
+                      console.log(blob, url, loading, error);
+                      // Do whatever you need with blob here
+                      return <div></div>;
+                    }
+                    }
+                  </BlobProvider> */}
+                </div>
               )}
               <p className="help-text">
                 Se enviará al mail previamente definido

@@ -34,7 +34,6 @@ function chartData(chartdata) {
   }));
 }
 
-
 class TestResult extends Component {
   constructor(props) {
     super(props);
@@ -59,13 +58,18 @@ class TestResult extends Component {
   }
 
   async onClickNextBtn() {
-    const { history } = this.props;
-    await html2canvas(document.querySelector('.overallScroreWrapper'),
-      { scale: 4 }).then(canvas => sessionStorage.setItem('chartImg', canvas.toDataURL('image/jpeg')));
+    const { history, result: { overallResult } } = this.props;
 
-    await html2canvas(document.querySelector('.polarAreaChartWrapper'),
-      { scale: 4 }).then(canvas => sessionStorage.setItem('scoreImg', canvas.toDataURL('image/jpeg')));
-    history.push(routes.TestResultByCategory);
+    const scoreImg = await html2canvas(document.querySelector('.overallScroreWrapper'),
+      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
+    const chartImg = await html2canvas(document.querySelector('.polarChart'),
+      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
+
+    history.push(routes.TestResultByCategory, {
+      query: {
+        ...overallResult, chartImg, scoreImg,
+      },
+    });
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -137,29 +141,33 @@ class TestResult extends Component {
               </Col>
 
               <Col xs={24} sm={24} md={12} className="m-b-15 polarAreaChartWrapper">
-                <PolarAreaChart data={chartData(overallResult.data)} width="400" height="400" options={options} />
+                <div className="polarChart">
+                  <PolarAreaChart data={chartData(overallResult.data)} width="400" height="400" options={options} />
+                </div>
                 <Row>
                   <Col xs={24}>
-                    <ul className="testCategory">
-                      <li>
-                        Virtual Language
-                      </li>
-                      <li>
-                        Adaptación al Cambio
-                      </li>
-                      <li>
-                        Virtual Work habilities
-                      </li>
-                      <li>
-                        Digital Leadership
-                      </li>
-                      <li>
-                        Digital mindset
-                      </li>
-                      <li>
-                        Virtual Core Business mindset
-                      </li>
-                    </ul>
+                    <div className="testCategoryWrapper">
+                      <ul className="testCategory">
+                        <li>
+                          Virtual Language
+                        </li>
+                        <li>
+                          Adaptación al Cambio
+                        </li>
+                        <li>
+                          Virtual Work habilities
+                        </li>
+                        <li>
+                          Digital Leadership
+                        </li>
+                        <li>
+                          Digital mindset
+                        </li>
+                        <li>
+                          Virtual Core Business mindset
+                        </li>
+                      </ul>
+                    </div>
                   </Col>
                 </Row>
               </Col>

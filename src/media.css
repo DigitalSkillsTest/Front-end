@@ -56,7 +56,7 @@
   .strenthWeakDesc{margin-bottom: 0}
   .stepButtonWrapper p.keyarearesult{display: none;}
   .testResultbyCategory .strenthWeakDesc,.testResultbyCategory p.resultDesc{margin: 20px 0}
-  .subCategoryScoreWrapper{width: 300px;}
+  .subCategoryScoreWrapper{width: 300px;float: none}
   .sendMailWrapper{padding: 15px}
   .sendMailWrapper .welcomeScreenLogoWrapper{display: none}
   .bg-image{width: 100%;height: 400px;top: 350px;left: 0;right: 0;background-position: 0 0}

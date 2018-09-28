@@ -54,12 +54,16 @@ class TestResultByCategory extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
-    const { dispatch, history } = this.props;
+    const { dispatch, history, location: { state } } = this.props;
     const examId = localStorage.getItem('examId');
     if (examId) {
       dispatch(fetchResultByCategoryReq({ examId }));
     } else {
       history.push(routes.HowTestWorks);
+    }
+
+    if (state === undefined) {
+      history.push(routes.TestResult);
     }
   }
 
@@ -88,7 +92,7 @@ class TestResultByCategory extends Component {
   }
 
   async onClickNextBtn() {
-    const { history } = this.props;
+    const { history, location: { state } } = this.props;
     const { categoryIndex, resultData, mailData } = this.state;
 
     const chartImg = await html2canvas(document.querySelector('.subcatchartwrapper'),
@@ -100,7 +104,7 @@ class TestResultByCategory extends Component {
     this.setState(prevState => ({ categoryIndex: prevState.categoryIndex < 6 ? prevState.categoryIndex + 1 : 6 }));
     mailData[categoryIndex - 1] = { data: resultData, chartImg, scoreImg };
     if (categoryIndex === 6) {
-      history.push(routes.SendMail, { query: { mailData } });
+      history.push(routes.SendMail, { query: { mailData, resultData: state.query } });
     }
   }
 
@@ -196,7 +200,15 @@ class TestResultByCategory extends Component {
 
               <Col xs={24} sm={24} md={8} className="m-b-15 text-center">
                 <div className="subcatchartwrapper">
-                  {overallResult && (<PolarAreaChart data={chartData(overallResult.data, resultData[0].categories_COD)} width="200" height="200" redraw options={options} />)}
+                  {overallResult && (
+                    <PolarAreaChart
+                      data={chartData(overallResult.data, resultData[0].categories_COD)}
+                      width="200"
+                      height="200"
+                      options={options}
+                      redraw
+                    />
+                  )}
                 </div>
                 <Row>
                   <Col xs={24} className="subCategoryScroeWrapper">
@@ -208,20 +220,21 @@ class TestResultByCategory extends Component {
                     <p className="score">
                       {parseFloat(avgScore(resultData)).toFixed(1)}
                     </p>
-                    {/* <div className="subCategoryScoreWrapper">
+                    <div className="subCategoryScoreWrapper">
                       {categoryData[categoryIndex - 1].subcategory.map((item, i) => (
                         <p className="subcategoryScore" key={Math.random()}>
-                          <span>
+                          <span style={{ color: getBgColor(resultData[0].categories_COD) }}>
                             {resultData[i].isScore}
                           </span>
-                          {item.sub_cat}
+                          <span>
+                            {item.sub_cat}
+                          </span>
                         </p>
                       ))}
-                    </div> */}
+                    </div>
                   </Col>
                 </Row>
               </Col>
-
             </Row>
           </div>
         )}

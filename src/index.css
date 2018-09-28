@@ -218,8 +218,9 @@ body {
 .testResultbyCategory h3.categoryName{font-size: 24px;line-height: 28px;font-weight: 300;margin-top: 10px;padding:0 50px}
 .testResultbyCategory p.score{font-size: 70px;line-height: 84px;font-weight: 700;margin: 20px 0;}
 .testResultbyCategory p.subcategoryScore{padding: 0;margin: 0;font-weight: 300;color:#606060}
-.testResultbyCategory p.subcategoryScore span{color:#0085C6;font-weight: 700;width: 20px;float: left;}
-.subCategoryScoreWrapper{width: 80%;margin: 0 auto;text-align: left;}
+.testResultbyCategory p.subcategoryScore span:first-child{font-weight: 700;width: 20px;float: left;}
+.testResultbyCategory p.subcategoryScore span:last-child{width: calc(100% - 25px);float: left;}
+.subCategoryScoreWrapper{width: 80%;margin: 0 auto;text-align: left;float: right;}
 .subcatchartwrapper{width: 200px;margin: 0 auto}
 /***************************** Test Result By Category page css end *************************/
 

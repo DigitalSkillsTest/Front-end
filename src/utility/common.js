@@ -184,10 +184,10 @@ export const categoryData = [
 
 export function renderLongDesc(longDesc) {
   return longDesc.map(item => (
-    <span key={Math.random()}>
+    <React.Fragment key={Math.random()}>
       {item.longVersionTxt}
       {'. '}
-    </span>
+    </React.Fragment>
   ));
 }
 
