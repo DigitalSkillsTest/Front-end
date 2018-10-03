@@ -10,9 +10,20 @@ const fetchResultByCategory = (data) => {
   return api().post(path, data).then(res => res).catch(error => error);
 };
 
+const sendMail = (data) => {
+  const path = '/result/email';
+  return api().post(path, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+    },
+  }).then(res => res).catch(error => error);
+};
+
 const ResultService = {
   fetchExamResult,
   fetchResultByCategory,
+  sendMail,
 };
 
 export default ResultService;

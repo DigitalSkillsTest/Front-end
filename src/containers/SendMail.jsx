@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Row, Col, Icon, Radio,
+  Row, Col, Icon, Radio, Button,
 } from 'antd';
 import PropTypes from 'prop-types';
 import {
-  Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image, BlobProvider,
+  Page, Text, View, Document, StyleSheet, Image, BlobProvider,
 } from '@react-pdf/renderer';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
@@ -16,6 +16,7 @@ import {
   renderStrenth,
   renderWeakness,
 } from '../utility/common';
+import { sendMailReq } from '../redux/actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -225,7 +226,10 @@ function MyDoc({ mailData, resultData }) {
               </View>
 
               <View>
-                <Text style={{ marginTop: 20, color: '#605F62', fontSize: 12, textAlign: 'justify' }}>
+                <Text style={{
+                  marginTop: 20, color: '#605F62', fontSize: 12, textAlign: 'justify',
+                }}
+                >
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
                 </Text>
               </View>
@@ -294,12 +298,19 @@ class SendMail extends Component {
       const { history } = this.props;
       history.push(routes.TestResult);
     }
-    localStorage.removeItem('examId');
   }
 
-  handleClick() {
-    const { history } = this.props;
-    history.push(routes.UserRegister);
+  handleClick(blob) {
+    const { dispatch, history, currentUser: { data } } = this.props;
+    const formData = new FormData();
+    if (blob !== null) {
+      formData.append('to', data.mail);
+      formData.append('subject', 'test');
+      formData.append('text', 'you get this mail because you join ashutec');
+      formData.append('file', blob);
+    }
+    const pdfData = { formData, history };
+    dispatch(sendMailReq(pdfData));
   }
 
   render() {
@@ -319,26 +330,21 @@ class SendMail extends Component {
             </Col>
 
             <Col xs={24}>
-              {/* <Button htmlType="button" className="btn-green" onClick={this.handleClick}>
-                Enviar al mail
-                {''}
-                <Icon type="caret-right" />
-              </Button> */}
               {state && (
-                <div onClick={this.handleClick}>
-                  <PDFDownloadLink document={MyDoc(state.query)} fileName="result.pdf" className="btn-green">
-                    Enviar al mail
-                    {''}
-                    <Icon type="caret-right" />
-                  </PDFDownloadLink>
-                  {/* <BlobProvider document={MyDoc(state.query)}>
-                    {({ blob, url, loading, error }) => {
-                      console.log(blob, url, loading, error);
+                <div>
+                  <BlobProvider document={MyDoc(state.query)}>
+                    {({ blob }) => {
                       // Do whatever you need with blob here
-                      return <div></div>;
+                      return (
+                        <Button htmlType="button" className="btn-green" onClick={() => this.handleClick(blob)}>
+                          Enviar al mail
+                          {''}
+                          <Icon type="caret-right" />
+                        </Button>
+                      );
                     }
                     }
-                  </BlobProvider> */}
+                  </BlobProvider>
                 </div>
               )}
               <p className="help-text">
@@ -373,4 +379,6 @@ export default connect(mapStateToProps)(SendMail);
 SendMail.propTypes = {
   history: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape({}).isRequired,
 };

@@ -22,7 +22,7 @@ class TestStart extends Component {
     this.onClickNextBtn = this.onClickNextBtn.bind(this);
     this.onClickPreviousBtn = this.onClickPreviousBtn.bind(this);
     this.getTime = this.getTime.bind(this);
-    this.sendTimeToServer = this.sendTimeToServer.bind(this);
+    // this.sendTimeToServer = this.sendTimeToServer.bind(this);
     this.setTimer = this.setTimer.bind(this);
   }
 
@@ -89,7 +89,9 @@ class TestStart extends Component {
           const questionCode = Object.values(values)[0];
           const questionId = currentQuestion.question._id;
           // get Answer from code
-          const { score } = currentQuestion.question.options.filter(answer => answer.code === questionCode)[0];
+          const scoreData = currentQuestion.question.options.filter(answer => answer.code === questionCode)[0];
+          const score = scoreData ? scoreData.score : history.push(routes.TestStart);
+
           // save Answer
           const examStatus = QIndex === 30 ? 'end' : 'start';
           const saveAnswerData = {
@@ -123,9 +125,9 @@ class TestStart extends Component {
   }
 
   getTime(hours, minutes, seconds) {
-    if (seconds % 5 === 0) {
-      this.sendTimeToServer(hours, minutes, seconds);
-    }
+    // if (seconds % 5 === 0) {
+    //   this.sendTimeToServer(hours, minutes, seconds);
+    // }
     this.timer = Date.now() + ((Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds)) * 1000);
     localStorage.setItem('attribute', this.timer);
   }
@@ -139,9 +141,9 @@ class TestStart extends Component {
     return startTime;
   }
 
-  sendTimeToServer(hours, minutes, seconds) {
-    console.log('Send Time to server', hours, minutes, seconds);
-  }
+  // sendTimeToServer(hours, minutes, seconds) {
+  //   console.log('Send Time to server', hours, minutes, seconds);
+  // }
 
   render() {
     const { showCategory } = this.state;

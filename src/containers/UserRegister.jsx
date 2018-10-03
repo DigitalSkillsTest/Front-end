@@ -6,7 +6,12 @@ import {
 } from 'antd';
 import Layout from '../components/Layout/Layout';
 import RenderInput from '../components/FormComponent/FormElement';
-import { createUserReq, clearCurrentUser, clearExam, resetExamStatus } from '../redux/actions';
+import {
+  createUserReq,
+  clearCurrentUser,
+  clearExam,
+  resetExamStatus,
+} from '../redux/actions';
 
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;

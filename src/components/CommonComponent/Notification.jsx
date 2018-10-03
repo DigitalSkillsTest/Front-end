@@ -1,10 +1,10 @@
 import { notification } from 'antd';
 
-const Notification = (type, message, description) => {
+const IconNotification = (type, message, description) => {
   notification[type]({
     message,
     description,
   });
 };
 
-export default Notification;
+export default IconNotification;

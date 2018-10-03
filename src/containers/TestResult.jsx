@@ -213,4 +213,5 @@ TestResult.propTypes = {
   history: PropTypes.shape({}).isRequired,
   result: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
+  exam: PropTypes.shape({}).isRequired,
 };

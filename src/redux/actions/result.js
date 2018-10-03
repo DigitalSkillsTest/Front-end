@@ -36,3 +36,22 @@ export const fetchResultByCategoryFail = error => ({
   type: FETCH_RESULT_BY_CATEGORY_FAIL,
   error,
 });
+
+export const SEND_MAIL_REQ = 'SEND_MAIL_REQ';
+export const SEND_MAIL_SUCCESS = 'SEND_MAIL_SUCCESS';
+export const SEND_MAIL_FAIL = 'SEND_MAIL_FAIL';
+
+export const sendMailReq = data => ({
+  type: SEND_MAIL_REQ,
+  data,
+});
+
+export const sendMailSuccess = data => ({
+  type: SEND_MAIL_SUCCESS,
+  data,
+});
+
+export const sendMailFail = error => ({
+  type: SEND_MAIL_FAIL,
+  error,
+});

@@ -140,4 +140,6 @@ export default connect(mapStateToProps)(HowTestWorks);
 
 HowTestWorks.propTypes = {
   history: PropTypes.shape({}).isRequired,
+  exam: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };

@@ -20,7 +20,7 @@ class TestComponent extends Component {
     super(props);
     this.state = {
       clientWidth: window.innerWidth,
-      isAnsweSelected: false,
+      isAnswerSelected: false,
     };
     this.handleResize = this.handleResize.bind(this);
   }
@@ -35,10 +35,10 @@ class TestComponent extends Component {
 
   static getDerivedStateFromProps(props, state) {
     const { onClickNextBtn } = props;
-    if (state.isAnsweSelected) {
+    if (state.isAnswerSelected) {
       setTimeout(() => onClickNextBtn(), 200);
       return {
-        isAnsweSelected: false,
+        isAnswerSelected: false,
         clientWidth: state.clientWidth,
       };
     }
@@ -96,7 +96,7 @@ class TestComponent extends Component {
                         })(
                           <RadioGroup size="large">
                             {options.map(option => (
-                              <RadioButton key={option._id} value={option.code} onClick={() => this.setState({ isAnsweSelected: true })}>
+                              <RadioButton key={option._id} value={option.code} onClick={() => this.setState({ isAnswerSelected: true })}>
                                 {option.answer}
                               </RadioButton>
                             ))
@@ -106,31 +106,6 @@ class TestComponent extends Component {
                       </FormItem>
 
                     </div>
-                    {/* <div className="stepButtonWrapper">
-                    <Row>
-                      <Col>
-                        {clientWidth < 768 && (
-                          <div className="progressWrapper responsive">
-                            <ProgressBar percent={getPercent(QIndex)} />
-                          </div>
-                        )}
-                        <FormItem>
-                          <Button.Group>
-                            <Button className="btn-default" onClick={onClickPreviousBtn}>
-                              <Icon type="caret-left" />
-                              {''}
-                              Anterior
-                            </Button>
-                            <Button className="btn-default pull-right" htmlType="submit">
-                              Siguiente
-                              {''}
-                              <Icon type="caret-right" />
-                            </Button>
-                          </Button.Group>
-                        </FormItem>
-                      </Col>
-                    </Row>
-                  </div> */}
                   </div>
 
                   {clientWidth >= 768 && (
@@ -143,51 +118,7 @@ class TestComponent extends Component {
                         </div> */}
                     </React.Fragment>
                   )}
-
-                  {/* <div className="stepButtonWrapper">
-                  <Row>
-                    <Col>
-                      {clientWidth < 768 && (
-                        <div className="progressWrapper responsive">
-                          <ProgressBar percent={getPercent(QIndex)} />
-                        </div>
-                      )}
-                      <FormItem>
-                        <Button.Group>
-                          <Button className="btn-default" onClick={onClickPreviousBtn}>
-                            <Icon type="caret-left" />
-                            {''}
-                            Anterior
-                          </Button>
-                          <Button className="btn-default pull-right" htmlType="submit">
-                            Siguiente
-                            {''}
-                            <Icon type="caret-right" />
-                          </Button>
-                        </Button.Group>
-                      </FormItem>
-                    </Col>
-                  </Row>
-                </div> */}
-
                 </Col>
-                {/* <Col sm={24} md={6}>
-
-                <div className="testSubCategory">
-                  <div className="card">
-                    <div className="card-head" style={{ background: getBgColor(categories_COD) }}>
-                      {categoryData[getSteps(categories_COD) - 1].category}
-                    </div>
-                    <div className="card-body">
-                      {categoryData[getSteps(categories_COD) - 1].subcategory.map(item => (
-                        <p className="subCategory" key={Math.random()}>
-                          {item.sub_cat}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Col> */}
               </Row>
             </div>
             <div className="stepButtonWrapper">
@@ -196,20 +127,6 @@ class TestComponent extends Component {
                   <div className="progressWrapper responsive">
                     <ProgressBar percent={getPercent(QIndex)} />
                   </div>
-                  {/* <FormItem>
-                    <Button.Group>
-                      <Button className="btn-default" onClick={onClickPreviousBtn}>
-                        <Icon type="caret-left" />
-                        {''}
-                        Anterior
-                      </Button>
-                      <Button className="btn-default pull-right" htmlType="submit">
-                        Siguiente
-                        {''}
-                        <Icon type="caret-right" />
-                      </Button>
-                    </Button.Group>
-                  </FormItem> */}
                 </Col>
               </Row>
             </div>
