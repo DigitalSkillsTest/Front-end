@@ -96,15 +96,20 @@ class TestResultByCategory extends Component {
     const { categoryIndex, resultData, mailData } = this.state;
 
     const chartImg = await html2canvas(document.querySelector('.subcatchartwrapper'),
-      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
+      { scale: 1 }).then(canvas => canvas.toDataURL('image/jpeg'));
 
     const scoreImg = await html2canvas(document.querySelector('.subCategoryScroeWrapper'),
-      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
+      { scale: 1 }).then(canvas => canvas.toDataURL('image/jpeg'));
 
     this.setState(prevState => ({ categoryIndex: prevState.categoryIndex < 6 ? prevState.categoryIndex + 1 : 6 }));
     mailData[categoryIndex - 1] = { data: resultData, chartImg, scoreImg };
+
     if (categoryIndex === 6) {
-      history.push(routes.SendMail, { query: { mailData, resultData: state.query } });
+      const location = {
+        pathname: routes.SendMail,
+        state: { mailData, resultData: state },
+      };
+      history.push(location);
     }
   }
 

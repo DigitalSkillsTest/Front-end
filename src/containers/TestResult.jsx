@@ -61,15 +61,15 @@ class TestResult extends Component {
     const { history, result: { overallResult } } = this.props;
 
     const scoreImg = await html2canvas(document.querySelector('.overallScroreWrapper'),
-      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
+      { scale: 1 }).then(canvas => canvas.toDataURL('image/jpeg'));
     const chartImg = await html2canvas(document.querySelector('.polarChart'),
-      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
+      { scale: 1 }).then(canvas => canvas.toDataURL('image/jpeg'));
 
-    history.push(routes.TestResultByCategory, {
-      query: {
-        ...overallResult, chartImg, scoreImg,
-      },
-    });
+    const location = {
+      pathname: routes.TestResultByCategory,
+      state: { ...overallResult, scoreImg, chartImg },
+    };
+    history.push(location);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {

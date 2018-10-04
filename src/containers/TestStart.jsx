@@ -133,7 +133,7 @@ class TestStart extends Component {
   }
 
   setTimer() {
-    const startTime = Date.now() + (5 * 60 * 1000);
+    const startTime = Date.now() + (30 * 60 * 1000);
     if (localStorage.getItem('attribute')) {
       return Number(localStorage.getItem('attribute'))
     }

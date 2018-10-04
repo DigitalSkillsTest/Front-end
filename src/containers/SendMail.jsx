@@ -332,17 +332,17 @@ class SendMail extends Component {
             <Col xs={24}>
               {state && (
                 <div>
-                  <BlobProvider document={MyDoc(state.query)}>
-                    {({ blob }) => {
+                  <BlobProvider document={MyDoc(state)}>
+                    {({ blob }) =>
                       // Do whatever you need with blob here
-                      return (
+                      (
                         <Button htmlType="button" className="btn-green" onClick={() => this.handleClick(blob)}>
                           Enviar al mail
                           {''}
                           <Icon type="caret-right" />
                         </Button>
-                      );
-                    }
+                      )
+
                     }
                   </BlobProvider>
                 </div>
@@ -376,9 +376,12 @@ const mapStateToProps = state => state;
 
 export default connect(mapStateToProps)(SendMail);
 
+SendMail.defaultProp = {
+  currentUser: PropTypes.shape({}),
+};
+
 SendMail.propTypes = {
   history: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
-  currentUser: PropTypes.shape({}).isRequired,
 };

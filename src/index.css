@@ -168,6 +168,9 @@ body {
 .mcqAnswer.step5 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #E34640 !important} 
 .mcqAnswer.step6 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{border: 2px solid #94378D !important} 
 .test-form .stepButtonWrapper .ant-row{margin-bottom: 0 !important}
+.testWrapper{margin-top: 20px}
+.timerWrapper h3{padding-left: 25px;padding-top: 5px;font-size: 20px;}
+.timerWrapper h3::before{content: '';width: 20px;height: 20px;position: absolute;top: 10px; left: 0;background: url('/assets/images/timer.svg') no-repeat}
 /***************************** Test Component page css end *************************/
 
 /***************************** Test Finish page css start *************************/

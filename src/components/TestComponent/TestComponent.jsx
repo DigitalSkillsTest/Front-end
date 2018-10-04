@@ -61,7 +61,7 @@ class TestComponent extends Component {
       return (
         <Layout sidebar>
           <Row>
-            <Col xs={24}>
+            <Col xs={24} md={20}>
               {clientWidth < 768 && (
                 <div className="questionSteps responsive">
                   <Steps current={categories_COD} />
@@ -71,11 +71,15 @@ class TestComponent extends Component {
                 {category}
               </div>
             </Col>
+            <Col xs={24} md={4}>
+              <div className="timerWrapper">
+                <CountDownTimer timer={timer} currentCounter={currentCounter} />
+              </div>
+            </Col>
           </Row>
           <Form onSubmit={onClickNextBtn} className="test-form">
             <div className="testWrapper">
               <Row>
-                <CountDownTimer timer={timer} currentCounter={currentCounter} />
                 <Col sm={24}>
                   <div className="mcqWrapper">
                     <div className="mcqQuestion">
