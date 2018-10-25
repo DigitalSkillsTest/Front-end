@@ -44,7 +44,7 @@ class MainLayout extends React.Component {
           >
             <Row type="flex" justify="center" align="top">
               <Col span={24} className="text-center sidebarTop">
-                <img src="/assets/images/brain-color.svg" alt="logo-white" className="brainColor" />
+                <img src={`${process.env.PUBLIC_URL}/assets/images/brain-color.svg`} alt="logo-white" className="brainColor" />
                 <h2>
                   <span>
                     Test de
@@ -91,7 +91,7 @@ class MainLayout extends React.Component {
 
             <Row type="flex" justify="center" align="bottom">
               <Col span={24} className="text-center">
-                <img src="/assets/images/logo-white.svg" alt="logo-white" className="sidebarLogo" />
+                <img src={`${process.env.PUBLIC_URL}/assets/images/logo-white.svg`} alt="logo-white" className="sidebarLogo" />
               </Col>
             </Row>
 

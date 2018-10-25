@@ -65,7 +65,7 @@ class UserRegister extends Component {
     const { form: { getFieldDecorator } } = this.props;
     return (
       <Layout sidebar>
-        <div className="bodybg2" />
+        <div className="bodybg2" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/bodyBg-2.svg') no-repeat bottom right` }} />
         <div className="userRegister">
           <Row>
             <Col className="m-b-15">

@@ -21,7 +21,7 @@ function App(props) {
   return (
     <div className="container">
       {isLoading && <Loader isLoading={isLoading} />}
-      <BrowserRouter>
+      <BrowserRouter basename="/dskills">
         <Switch>
           <Route component={WelComepage} path={routes.WelComepage} exact />
           <Route component={UserRegister} path={routes.UserRegister} exact />
@@ -38,7 +38,7 @@ function App(props) {
   );
 }
 
-const mapStateToProps = state => ({ isLoading: state.loader.isLoading, color:'' });
+const mapStateToProps = state => ({ isLoading: state.loader.isLoading, color: '' });
 
 export default connect(mapStateToProps)(App);
 

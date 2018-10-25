@@ -81,11 +81,11 @@ const styles = StyleSheet.create({
 const Sidebar = () => (
   <View style={[styles.Column, styles.sidebar]}>
     <Image
-      src="/assets/images/sidebar_logo1.png"
+      src={`${process.env.PUBLIC_URL}/assets/images/sidebar_logo1.png`}
       style={{ width: 75, marginTop: 40, marginLeft: 20 }}
     />
     <Image
-      src="/assets/images/sidebar_logo2.png"
+      src={`${process.env.PUBLIC_URL}/assets/images/sidebar_logo2.png`}
       style={{ width: 50, marginTop: 570, marginLeft: 30 }}
     />
   </View>
@@ -138,7 +138,7 @@ const ResultContent = ({ props }) => {
 
           <View style={styles.Column}>
             <Image
-              src="/assets/images/result-category.png"
+              src={`${process.env.PUBLIC_URL}/assets/images/result-category.png`}
               style={{ width: 100, marginLeft: 10, marginTop: 40 }}
             />
           </View>
@@ -204,9 +204,7 @@ function MyDoc({ mailData, resultData }) {
     <Document>
       <Page size="A4">
         <View style={{ margin: 30 }}>
-          <Image
-            src="/assets/images/welcome.png"
-          />
+          <Image src={`${process.env.PUBLIC_URL}/assets/images/welcome.png`} />
         </View>
       </Page>
 
@@ -236,14 +234,14 @@ function MyDoc({ mailData, resultData }) {
 
               <View style={{ marginTop: 30 }}>
                 <Image
-                  src="/assets/images/category.png"
+                  src={`${process.env.PUBLIC_URL}/assets/images/category.png`}
                   style={{ width: 200 }}
                 />
               </View>
 
               <View style={{ marginTop: 50, marginLeft: 30 }}>
                 <Image
-                  src="/assets/images/chart2.png"
+                  src={`${process.env.PUBLIC_URL}/assets/images/chart2.png`}
                   style={{ width: 350 }}
                 />
               </View>
@@ -273,9 +271,7 @@ function MyDoc({ mailData, resultData }) {
           <Sidebar />
           <View style={[styles.Column, styles.content]}>
             <View style={{ margin: 30 }}>
-              <Image
-                src="/assets/images/info.png"
-              />
+              <Image src={`${process.env.PUBLIC_URL}/assets/images/info.png`} />
             </View>
           </View>
         </View>
@@ -317,7 +313,7 @@ class SendMail extends Component {
     const { location: { state } } = this.props;
     return (
       <Layout sidebar>
-        <div className="bg-image" />
+        <div className="bg-image" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/bodyBg-2.svg') no-repeat bottom right` }} />
         <div className="sendMailWrapper">
           <Row>
             <Col xs={24}>
@@ -363,7 +359,7 @@ class SendMail extends Component {
             </Col>
 
             <Col span={24} className="welcomeScreenLogoWrapper">
-              <img src="/assets/images/logo.svg" alt="logo" className="welcomeScreenLogo" />
+              <img src={`${process.env.PUBLIC_URL}/assets/images/logo.png`} alt="logo" className="welcomeScreenLogo" />
             </Col>
           </Row>
         </div>

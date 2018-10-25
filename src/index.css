@@ -55,8 +55,8 @@ body {
 
 .welcomeScreenLogo{width: 325px;height: 50px;}
 .welcomeScreen{margin-top: 50px;height: 100%;width:100%;}
-.bg-img{background: url('/assets/images/body-bg.svg') no-repeat bottom left;background-size:contain; background-position-x: 0%;background-position-y: 0%;position: absolute;top:200px;height: 510px;width:100%;left: -150px;}
-.testStartBlock{background: url('/assets/images/steps.svg') no-repeat top right;float: right !important;margin-top: 80px;}
+.bg-img{background-size:contain; background-position-x: 0%;background-position-y: 0%;position: absolute;top:200px;height: 510px;width:100%;left: -150px;}
+.testStartBlock{float: right !important;margin-top: 80px;}
 .testStartBlock h1{margin-bottom: 70px;font-size: 40px;line-height: 45px;font-weight: 700;}
 .testStartBlock h1 span{font-weight: 300;}
 
@@ -66,7 +66,7 @@ body {
 .userRegister{padding: 20px 50px;}
 .userRegisterRightBlock{text-align: center}
 .btn-green i.anticon{font-size: 22px !important;}
-.bodybg2{background: url('/assets/images/bodyBg-2.svg') no-repeat bottom right;width: 564px;height: 300px;position: absolute;top: 400px;right: 0px;}
+.bodybg2{width: 564px;height: 300px;position: absolute;top: 400px;right: 0px;}
 .userRegisterRightBlock .ant-radio-wrapper span:last-child{color: #1B2027 !important }
 
 /***************************** User Register page css end *************************/
@@ -228,7 +228,7 @@ body {
 /***************************** Test Result By Category page css end *************************/
 
 /***************************** Test Mail page css start *************************/
-.bg-image{background: url('/assets/images/bodyBg-2.svg') no-repeat bottom right;background-size: contain;position: absolute;top: 100px;height: 500px;width: 55%;right: 0;}
+.bg-image{background-size: contain;position: absolute;top: 100px;height: 500px;width: 55%;right: 0;}
 .sendMailWrapper{padding: 100px}
 .sendMailWrapper a.btn-green:focus{text-decoration: none !important}
 .sendMailWrapper h1{font-weight: 30px;line-height: 36px;font-weight: 700;margin-bottom: 40px;color: #1B2027;}

@@ -18,15 +18,15 @@ class WelComepage extends Component {
   render() {
     return (
       <Layout sidebar={false}>
-        <div className="bg-img" />
+        <div className="bg-img" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/body-bg.svg') no-repeat bottom left` }} />
         <Row gutter={{ xs: 8, sm: 16, md: 24 }}>
           <Col span={24} className="welcomeScreenLogoWrapper">
-            <img src="/assets/images/logo.svg" alt="logo" className="welcomeScreenLogo" />
+            <img src={`${process.env.PUBLIC_URL}/assets/images/logo.svg`} alt="logo" className="welcomeScreenLogo" />
           </Col>
         </Row>
         <div className="welcomeScreen">
           <Row gutter={{ xs: 8, sm: 16, md: 24 }}>
-            <Col span={10} className="testStartBlock">
+            <Col span={10} className="testStartBlock" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/steps.svg') no-repeat top right` }}>
               <h1>
                 <span>
                   Test de
