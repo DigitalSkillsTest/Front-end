@@ -1,7 +1,6 @@
 export const WelComepage = '/';
 export const UserRegister = '/user/create';
 export const HowTestWorks = '/how-test-works';
-// export const TestCategoty = '/test/category';
 export const TestStart = '/test/start';
 export const TestFinish = '/test/finish';
 export const TestResult = '/test/result';

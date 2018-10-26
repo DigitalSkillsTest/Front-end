@@ -3,6 +3,7 @@ import { Row, Col, Button } from 'antd';
 import PropTypes from 'prop-types';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
+import logo from '../images/logo.svg';
 
 class WelComepage extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class WelComepage extends Component {
         <div className="bg-img" />
         <Row gutter={{ xs: 8, sm: 16, md: 24 }}>
           <Col span={24} className="welcomeScreenLogoWrapper">
-            <img src="/assets/images/logo.svg" alt="logo" className="welcomeScreenLogo" />
+            <img src={logo} alt="logo" className="welcomeScreenLogo" />
           </Col>
         </Row>
         <div className="welcomeScreen">

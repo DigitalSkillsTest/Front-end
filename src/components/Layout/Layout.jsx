@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom';
 import * as routes from '../../routes/path';
 import 'antd/dist/antd.css';
 import { fetchUserReq, setExamStatusReq } from '../../redux/actions';
+import brainColor from '../../images/brain-color.svg';
+import LogoWhite from '../../images/logo-white.svg';
 
 const { Content, Sider, Header } = Layout;
 
@@ -44,7 +46,7 @@ class MainLayout extends React.Component {
           >
             <Row type="flex" justify="center" align="top">
               <Col span={24} className="text-center sidebarTop">
-                <img src="/assets/images/brain-color.svg" alt="logo-white" className="brainColor" />
+                <img src={brainColor} alt="logo-white" className="brainColor" />
                 <h2>
                   <span>
                     Test de
@@ -91,7 +93,7 @@ class MainLayout extends React.Component {
 
             <Row type="flex" justify="center" align="bottom">
               <Col span={24} className="text-center">
-                <img src="/assets/images/logo-white.svg" alt="logo-white" className="sidebarLogo" />
+                <img src={LogoWhite} alt="logo-white" className="sidebarLogo" />
               </Col>
             </Row>
 

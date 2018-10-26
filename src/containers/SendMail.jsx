@@ -7,6 +7,14 @@ import PropTypes from 'prop-types';
 import {
   Page, Text, View, Document, StyleSheet, Image, BlobProvider,
 } from '@react-pdf/renderer';
+import logo from '../images/logo.svg';
+import resultCategogyImg from '../images/result-category.png';
+import WelcomeImg from '../images/welcome.png';
+import categoryImg from '../images/category.png';
+import chart2Img from '../images/chart2.png';
+import infoImg from '../images/info.png';
+import sidebarLogo1 from '../images/sidebar_logo1.png';
+import sidebarLogo2 from '../images/sidebar_logo2.png';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
 import {
@@ -81,11 +89,11 @@ const styles = StyleSheet.create({
 const Sidebar = () => (
   <View style={[styles.Column, styles.sidebar]}>
     <Image
-      src="/assets/images/sidebar_logo1.png"
+      src={sidebarLogo1}
       style={{ width: 75, marginTop: 40, marginLeft: 20 }}
     />
     <Image
-      src="/assets/images/sidebar_logo2.png"
+      src={sidebarLogo2}
       style={{ width: 50, marginTop: 570, marginLeft: 30 }}
     />
   </View>
@@ -138,7 +146,7 @@ const ResultContent = ({ props }) => {
 
           <View style={styles.Column}>
             <Image
-              src="/assets/images/result-category.png"
+              src={resultCategogyImg}
               style={{ width: 100, marginLeft: 10, marginTop: 40 }}
             />
           </View>
@@ -205,7 +213,7 @@ function MyDoc({ mailData, resultData }) {
       <Page size="A4">
         <View style={{ margin: 30 }}>
           <Image
-            src="/assets/images/welcome.png"
+            src={WelcomeImg}
           />
         </View>
       </Page>
@@ -236,14 +244,14 @@ function MyDoc({ mailData, resultData }) {
 
               <View style={{ marginTop: 30 }}>
                 <Image
-                  src="/assets/images/category.png"
+                  src={categoryImg}
                   style={{ width: 200 }}
                 />
               </View>
 
               <View style={{ marginTop: 50, marginLeft: 30 }}>
                 <Image
-                  src="/assets/images/chart2.png"
+                  src={chart2Img}
                   style={{ width: 350 }}
                 />
               </View>
@@ -274,7 +282,7 @@ function MyDoc({ mailData, resultData }) {
           <View style={[styles.Column, styles.content]}>
             <View style={{ margin: 30 }}>
               <Image
-                src="/assets/images/info.png"
+                src={infoImg}
               />
             </View>
           </View>
@@ -363,7 +371,7 @@ class SendMail extends Component {
             </Col>
 
             <Col span={24} className="welcomeScreenLogoWrapper">
-              <img src="/assets/images/logo.svg" alt="logo" className="welcomeScreenLogo" />
+              <img src={logo} alt="logo" className="welcomeScreenLogo" />
             </Col>
           </Row>
         </div>
