@@ -325,7 +325,7 @@ class SendMail extends Component {
     const { location: { state } } = this.props;
     return (
       <Layout sidebar>
-        <div className="bg-image" />
+        <div className="bg-image" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/bodyBg-2.svg') no-repeat bottom right` }} />
         <div className="sendMailWrapper">
           <Row>
             <Col xs={24}>
