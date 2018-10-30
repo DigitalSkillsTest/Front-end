@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-localize-redux';
 import {
   Form, Row, Col, Radio, Button, Icon,
 } from 'antd';
@@ -64,126 +65,136 @@ class UserRegister extends Component {
   render() {
     const { form: { getFieldDecorator } } = this.props;
     return (
-      <Layout sidebar>
-        <div className="bodybg2" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/bodyBg-2.svg') no-repeat bottom right` }} />
-        <div className="userRegister">
-          <Row>
-            <Col className="m-b-15">
-              <h1 className="pageHeading">
-                Completa tus datos
-                <span className="pageSubHeading">
-                  antes de comenzar
-                </span>
-              </h1>
-            </Col>
-          </Row>
+      <Translate>
+        {({ translate }) => (
+          <Layout sidebar>
+            <div className="bodybg2" />
+            <div className="userRegister">
+              <Row>
+                <Col className="m-b-15">
+                  <h1 className="pageHeading">
+                    {translate('registerpage.heading')}
+                    <span className="pageSubHeading">
+                      {translate('registerpage.subheading')}
+                    </span>
+                  </h1>
+                </Col>
+              </Row>
 
-          <Row>
-            <Form onSubmit={this.handleSubmit}>
-              <Col xs={24} sm={24} md={24} lg={14}>
-                <Row>
-                  <Col>
-                    <RenderInput
-                      name="name"
-                      rules={[
-                        { required: true, message: 'Please input your username!' },
-                        { validator: validateUsername },
-                        { pattern: new RegExp('[a-zA-Z][a-zA-Z0-9]'), message: 'Please input valid username!' },
-                      ]}
-                      getFieldDecorator={getFieldDecorator}
-                    />
+              <Row>
+                <Form onSubmit={this.handleSubmit}>
+                  <Col xs={24} sm={24} md={24} lg={14}>
+                    <Row>
+                      <Col>
+                        <RenderInput
+                          name="name"
+                          placeholder={translate('registerpage.formfield.name')}
+                          rules={[
+                            { required: true, message: `${translate('registerpage.error.required')} ${translate('registerpage.formfield.name')}!` },
+                            { validator: validateUsername },
+                            { pattern: new RegExp('[a-zA-Z][a-zA-Z0-9]'), message: 'Please input valid username!' },
+                          ]}
+                          getFieldDecorator={getFieldDecorator}
+                        />
 
-                    <RenderInput
-                      name="lastName"
-                      rules={[
-                        { required: true, message: 'Please input your lastName!' },
-                        { whitespace: true, message: 'Please input your lastName!' },
-                      ]}
+                        <RenderInput
+                          name="lastName"
+                          placeholder={translate('registerpage.formfield.lastname')}
+                          rules={[
+                            { required: true, message: `${translate('registerpage.error.required')} ${translate('registerpage.formfield.lastname')}!` },
+                            { whitespace: true, message: `${translate('registerpage.error.whitespace')}` },
+                          ]}
 
-                      getFieldDecorator={getFieldDecorator}
-                    />
+                          getFieldDecorator={getFieldDecorator}
+                        />
 
-                    <RenderInput
-                      name="mail"
-                      type="email"
-                      rules={[
-                        { required: true, message: 'Please input your email!' },
-                      ]}
-                      getFieldDecorator={getFieldDecorator}
-                    />
+                        <RenderInput
+                          name="mail"
+                          placeholder={translate('registerpage.formfield.email')}
+                          type="email"
+                          rules={[
+                            { required: true, message: `${translate('registerpage.error.required')} ${translate('registerpage.formfield.email')}!` },
+                          ]}
+                          getFieldDecorator={getFieldDecorator}
+                        />
 
-                    <RenderInput
-                      name="company"
-                      rules={[
-                        { required: true, message: 'Please input your company!' },
-                        { whitespace: true, message: 'Please input your company!' },
-                      ]}
-                      getFieldDecorator={getFieldDecorator}
-                    />
+                        <RenderInput
+                          name="company"
+                          placeholder={translate('registerpage.formfield.company')}
+                          rules={[
+                            { required: true, message: `${translate('registerpage.error.required')} ${translate('registerpage.formfield.company')}!` },
+                            { whitespace: true, message: `${translate('registerpage.error.whitespace')}` },
+                          ]}
+                          getFieldDecorator={getFieldDecorator}
+                        />
 
-                    <RenderInput
-                      name="position"
-                      rules={[
-                        { required: true, message: 'Please input your position!' },
-                        { whitespace: true, message: 'Please input your position!' },
-                      ]}
-                      getFieldDecorator={getFieldDecorator}
-                    />
+                        <RenderInput
+                          name="position"
+                          placeholder={translate('registerpage.formfield.position')}
+                          rules={[
+                            { required: true, message: `${translate('registerpage.error.required')} ${translate('registerpage.formfield.position')}!` },
+                            { whitespace: true, message: `${translate('registerpage.error.whitespace')}` },
+                          ]}
+                          getFieldDecorator={getFieldDecorator}
+                        />
 
-                    <RenderInput
-                      name="age"
-                      type="number"
-                      min="1"
-                      rules={[{ required: true, message: 'Please input your age!' }]}
-                      getFieldDecorator={getFieldDecorator}
-                    />
+                        <RenderInput
+                          name="age"
+                          placeholder={translate('registerpage.formfield.age')}
+                          type="number"
+                          min="1"
+                          rules={[{ required: true, message: `${translate('registerpage.error.required')} ${translate('registerpage.formfield.age')}!` }]}
+                          getFieldDecorator={getFieldDecorator}
+                        />
 
+                      </Col>
+                      <Col className="m-t-15">
+                        <FormItem>
+                          {getFieldDecorator('gender', {
+                            rules: [{ required: true, message: `${translate('registerpage.error.required')} ${translate('registerpage.formfield.gender.gender')}!` }],
+                          })(
+                            <RadioGroup>
+                              <Radio value={translate('registerpage.formfield.gender.genderoptions.option1')}>
+                                {translate('registerpage.formfield.gender.genderoptions.option1')}
+                              </Radio>
+                              <Radio value={translate('registerpage.formfield.gender.genderoptions.option2')}>
+                                {translate('registerpage.formfield.gender.genderoptions.option2')}
+                              </Radio>
+                              <Radio value={translate('registerpage.formfield.gender.genderoptions.option3')}>
+                                {translate('registerpage.formfield.gender.genderoptions.option3')}
+                              </Radio>
+                            </RadioGroup>,
+                          )}
+                        </FormItem>
+                      </Col>
+                    </Row>
                   </Col>
-                  <Col className="m-t-15">
-                    <FormItem>
-                      {getFieldDecorator('gender', {
-                        rules: [{ required: true, message: 'Please select your gender!' }],
-                      })(
-                        <RadioGroup>
-                          <Radio value="female">
-                            Femenino
-                          </Radio>
-                          <Radio value="male">
-                            Masculino
-                          </Radio>
-                          <Radio value="other">
-                            Otro
-                          </Radio>
-                        </RadioGroup>,
-                      )}
-                    </FormItem>
+                  <Col xs={24} sm={24} md={24} lg={10} className="userRegisterRightBlock">
+                    <Row>
+                      <Col>
+                        <Radio className="text-left" defaultChecked>
+                          {translate('terms.text1')}
+                          <br className="termdevider" />
+                          <span className="terms">
+                            {translate('terms.text2')}
+                          </span>
+                        </Radio>
+                      </Col>
+                      <Col>
+                        <Button htmlType="submit" className="btn-green m-t-60">
+                          {translate('nextbtn')}
+                          {''}
+                          <Icon type="caret-right" />
+                        </Button>
+                      </Col>
+                    </Row>
                   </Col>
-                </Row>
-              </Col>
-              <Col xs={24} sm={24} md={24} lg={10} className="userRegisterRightBlock">
-                <Row>
-                  <Col>
-                    <Radio className="text-left" defaultChecked>
-                      Acepto
-                      <br className="termdevider" />
-                      <span className="terms">
-                        Términos y condiciones
-                      </span>
-                    </Radio>
-                  </Col>
-                  <Col>
-                    <Button htmlType="submit" className="btn-green m-t-60">
-                      Siguiente
-                      {''}
-                      <Icon type="caret-right" />
-                    </Button>
-                  </Col>
-                </Row>
-              </Col>
-            </Form>
-          </Row>
-        </div>
-      </Layout>
+                </Form>
+              </Row>
+            </div>
+          </Layout>
+        )}
+      </Translate>
     );
   }
 }

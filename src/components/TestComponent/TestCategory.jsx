@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Row, Col, Button, Icon,
 } from 'antd';
+import { Translate } from 'react-localize-redux';
 import PropTypes from 'prop-types';
 import Layout from '../Layout/Layout';
 import { getBgColor, categoryData, getSteps } from '../../utility/common';
@@ -43,10 +44,10 @@ class TestCategotyDescription extends Component {
                 <Button className="btn-default transparent" onClick={onClickPreviousBtn} disabled={this.props.index > 1 ? false : true}>
                   <Icon type="caret-left" />
                   {''}
-                  Anterior
+                  <Translate id="prevbtn" />
                 </Button>
                 <Button className="btn-default transparent pull-right" onClick={onClickNextBtn}>
-                  Siguiente
+                  <Translate id="nextbtn" />
                   {''}
                   <Icon type="caret-right" />
                 </Button>

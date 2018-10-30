@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   Row, Col, Icon, Radio, Button,
 } from 'antd';
+import { Translate } from 'react-localize-redux';
 import PropTypes from 'prop-types';
 import {
   Page, Text, View, Document, StyleSheet, Image, BlobProvider,
@@ -99,7 +100,7 @@ const Sidebar = () => (
   </View>
 );
 
-const ResultContent = ({ props }) => {
+const ResultContent = ({ props, translations }) => {
   const {
     data, chartImg, scoreImg,
   } = props;
@@ -119,7 +120,7 @@ const ResultContent = ({ props }) => {
         <View style={styles.container}>
           <View style={[styles.card, { width: 215, marginRight: 15 }]}>
             <Text style={styles.cardhead}>
-              Fortalezas
+              {translations['resultpage.Strengths'][0]}
             </Text>
             <Text style={styles.cardbody}>
               {renderStrenth(data).every(x => x === false) ? 'None' : renderStrenth(data)}
@@ -128,7 +129,7 @@ const ResultContent = ({ props }) => {
 
           <View style={[styles.card, { width: 215 }]}>
             <Text style={styles.cardhead}>
-              Debilidades
+              {translations['resultpage.Weaknesses'][0]}
             </Text>
             <Text style={styles.cardbody}>
               {renderWeakness(data).every(x => x === false) ? 'None' : renderWeakness(data)}
@@ -156,7 +157,7 @@ const ResultContent = ({ props }) => {
   );
 };
 
-const CategoryContent = ({ props }) => {
+const CategoryContent = ({ props, translations }) => {
   const { data, chartImg, scoreImg } = props;
   return (
     <View style={[styles.Column, styles.content]}>
@@ -172,7 +173,7 @@ const CategoryContent = ({ props }) => {
 
         <View style={styles.card}>
           <Text style={styles.cardhead}>
-            Fortalezas
+            {translations['resultpage.Strengths'][0]}
           </Text>
           <Text style={styles.cardbody}>
             {renderStrenth(data).every(x => x === false) ? 'None' : renderStrenth(data)}
@@ -181,7 +182,7 @@ const CategoryContent = ({ props }) => {
 
         <View style={styles.card}>
           <Text style={styles.cardhead}>
-            Debilidades
+            {translations['resultpage.Weaknesses'][0]}
           </Text>
           <Text style={styles.cardbody}>
             {renderWeakness(data).every(x => x === false) ? 'None' : renderWeakness(data)}
@@ -207,7 +208,7 @@ const CategoryContent = ({ props }) => {
   );
 };
 
-function MyDoc({ mailData, resultData }) {
+function MyDoc({ mailData, resultData }, translations) {
   return (
     <Document>
       <Page size="A4">
@@ -226,10 +227,10 @@ function MyDoc({ mailData, resultData }) {
 
               <View style={{ marginTop: 15 }}>
                 <Text>
-                  Cómo funciona el test
+                  {translations['howtestworks.heading'][0]}
                 </Text>
                 <Text>
-                  Instrucciones y etapas
+                  {translations['howtestworks.subheading'][0]}
                 </Text>
               </View>
 
@@ -238,7 +239,7 @@ function MyDoc({ mailData, resultData }) {
                   marginTop: 20, color: '#605F62', fontSize: 12, textAlign: 'justify',
                 }}
                 >
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+                  {translations['howtestworks.description'][0]}
                 </Text>
               </View>
 
@@ -263,7 +264,7 @@ function MyDoc({ mailData, resultData }) {
       <Page size="A4" wrap>
         <View style={styles.container}>
           <Sidebar />
-          <ResultContent props={resultData} />
+          <ResultContent props={resultData} translations={translations} />
         </View>
       </Page>
 
@@ -271,7 +272,7 @@ function MyDoc({ mailData, resultData }) {
         <Page size="A4" wrap key={i}>
           <View style={styles.container}>
             <Sidebar />
-            <CategoryContent props={item} />
+            <CategoryContent props={item} translations={translations} />
           </View>
         </Page>
       ))}
@@ -322,60 +323,63 @@ class SendMail extends Component {
   }
 
   render() {
-    const { location: { state } } = this.props;
+    const { location: { state }, localize: { translations } } = this.props;
     return (
-      <Layout sidebar>
-        <div className="bg-image" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/bodyBg-2.svg') no-repeat bottom right` }} />
-        <div className="sendMailWrapper">
-          <Row>
-            <Col xs={24}>
-              <h1>
-                ¡Has terminado!
-                <span>
-                  Si lo deseas, puedes enviar los resultados a tu mail
-                </span>
-              </h1>
-            </Col>
+      <Translate>
+        {({ translate }) => (
+          <Layout sidebar>
+            <div className="bg-image" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/bodyBg-2.svg') no-repeat bottom right` }} />
+            <div className="sendMailWrapper">
+              <Row>
+                <Col xs={24}>
+                  <h1>
+                    {translate('sendmailpage.heading')}
+                    <span>
+                      {translate('sendmailpage.subheading')}
+                    </span>
+                  </h1>
+                </Col>
 
-            <Col xs={24}>
-              {state && (
-                <div>
-                  <BlobProvider document={MyDoc(state)}>
-                    {({ blob }) =>
-                      // Do whatever you need with blob here
-                      (
-                        <Button htmlType="button" className="btn-green" onClick={() => this.handleClick(blob)}>
-                          Enviar al mail
-                          {''}
-                          <Icon type="caret-right" />
-                        </Button>
-                      )
+                <Col xs={24}>
+                  {state && (
+                    <div>
+                      <BlobProvider document={MyDoc(state, translations)}>
+                        {({ blob }) =>
+                          // Do whatever you need with blob here
+                          (
+                            <Button htmlType="button" className="btn-green" onClick={() => this.handleClick(blob)}>
+                              {translate('sendmailpage.mailbtntext')}
+                              {''}
+                              <Icon type="caret-right" />
+                            </Button>
+                          )
+                        }
+                      </BlobProvider>
+                    </div>
+                  )}
+                  <p className="help-text">
+                    {translate('sendmailpage.mailbtnhelptext')}
+                  </p>
+                </Col>
 
-                    }
-                  </BlobProvider>
-                </div>
-              )}
-              <p className="help-text">
-                Se enviará al mail previamente definido
-              </p>
-            </Col>
+                <Col xs={24} className="userRegisterRightBlock">
+                  <Radio className="text-left" defaultChecked>
+                    {translate('terms.text1')}
+                    <br className="termdevider" />
+                    <span className="terms">
+                      {translate('terms.text2')}
+                    </span>
+                  </Radio>
+                </Col>
 
-            <Col xs={24} className="userRegisterRightBlock">
-              <Radio className="text-left" defaultChecked>
-                Acepto
-                <br className="termdevider" />
-                <span className="terms">
-                  Términos y condiciones
-                </span>
-              </Radio>
-            </Col>
-
-            <Col span={24} className="welcomeScreenLogoWrapper">
-              <img src={logo} alt="logo" className="welcomeScreenLogo" />
-            </Col>
-          </Row>
-        </div>
-      </Layout>
+                <Col span={24} className="welcomeScreenLogoWrapper">
+                  <img src={logo} alt="logo" className="welcomeScreenLogo" />
+                </Col>
+              </Row>
+            </div>
+          </Layout>
+        )}
+      </Translate>
     );
   }
 }

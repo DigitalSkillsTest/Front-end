@@ -1,0 +1,66 @@
+{
+  "welcomepage": {
+    "heading1": "Test de",
+    "heading2": "Habilidades",
+    "heading3": "Digitales",
+    "btnText": "Comenzar"
+  },
+  "registerpage": {
+    "heading": "Completa tus datos",
+    "subheading": "antes de comenzar",
+    "formfield": {
+      "name": "Nombre",
+      "lastname": "Apellido",
+      "email": "Mail",
+      "company": "Empresa",
+      "position": "Cargo",
+      "age": "Edad",
+      "gender": {
+        "gender": "Género",
+        "genderoptions": {
+          "option1": "Femenino",
+          "option2": "Masculino",
+          "option3": "Otro"
+        }
+      }
+    },
+    "error": {
+      "required": "por favor ingrese su",
+      "whitespace": "los espacios en blanco no permiten"
+    }
+  },
+  "howtestworks": {
+    "heading": "Cómo funciona el test",
+    "subheading": "Instrucciones y etapas",
+    "description": "Lorem Ipsum es simplemente texto ficticio de la industria de la impresión y la composición tipográfica. Lorem Ipsum ha sido el texto ficticio estándar de la industria desde la década de 1500, cuando una impresora desconocida tomó una galera de tipos y la codificó para hacer una",
+    "categoryheading": "6 áreas de desarrollo personal",
+    "question": "preguntas",
+    "time": "minutos"
+  },
+  "testfinishpage": {
+    "heading": "¡Felicitaciones!",
+    "subheading": "Has terminado el test :D",
+    "description": "Lorem Ipsum es simplemente texto ficticio de la industria de la impresión y la composición tipográfica. Lorem Ipsum ha sido el texto ficticio estándar de la industria desde la década de 1500, cuando una impresora desconocida tomó una galera de tipos y la codificó para hacer",
+    "nextpagetext": "A continuación podrás ver tus resultados"
+  },
+  "resultpage": {
+    "Strengths": "Fortalezas",
+    "Weaknesses": "Debilidades",
+    "nextpageinfo": {
+      "text1": "A cotinuación podrás ver los detalles de cada",
+      "text2": "área clave del desarrollo de habilidades digitales"
+    }
+  },
+  "sendmailpage": {
+    "heading": "¡Has terminado!",
+    "subheading": "Si lo deseas, puedes enviar los resultados a tu mail",
+    "mailbtntext": "Enviar al mail",
+    "mailbtnhelptext": "Se enviará al mail previamente definido"
+  },
+  "nextbtn": "Siguiente",
+  "prevbtn": "Anterior",
+  "terms": {
+    "text1": "Acepto",
+    "text2": "Términos y condiciones"
+  }
+}

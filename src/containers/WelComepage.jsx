@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'antd';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-localize-redux';
 import * as routes from '../routes/path';
 import Layout from '../components/Layout/Layout';
 import logo from '../images/logo.svg';
@@ -19,7 +20,7 @@ class WelComepage extends Component {
   render() {
     return (
       <Layout sidebar={false}>
-        <div className="bg-img" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/body-bg.svg') no-repeat bottom left` }} />
+        <div className="bg-img" />
         <Row gutter={{ xs: 8, sm: 16, md: 24 }}>
           <Col span={24} className="welcomeScreenLogoWrapper">
             <img src={logo} alt="logo" className="welcomeScreenLogo" />
@@ -27,19 +28,19 @@ class WelComepage extends Component {
         </Row>
         <div className="welcomeScreen">
           <Row gutter={{ xs: 8, sm: 16, md: 24 }}>
-            <Col span={10} className="testStartBlock" style={{ background: `url('${process.env.PUBLIC_URL}/assets/images/steps.svg') no-repeat top right` }}>
+            <Col span={10} className="testStartBlock">
               <h1>
                 <span>
-                  Test de
+                  <Translate id="welcomepage.heading1" />
                 </span>
                 <br />
-                Habilidades
+                <Translate id="welcomepage.heading2" />
                 {' '}
                 <br />
-                Digitales
+                <Translate id="welcomepage.heading3" />
               </h1>
               <Button className="btn-green" onClick={this.onClickNextBtn}>
-                Comenzar
+                <Translate id="welcomepage.btnText" />
               </Button>
             </Col>
           </Row>

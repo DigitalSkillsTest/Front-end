@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Row, Col, Button, Icon, Slider,
 } from 'antd';
+import { Translate } from 'react-localize-redux';
 import html2canvas from 'html2canvas';
 import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
@@ -82,123 +83,127 @@ class TestResult extends Component {
   render() {
     const { result: { overallResult } } = this.props;
     return (
-      <Layout sidebar>
-        <div className="testResult" id="testResult">
-          {overallResult && overallResult.data.length > 0 && (
-            <Row>
-              <Col xs={24} sm={24} md={12} className="m-b-15">
+      <Translate>
+        {({ translate }) => (
+          <Layout sidebar>
+            <div className="testResult" id="testResult">
+              {overallResult && overallResult.data.length > 0 && (
                 <Row>
-                  <Col xs={24}>
-                    <div className="overallScroreWrapper">
-                      <h2>
-                        Overall Score
-                      </h2>
-                      <h1>
-                        {parseFloat(renderPercent(overallResult.data)).toFixed(0)}
-                        <span>
-                          %
-                        </span>
-                      </h1>
-                      <div className="slider">
-                        <Slider
-                          marks={{
-                            0: '', 33: '', 66: '', 100: '',
+                  <Col xs={24} sm={24} md={12} className="m-b-15">
+                    <Row>
+                      <Col xs={24}>
+                        <div className="overallScroreWrapper">
+                          <h2>
+                            Overall Score
+                          </h2>
+                          <h1>
+                            {parseFloat(renderPercent(overallResult.data)).toFixed(0)}
+                            <span>
+                              %
+                            </span>
+                          </h1>
+                          <div className="slider">
+                            <Slider
+                              marks={{
+                                0: '', 33: '', 66: '', 100: '',
+                              }}
+                              defaultValue={renderPercent(overallResult.data)}
+                              disabled
+                            />
+                          </div>
+                        </div>
+                        <p className="resultDesc">
+                          {renderLongDesc(overallResult.data)}
+                        </p>
+                      </Col>
+
+                      <Col xs={24}>
+                        <div className="strenthWeakDesc">
+                          <Row gutter={{
+                            lg: 32,
                           }}
-                          defaultValue={renderPercent(overallResult.data)}
-                          disabled
-                        />
-                      </div>
+                          >
+                            <Col xs={24} sm={24} md={24} lg={12}>
+                              <Card title={translate('resultpage.Strengths')} icon="plus">
+                                <p>
+                                  {renderStrenth(overallResult.data).every(x => x === false) ? 'None' : renderStrenth(overallResult.data)}
+                                </p>
+                              </Card>
+                            </Col>
+                            <Col xs={24} sm={24} md={24} lg={12}>
+                              <Card title={translate('resultpage.Weaknesses')} icon="minus">
+                                <p>
+                                  {renderWeakness(overallResult.data).every(x => x === false) ? 'None' : renderWeakness(overallResult.data)}
+                                </p>
+                              </Card>
+                            </Col>
+                          </Row>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+
+                  <Col xs={24} sm={24} md={12} className="m-b-15 polarAreaChartWrapper">
+                    <div className="polarChart">
+                      <PolarAreaChart data={chartData(overallResult.data)} width="400" height="400" options={options} />
                     </div>
-                    <p className="resultDesc">
-                      {renderLongDesc(overallResult.data)}
+                    <Row>
+                      <Col xs={24}>
+                        <div className="testCategoryWrapper">
+                          <ul className="testCategory">
+                            <li>
+                              Virtual Language
+                            </li>
+                            <li>
+                              Adaptación al Cambio
+                            </li>
+                            <li>
+                              Virtual Work habilities
+                            </li>
+                            <li>
+                              Digital Leadership
+                            </li>
+                            <li>
+                              Digital mindset
+                            </li>
+                            <li>
+                              Virtual Core Business mindset
+                            </li>
+                          </ul>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+
+                </Row>
+              )}
+            </div>
+            <div className="stepButtonWrapper">
+              <Row>
+                <Col xs={24}>
+                  <Button.Group>
+                    <Button className="btn-default" onClick={this.onClickPreviousBtn}>
+                      <Icon type="caret-left" />
+                      {''}
+                      {translate('prevbtn')}
+                    </Button>
+                    <p className="keyarearesult">
+                      {translate('resultpage.nextpageinfo.text1')}
+                      <br />
+                      {translate('resultpage.nextpageinfo.text2')}
                     </p>
-                  </Col>
-
-                  <Col xs={24}>
-                    <div className="strenthWeakDesc">
-                      <Row gutter={{
-                        lg: 32,
-                      }}
-                      >
-                        <Col xs={24} sm={24} md={24} lg={12}>
-                          <Card title="Fortalezas" icon="plus">
-                            <p>
-                              {renderStrenth(overallResult.data).every(x => x === false) ? 'None' : renderStrenth(overallResult.data)}
-                            </p>
-                          </Card>
-                        </Col>
-                        <Col xs={24} sm={24} md={24} lg={12}>
-                          <Card title="Debilidades" icon="minus">
-                            <p>
-                              {renderWeakness(overallResult.data).every(x => x === false) ? 'None' : renderWeakness(overallResult.data)}
-                            </p>
-                          </Card>
-                        </Col>
-                      </Row>
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-
-              <Col xs={24} sm={24} md={12} className="m-b-15 polarAreaChartWrapper">
-                <div className="polarChart">
-                  <PolarAreaChart data={chartData(overallResult.data)} width="400" height="400" options={options} />
-                </div>
-                <Row>
-                  <Col xs={24}>
-                    <div className="testCategoryWrapper">
-                      <ul className="testCategory">
-                        <li>
-                          Virtual Language
-                        </li>
-                        <li>
-                          Adaptación al Cambio
-                        </li>
-                        <li>
-                          Virtual Work habilities
-                        </li>
-                        <li>
-                          Digital Leadership
-                        </li>
-                        <li>
-                          Digital mindset
-                        </li>
-                        <li>
-                          Virtual Core Business mindset
-                        </li>
-                      </ul>
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-
-            </Row>
-          )}
-        </div>
-        <div className="stepButtonWrapper">
-          <Row>
-            <Col xs={24}>
-              <Button.Group>
-                <Button className="btn-default" onClick={this.onClickPreviousBtn}>
-                  <Icon type="caret-left" />
-                  {''}
-                  Anterior
-                </Button>
-                <p className="keyarearesult">
-                  A cotinuación podrás ver los detalles de cada
-                  <br />
-                  área clave del desarrollo de habilidades digitales
-                </p>
-                <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
-                  Siguiente
-                  {''}
-                  <Icon type="caret-right" />
-                </Button>
-              </Button.Group>
-            </Col>
-          </Row>
-        </div>
-      </Layout>
+                    <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
+                      {translate('nextbtn')}
+                      {''}
+                      <Icon type="caret-right" />
+                    </Button>
+                  </Button.Group>
+                </Col>
+              </Row>
+            </div>
+          </Layout>
+        )}
+      </Translate>
     );
   }
 }

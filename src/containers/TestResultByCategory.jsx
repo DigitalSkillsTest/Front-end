@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Row, Col, Button, Icon,
 } from 'antd';
+import { Translate } from 'react-localize-redux';
 import html2canvas from 'html2canvas';
 import { PolarArea as PolarAreaChart } from 'react-chartjs';
 import * as routes from '../routes/path';
@@ -153,115 +154,119 @@ class TestResultByCategory extends Component {
     const { clientWidth, resultData, categoryIndex } = this.state;
     const { result: { overallResult } } = this.props;
     return (
-      <Layout sidebar>
-        {resultData && resultData.length > 0 && (
-          <div className="testResultbyCategory">
-            <Row>
-              <Col xs={24}>
-                {clientWidth < 768 && (
-                  <div className="questionSteps responsive">
-                    <Steps current={resultData[0].categories_COD} />
-                  </div>
-                )}
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={24} sm={24} md={16} className="m-b-15">
+      <Translate>
+        {({ translate }) => (
+          <Layout sidebar>
+            {resultData && resultData.length > 0 && (
+              <div className="testResultbyCategory">
                 <Row>
                   <Col xs={24}>
-                    <div className="testCategoryHeading" style={{ background: getBgColor(resultData[0].categories_COD) }}>
-                      {getCategory(resultData[0].categories_COD)}
-                    </div>
-                    <p className="resultDesc">
-                      {renderLongDesc(resultData)}
-                    </p>
-                  </Col>
-
-                  <Col xs={24}>
-                    <div className="strenthWeakDesc">
-                      <Row gutter={{
-                        lg: 32,
-                      }}
-                      >
-                        <Col xs={24} sm={24} md={24} lg={12}>
-                          <Card title="Fortalezas" icon="plus">
-                            <p>
-                              {renderStrenth(resultData).every(x => x === false) ? 'None' : renderStrenth(resultData)}
-                            </p>
-                          </Card>
-                        </Col>
-                        <Col xs={24} sm={24} md={24} lg={12}>
-                          <Card title="Debilidades" icon="minus">
-                            <p>
-                              {renderWeakness(resultData).every(x => x === false) ? 'None' : renderWeakness(resultData)}
-                            </p>
-                          </Card>
-                        </Col>
-                      </Row>
-                    </div>
+                    {clientWidth < 768 && (
+                      <div className="questionSteps responsive">
+                        <Steps current={resultData[0].categories_COD} />
+                      </div>
+                    )}
                   </Col>
                 </Row>
-              </Col>
-
-              <Col xs={24} sm={24} md={8} className="m-b-15 text-center">
-                <div className="subcatchartwrapper">
-                  {overallResult && (
-                    <PolarAreaChart
-                      data={chartData(overallResult.data, resultData[0].categories_COD)}
-                      width="200"
-                      height="200"
-                      options={options}
-                      redraw
-                    />
-                  )}
-                </div>
                 <Row>
-                  <Col xs={24} className="subCategoryScroeWrapper">
-                    <h3 className="categoryName">
-                      {getCategory(resultData[0].categories_COD)}
-                      {' '}
-                      Score
-                    </h3>
-                    <p className="score">
-                      {parseFloat(avgScore(resultData)).toFixed(1)}
-                    </p>
-                    <div className="subCategoryScoreWrapper">
-                      {categoryData[categoryIndex - 1].subcategory.map((item, i) => (
-                        <p className="subcategoryScore" key={Math.random()}>
-                          <span style={{ color: getBgColor(resultData[0].categories_COD) }}>
-                            {resultData[i].isScore}
-                          </span>
-                          <span>
-                            {item.sub_cat}
-                          </span>
+                  <Col xs={24} sm={24} md={16} className="m-b-15">
+                    <Row>
+                      <Col xs={24}>
+                        <div className="testCategoryHeading" style={{ background: getBgColor(resultData[0].categories_COD) }}>
+                          {getCategory(resultData[0].categories_COD)}
+                        </div>
+                        <p className="resultDesc">
+                          {renderLongDesc(resultData)}
                         </p>
-                      ))}
+                      </Col>
+
+                      <Col xs={24}>
+                        <div className="strenthWeakDesc">
+                          <Row gutter={{
+                            lg: 32,
+                          }}
+                          >
+                            <Col xs={24} sm={24} md={24} lg={12}>
+                              <Card title={translate('resultpage.Strengths')} icon="plus">
+                                <p>
+                                  {renderStrenth(resultData).every(x => x === false) ? 'None' : renderStrenth(resultData)}
+                                </p>
+                              </Card>
+                            </Col>
+                            <Col xs={24} sm={24} md={24} lg={12}>
+                              <Card title={translate('resultpage.Weaknesses')} icon="minus">
+                                <p>
+                                  {renderWeakness(resultData).every(x => x === false) ? 'None' : renderWeakness(resultData)}
+                                </p>
+                              </Card>
+                            </Col>
+                          </Row>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+
+                  <Col xs={24} sm={24} md={8} className="m-b-15 text-center">
+                    <div className="subcatchartwrapper">
+                      {overallResult && (
+                        <PolarAreaChart
+                          data={chartData(overallResult.data, resultData[0].categories_COD)}
+                          width="200"
+                          height="200"
+                          options={options}
+                          redraw
+                        />
+                      )}
                     </div>
+                    <Row>
+                      <Col xs={24} className="subCategoryScroeWrapper">
+                        <h3 className="categoryName">
+                          {getCategory(resultData[0].categories_COD)}
+                          {' '}
+                          Score
+                        </h3>
+                        <p className="score">
+                          {parseFloat(avgScore(resultData)).toFixed(1)}
+                        </p>
+                        <div className="subCategoryScoreWrapper">
+                          {categoryData[categoryIndex - 1].subcategory.map((item, i) => (
+                            <p className="subcategoryScore" key={Math.random()}>
+                              <span style={{ color: getBgColor(resultData[0].categories_COD) }}>
+                                {resultData[i].isScore}
+                              </span>
+                              <span>
+                                {item.sub_cat}
+                              </span>
+                            </p>
+                          ))}
+                        </div>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
-              </Col>
-            </Row>
-          </div>
+              </div>
+            )}
+            <div className="stepButtonWrapper">
+              <Row>
+                <Col xs={24}>
+                  <Button.Group>
+                    <Button className="btn-default" onClick={this.onClickPreviousBtn}>
+                      <Icon type="caret-left" />
+                      {''}
+                      {translate('prevbtn')}
+                    </Button>
+                    <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
+                      {translate('nextbtn')}
+                      {''}
+                      <Icon type="caret-right" />
+                    </Button>
+                  </Button.Group>
+                </Col>
+              </Row>
+            </div>
+          </Layout>
         )}
-        <div className="stepButtonWrapper">
-          <Row>
-            <Col xs={24}>
-              <Button.Group>
-                <Button className="btn-default" onClick={this.onClickPreviousBtn}>
-                  <Icon type="caret-left" />
-                  {''}
-                  Anterior
-                </Button>
-                <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
-                  Siguiente
-                  {''}
-                  <Icon type="caret-right" />
-                </Button>
-              </Button.Group>
-            </Col>
-          </Row>
-        </div>
-      </Layout>
+      </Translate>
     );
   }
 }

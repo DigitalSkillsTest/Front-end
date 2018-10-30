@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-localize-redux';
 import {
   Row, Col, Button, Icon,
 } from 'antd';
@@ -42,93 +43,101 @@ class HowTestWorks extends Component {
 
   render() {
     return (
-      <Layout sidebar>
-        <div className="howTestWorks">
-          <Row>
-            <Col xs={24} sm={24} md={24} lg={12} className="m-b-15">
+      <Translate>
+        {({ translate }) => (
+          <Layout sidebar>
+            <div className="howTestWorks">
               <Row>
-                <Col xs={24}>
-                  <h1 className="pageHeading">
-                    Cómo funciona el test
-                    <span className="pageSubHeading">
-                      Instrucciones y etapas
-                    </span>
-                  </h1>
+                <Col xs={24} sm={24} md={24} lg={12} className="m-b-15">
+                  <Row>
+                    <Col xs={24}>
+                      <h1 className="pageHeading">
+                        {translate('howtestworks.heading')}
+                        <span className="pageSubHeading">
+                          {translate('howtestworks.subheading')}
+                        </span>
+                      </h1>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col xs={24}>
+                      <p className="testinfo">
+                        {translate('howtestworks.description')}
+                      </p>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col xs={24}>
+                      <h2 className="testCategoryTitle">
+                        {translate('howtestworks.categoryheading')}
+                      </h2>
+                    </Col>
+
+                    <Col xs={24}>
+                      <ul className="testCategory">
+                        <li>
+                          Virtual Language
+                        </li>
+                        <li>
+                          Adaptación al Cambio
+                        </li>
+                        <li>
+                          Virtual Work habilities
+                        </li>
+                        <li>
+                          Digital Leadership
+                        </li>
+                        <li>
+                          Digital mindset
+                        </li>
+                        <li>
+                          Virtual Core Business mindset
+                        </li>
+                      </ul>
+                    </Col>
+                  </Row>
+                </Col>
+
+                <Col xs={24} sm={24} md={24} lg={12} className="m-b-15 text-center">
+                  <img src={chartImage} alt="chart" className="chartImage" />
+                  <div className="questiontimewrapper">
+                    <h5 className="questionMarkIcon">
+                      30
+                      {' '}
+                      {translate('howtestworks.question')}
+                    </h5>
+                    <h5 className="timerIcon">
+                      20
+                      {' '}
+                      {translate('howtestworks.time')}
+                    </h5>
+                  </div>
                 </Col>
               </Row>
-
+            </div>
+            <div className="stepButtonWrapper">
               <Row>
-                <Col xs={24}>
-                  <p className="testinfo">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-                  </p>
+                <Col>
+                  <Button.Group>
+                    <Button className="btn-default" onClick={this.onClickPreviousBtn}>
+                      <Icon type="caret-left" />
+                      {''}
+                      {translate('prevbtn')}
+                    </Button>
+                    <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
+                      {translate('nextbtn')}
+                      {''}
+                      <Icon type="caret-right" />
+                    </Button>
+                  </Button.Group>
                 </Col>
               </Row>
-
-              <Row>
-                <Col xs={24}>
-                  <h2 className="testCategoryTitle">
-                    6 áreas de desarrollo personal
-                  </h2>
-                </Col>
-
-                <Col xs={24}>
-                  <ul className="testCategory">
-                    <li>
-                      Virtual Language
-                    </li>
-                    <li>
-                      Adaptación al Cambio
-                    </li>
-                    <li>
-                      Virtual Work habilities
-                    </li>
-                    <li>
-                      Digital Leadership
-                    </li>
-                    <li>
-                      Digital mindset
-                    </li>
-                    <li>
-                      Virtual Core Business mindset
-                    </li>
-                  </ul>
-                </Col>
-              </Row>
-            </Col>
-
-            <Col xs={24} sm={24} md={24} lg={12} className="m-b-15 text-center">
-              <img src={chartImage} alt="chart" className="chartImage" />
-              <div className="questiontimewrapper">
-                <h5 className="questionMarkIcon">
-                  30 preguntas
-                </h5>
-                <h5 className="timerIcon">
-                  20 minutos
-                </h5>
-              </div>
-            </Col>
-          </Row>
-        </div>
-        <div className="stepButtonWrapper">
-          <Row>
-            <Col>
-              <Button.Group>
-                <Button className="btn-default" onClick={this.onClickPreviousBtn}>
-                  <Icon type="caret-left" />
-                  {''}
-                  Anterior
-                </Button>
-                <Button className="btn-default pull-right" onClick={this.onClickNextBtn}>
-                  Siguiente
-                  {''}
-                  <Icon type="caret-right" />
-                </Button>
-              </Button.Group>
-            </Col>
-          </Row>
-        </div>
-      </Layout>
+            </div>
+          </Layout>
+        )}
+      </Translate>
     );
   }
 }

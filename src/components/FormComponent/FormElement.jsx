@@ -4,12 +4,12 @@ import { Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
-const RenderInput = ({ getFieldDecorator, name, rules, ...props }) => (
+const RenderInput = ({ getFieldDecorator, name, placeholder, rules, ...props }) => (
   <FormItem>
     {getFieldDecorator(name, {
       rules,
     })(
-      <Input {...props} className="formInput" placeholder={name} />,
+      <Input {...props} className="formInput" placeholder={placeholder} />,
     )}
   </FormItem>
 );
@@ -17,6 +17,7 @@ const RenderInput = ({ getFieldDecorator, name, rules, ...props }) => (
 RenderInput.propTypes = {
   getFieldDecorator: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
   rules: PropTypes.instanceOf(Array),
 };
 
