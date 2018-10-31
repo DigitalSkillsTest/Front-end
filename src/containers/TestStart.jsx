@@ -7,7 +7,7 @@ import TestCategory from '../components/TestComponent/TestCategory';
 import TestComponent from '../components/TestComponent/TestComponent';
 import * as routes from '../routes/path';
 import {
-  fetchQuestionReq, examStartReq, saveAnswerReq, nextQuestion, previousQuestion, setExamId, setExamStatusReq,
+  fetchQuestionReq, examStartReq, saveAnswerReq, previousQuestion, setExamId, setExamStatusReq,
 } from '../redux/actions';
 
 
@@ -118,16 +118,13 @@ class TestStart extends Component {
           };
           dispatch(fetchQuestionReq(data));
         } else {
-          dispatch(nextQuestion());
+          // dispatch(nextQuestion());
         }
       }
     });
   }
 
   getTime(hours, minutes, seconds) {
-    // if (seconds % 5 === 0) {
-    //   this.sendTimeToServer(hours, minutes, seconds);
-    // }
     this.timer = Date.now() + ((Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds)) * 1000);
     localStorage.setItem('attribute', this.timer);
   }
@@ -140,10 +137,6 @@ class TestStart extends Component {
     localStorage.setItem('attribute', startTime);
     return startTime;
   }
-
-  // sendTimeToServer(hours, minutes, seconds) {
-  //   console.log('Send Time to server', hours, minutes, seconds);
-  // }
 
   render() {
     const { showCategory } = this.state;

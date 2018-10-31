@@ -16,8 +16,10 @@ import {
   SET_EXAM_STATUS_REQ,
   setExamStatusSuccess,
   setExamStatusFail,
+  nextQuestion,
 } from '../actions';
 import { examService } from '../../services';
+import { IconNotification } from '../../components/CommonComponent';
 
 function* examStart(action) {
   try {
@@ -51,10 +53,12 @@ function* saveAnswer(action) {
     const response = yield call(examService.saveAnswer, action.data);
     if (response.status === 200) {
       yield put(saveAnswerSuccess(response.data));
+      yield put(nextQuestion());
     } else {
       throw response.message;
     }
   } catch (error) {
+    IconNotification('error', 'Your answer not submitted successfully. Please try again.');
     yield put(saveAnswerFail(error));
   }
 }
