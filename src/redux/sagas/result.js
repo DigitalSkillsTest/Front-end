@@ -54,8 +54,8 @@ function* sendMail(action) {
     if (response.status === 200) {
       yield put(sendMailSuccess(response.data));
       IconNotification('success', 'Mail Sent Successfully.');
-      localStorage.clear();
-      history.push(routes.WelComepage);
+      // localStorage.clear();
+      // history.push(routes.WelComepage);
     } else {
       throw response.message;
     }

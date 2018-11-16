@@ -68,7 +68,34 @@ body {
 .btn-green i.anticon{font-size: 22px !important;}
 .bodybg2{background: url('./images/bodyBg-2.svg') no-repeat bottom right;width: 564px;height: 300px;position: absolute;top: 400px;right: 0px;}
 .userRegisterRightBlock .ant-radio-wrapper span:last-child{color: #1B2027 !important }
+.userRegisterRightBlock .ant-checkbox-wrapper span:last-child{color: #1B2027 !important;font-size: 18px !important; font-weight: 700 !important;}
+.userRegisterRightBlock .ant-checkbox-wrapper span.terms {
+  font-weight: 300 !important;
+  padding-left: 25px !important;
+  display: block;
+  line-height: 10px
+}
 
+.userRegisterRightBlock .ant-checkbox-wrapper .ant-checkbox-inner{
+  background-color:#e5e5e5 !important;
+  border-color: #e5e5e5 !important;
+  border-radius:50% !important;
+  height: 20px;
+  width: 20px; 
+  overflow: hidden;
+}
+.userRegisterRightBlock .ant-checkbox-wrapper .ant-checkbox-inner::after{
+  background: #1B2027 !important;
+  border: none !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius:50% !important; 
+  top: 5px;
+  left: 5px;
+}
+.userRegisterRightBlock .ant-radio-wrapper span.terms a,.userRegisterRightBlock .ant-checkbox-wrapper span.terms a{color: #1B2027;text-decoration: underline}
+/* .userRegisterRightBlock .ant-checkbox-wrapper span.terms a:hover,.userRegisterRightBlock .ant-checkbox-wrapper span.terms a:focus{text-decoration: none} */
+.termsmodal p{text-align: justify}
 /***************************** User Register page css end *************************/
 
 /***************************** How Test Works page css start *************************/
@@ -224,7 +251,7 @@ body {
 .testResultbyCategory p.subcategoryScore span:first-child{font-weight: 700;width: 20px;float: left;}
 .testResultbyCategory p.subcategoryScore span:last-child{width: calc(100% - 25px);float: left;}
 .subCategoryScoreWrapper{width: 80%;margin: 0 auto;text-align: left;float: right;}
-.subcatchartwrapper{width: 200px;margin: 0 auto}
+.subcatchartwrapper{width: 300px;margin: 0 auto}
 /***************************** Test Result By Category page css end *************************/
 
 /***************************** Test Mail page css start *************************/

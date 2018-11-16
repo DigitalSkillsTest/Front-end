@@ -59,16 +59,17 @@ class TestResult extends Component {
   }
 
   async onClickNextBtn() {
-    const { history, result: { overallResult } } = this.props;
+    const { history, result: { overallResult }, currentUser } = this.props;
 
     const scoreImg = await html2canvas(document.querySelector('.overallScroreWrapper'),
-      { scale: 1 }).then(canvas => canvas.toDataURL('image/jpeg'));
+      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
     const chartImg = await html2canvas(document.querySelector('.polarChart'),
-      { scale: 1 }).then(canvas => canvas.toDataURL('image/jpeg'));
+      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
 
+    const user = `${currentUser.data.name} ${currentUser.data.lastName}`;
     const location = {
       pathname: routes.TestResultByCategory,
-      state: { ...overallResult, scoreImg, chartImg },
+      state: { ...overallResult, scoreImg, chartImg, user },
     };
     history.push(location);
   }
@@ -211,6 +212,7 @@ class TestResult extends Component {
 const mapStateToProps = state => ({
   exam: state.exam,
   result: state.result,
+  currentUser: state.currentUser,
 });
 export default connect(mapStateToProps)(TestResult);
 
@@ -219,4 +221,5 @@ TestResult.propTypes = {
   result: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
   exam: PropTypes.shape({}).isRequired,
+  currentUser: PropTypes.shape({}),
 };

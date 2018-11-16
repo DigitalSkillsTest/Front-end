@@ -97,10 +97,10 @@ class TestResultByCategory extends Component {
     const { categoryIndex, resultData, mailData } = this.state;
 
     const chartImg = await html2canvas(document.querySelector('.subcatchartwrapper'),
-      { scale: 1 }).then(canvas => canvas.toDataURL('image/jpeg'));
+      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
 
     const scoreImg = await html2canvas(document.querySelector('.subCategoryScroeWrapper'),
-      { scale: 1 }).then(canvas => canvas.toDataURL('image/jpeg'));
+      { scale: 4 }).then(canvas => canvas.toDataURL('image/jpeg'));
 
     this.setState(prevState => ({ categoryIndex: prevState.categoryIndex < 6 ? prevState.categoryIndex + 1 : 6 }));
     mailData[categoryIndex - 1] = { data: resultData, chartImg, scoreImg };
@@ -211,8 +211,8 @@ class TestResultByCategory extends Component {
                       {overallResult && (
                         <PolarAreaChart
                           data={chartData(overallResult.data, resultData[0].categories_COD)}
-                          width="200"
-                          height="200"
+                          width="250"
+                          height="250"
                           options={options}
                           redraw
                         />
