@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Row, Col, Icon, Radio, Button, Checkbox, Modal
+  Row, Col, Icon, Radio, Button, Modal,
 } from 'antd';
+import moment from 'moment';
 import { Translate } from 'react-localize-redux';
 import PropTypes from 'prop-types';
 import {
@@ -26,7 +27,6 @@ import {
   renderWeakness,
 } from '../utility/common';
 import { sendMailReq } from '../redux/actions';
-import moment from 'moment';
 
 const styles = StyleSheet.create({
   container: {
@@ -209,7 +209,7 @@ const CategoryContent = ({ props, translations }) => {
   );
 };
 
-function MyDoc({ mailData, resultData }, translations, currentUser) {
+function MyDoc({ mailData, resultData }, translations) {
   return (
     <Document>
       <Page size="A4">
@@ -224,7 +224,7 @@ function MyDoc({ mailData, resultData }, translations, currentUser) {
           }}>{resultData.user}</Text>
           <Text style={{
             marginTop: 5, color: '#22212D', fontSize: 14,
-          }}>Fecha: {moment().format('DD, MMMM YYYY')}</Text>
+          }}>Fecha: {moment().format('DD MMMM, YYYY')}</Text>
         </View>
       </Page>
 
@@ -364,7 +364,7 @@ class SendMail extends Component {
                 <Col xs={24}>
                   {state && (
                     <div>
-                      <BlobProvider document={MyDoc(state, translations, currentUser)}>
+                      <BlobProvider document={MyDoc(state, translations)}>
                         {({ blob }) =>
                           // Do whatever you need with blob here
                           (
